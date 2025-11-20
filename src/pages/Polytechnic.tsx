@@ -47,7 +47,13 @@ const Polytechnic = () => {
       <section className="bg-gradient-to-r from-warning to-secondary text-white py-20 px-4">
         <div className="container mx-auto text-center">
           <div className="mb-6 inline-block">
-            <img src={polytechnicIcon} alt="Polytechnic" className="w-32 h-32 mx-auto" />
+            <img
+              src={polytechnicIcon}
+              alt="Polytechnic"
+              className="w-32 h-32 mx-auto"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Polytechnic College</h1>
           <p className="text-xl max-w-3xl mx-auto text-white/90">

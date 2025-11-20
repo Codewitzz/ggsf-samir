@@ -19,6 +19,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,14 +61,15 @@ const Header = () => {
     { title: "Activities", href: "/mba/activities" },
   ];
 
-  const engineeringMenuItems = [
-    { title: "About Engineering", href: "/engineering/about" },
-    { title: "Admissions", href: "/engineering/admissions" },
-    { title: "Facilities", href: "/engineering/facilities" },
-    { title: "Research", href: "/engineering/research" },
-    { title: "Activities", href: "/engineering/activities" },
-    { title: "Faculty", href: "/engineering/faculty" },
-  ];
+const engineeringMenuItems = [
+  { title: "Departments Overview", href: "/engineering/departments" },
+  { title: "About Engineering", href: "/engineering/about" },
+  { title: "Admissions", href: "/engineering/admissions" },
+  { title: "Facilities", href: "/engineering/facilities" },
+  { title: "Research", href: "/engineering/research" },
+  { title: "Activities", href: "/engineering/activities" },
+  { title: "Faculty", href: "/engineering/faculty" },
+];
 
   const engineeringDepartments = [
     { title: "Computer Engineering", href: "/engineering/departments/computer-engineering" },
@@ -170,8 +172,16 @@ const Header = () => {
     setSearchQuery("");
   };
 
-  const triggerClassName =
-    "bg-transparent data-[state=open]:bg-primary/10 data-[state=open]:text-primary transition-colors";
+  const triggerClassName = cn(
+    "bg-transparent data-[state=open]:bg-primary/10 transition-colors text-sm font-medium px-4 py-2 rounded-md",
+    isScrolled ? "text-white hover:text-secondary" : "text-foreground/90 hover:text-primary",
+  );
+  const navLinkClassName = cn(
+    "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    isScrolled
+      ? "text-white hover:text-secondary focus-visible:ring-white/40 focus-visible:ring-offset-primary"
+      : "text-foreground/90 hover:text-primary focus-visible:ring-primary/40 focus-visible:ring-offset-background",
+  );
 
   return (
     <>
@@ -217,6 +227,8 @@ const Header = () => {
                   src="/ggsf-logo.png"
                   alt="Guru Gobind Singh Foundation Logo"
                   className="h-16 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = "none";
@@ -234,19 +246,9 @@ const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/">
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                      Home
-                    </NavigationMenuLink>
+                    <NavigationMenuLink className={navLinkClassName}>Home</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/departments">
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                      Departments
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={triggerClassName}>MBA</NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -256,7 +258,7 @@ const Header = () => {
                           <NavigationMenuLink asChild >
                             <Link
                               to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none bg-none no-underline outline-none  hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none bg-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                             >
                               <div className="text-sm  font-medium leading-none">{item.title}</div>
                             </Link>
@@ -277,7 +279,7 @@ const Header = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                             >
                               {item.title}
                             </Link>
@@ -297,7 +299,7 @@ const Header = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                             >
                               <div className="text-sm font-medium leading-none">{item.title}</div>
                             </Link>
@@ -317,7 +319,7 @@ const Header = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                             >
                               <div className="text-sm font-medium leading-none">{item.title}</div>
                             </Link>
@@ -330,25 +332,19 @@ const Header = () => {
 
                 <NavigationMenuItem>
                   <Link to="/events">
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                      Events
-                    </NavigationMenuLink>
+                    <NavigationMenuLink className={navLinkClassName}>Events</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
                   <Link to="/gallery">
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                      Gallery
-                    </NavigationMenuLink>
+                    <NavigationMenuLink className={navLinkClassName}>Gallery</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
                   <Link to="/contact">
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                      Contact
-                    </NavigationMenuLink>
+                    <NavigationMenuLink className={navLinkClassName}>Contact</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -361,7 +357,10 @@ const Header = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="text-foreground hover:text-primary"
+                className={cn(
+                  "hover:text-primary",
+                  isScrolled ? "text-white hover:text-secondary" : "text-foreground",
+                )}
               >
                 <Search className="h-5 w-5" />
               </Button>
@@ -422,14 +421,9 @@ const Header = () => {
                         </>
                       )}
                       {!searchQuery && (
-                        <CommandGroup heading="Quick Links">
-                          <CommandItem onSelect={() => handleSelect("/about")}>About Us</CommandItem>
-                          <CommandItem onSelect={() => handleSelect("/engineering/about")}>
-                            Engineering College
-                          </CommandItem>
-                          <CommandItem onSelect={() => handleSelect("/mba/about")}>MBA Programs</CommandItem>
-                          <CommandItem onSelect={() => handleSelect("/me/about")}>ME (Masters of Engineering)</CommandItem>
-                        </CommandGroup>
+                        <div className="px-4 py-6 text-sm text-muted-foreground">
+                          Start typing to search across departments, programs, and resources.
+                        </div>
                       )}
                     </>
                   )}
@@ -445,9 +439,6 @@ const Header = () => {
             <div className="container mx-auto px-4 py-4 space-y-4">
               <Link to="/" className="block py-2 hover:text-primary transition-colors">
                 Home
-              </Link>
-              <Link to="/departments" className="block py-2 hover:text-primary transition-colors">
-                Departments
               </Link>
               <div>
                 <p className="font-semibold text-sm text-muted-foreground mb-2">MBA</p>

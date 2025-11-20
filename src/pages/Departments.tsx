@@ -99,7 +99,7 @@ const Departments = () => {
                 Meet Academic Advisors
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/60 text-white hover:bg-white hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-white/60 text-black hover:bg-white hover:text-primary">
               <Link to="/downloads">Download Prospectus</Link>
             </Button>
           </div>

@@ -46,6 +46,30 @@ const Hero = () => {
           { label: "Scholarships", value: "₹2 Cr" },
         ],
       },
+      {
+        id: "global-connect",
+        title: "Global partnerships that open doors worldwide",
+        description:
+          "Benefit from international MoUs, semester abroad programs, and dual certifications curated with leading universities.",
+        badge: "Global Immersion 2025",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80",
+        stats: [
+          { label: "International MoUs", value: "25" },
+          { label: "Exchange seats", value: "140+" },
+        ],
+      },
+      {
+        id: "research",
+        title: "Research culture powering patents and prototypes",
+        description:
+          "Join multidisciplinary labs focused on EV, green energy, AI, and med-tech with seed funding and patent mentorship.",
+        badge: "Innovation Grants",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+        stats: [
+          { label: "Patents filed", value: "60+" },
+          { label: "Funded projects", value: "₹5 Cr" },
+        ],
+      },
     ],
     [],
   );

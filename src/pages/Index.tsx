@@ -9,7 +9,6 @@ import DownloadsSection from "@/components/DownloadsSection";
 import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
-import AIChatBot from "@/components/AIChatBot";
 import ResearchHighlights from "@/components/ResearchHighlights";
 import StudentAchievements from "@/components/StudentAchievements";
 import CampusCells from "@/components/CampusCells";
@@ -87,7 +86,6 @@ const Index = () => {
         </div>
       </main>
       <Footer />
-      <AIChatBot />
     </div>
   );
 };

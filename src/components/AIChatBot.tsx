@@ -1,12 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBXeBN9DB5dgAp9Gpu7m43yvYQMbPOoCDc";
-const genAI = GEMINI_API_KEY ? new GoogleGenerativeAI(GEMINI_API_KEY) : null;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 interface Message {
   role: "user" | "assistant";
@@ -14,6 +13,15 @@ interface Message {
 }
 
 const AIChatBot = () => {
+  const genAI = useMemo(() => {
+    if (!GEMINI_API_KEY) return null;
+    try {
+      return new GoogleGenerativeAI(GEMINI_API_KEY);
+    } catch (error) {
+      console.error("Failed to init Gemini client", error);
+      return null;
+    }
+  }, [GEMINI_API_KEY]);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -32,39 +40,42 @@ const AIChatBot = () => {
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+    const trimmed = input.trim();
+    if (!trimmed || isLoading) return;
+
+    const userMessage: Message = { role: "user", content: trimmed };
+    const updatedHistory = [...messages, userMessage];
+    setMessages(updatedHistory);
+    setInput("");
 
     if (!genAI) {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Chatbot setup is incomplete because the API key is missing. Please contact the administrator.",
+          content: "Our AI assistant is offline right now. Please reach out via the contact page for immediate help.",
         },
       ]);
       return;
     }
 
-    const userMessage: Message = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
     setIsLoading(true);
 
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-      
+
       const systemPrompt = `You are a helpful AI assistant for a college foundation that includes three colleges: MBA, Engineering, and Polytechnic. 
       Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. 
       Be concise, friendly, and informative. If you don't know something specific about the college, acknowledge it politely.`;
 
       const chat = model.startChat({
-        history: messages.slice(1).map(msg => ({
+        history: updatedHistory.slice(1).map((msg) => ({
           role: msg.role === "assistant" ? "model" : "user",
           parts: [{ text: msg.content }],
         })),
       });
 
-      const result = await chat.sendMessage(systemPrompt + "\n\nStudent question: " + input);
+      const result = await chat.sendMessage(`${systemPrompt}\n\nStudent question: ${trimmed}`);
       const response = await result.response;
       const text = response.text();
 
@@ -83,7 +94,7 @@ const AIChatBot = () => {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -123,8 +134,8 @@ const AIChatBot = () => {
           </div>
 
           {/* Messages */}
-          <ScrollArea className="flex-1 p-4" ref={scrollRef}>
-            <div className="space-y-4">
+          <ScrollArea className="flex-1 p-4">
+            <div className="space-y-4 h-full" ref={scrollRef}>
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -157,7 +168,7 @@ const AIChatBot = () => {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder="Ask a question..."
                 disabled={isLoading}
                 className="flex-1"

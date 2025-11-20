@@ -3,7 +3,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
-import AIChatBot from "@/components/AIChatBot";
 
 const Contact = () => {
   return (
@@ -13,7 +12,6 @@ const Contact = () => {
       <ContactForm />
       <LocationMap />
       <Footer />
-      <AIChatBot />
     </div>
   );
 };

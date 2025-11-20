@@ -49,8 +49,14 @@ const CollegeCards = () => {
             >
               <div className={`h-2 bg-gradient-to-r ${college.color}`} />
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 w-32 h-32 rounded-full bg-accent flex items-center justify-center p-6">
-                  <img src={college.icon} alt={college.title} className="w-full h-full object-contain" />
+                <div className="mx-auto mb-4 w-32 h-32 flex items-center justify-center p-2">
+                  <img
+                    src={college.icon}
+                    alt={college.title}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <CardTitle className="text-2xl mb-2">{college.title}</CardTitle>
                 <CardDescription className="text-base">{college.description}</CardDescription>

@@ -20,6 +20,10 @@ import QuickAccessLinks from "@/components/QuickAccessLinks";
 import PublicDisclosure from "@/components/PublicDisclosure";
 import TPCell from "@/components/TPCell";
 import AnnouncementsBar from "@/components/AnnouncementsBar";
+import NAACAccreditation from "@/components/NAACAccreditation";
+import NBAAccreditation from "@/components/NBAAccreditation";
+import ChatbotInfo from "@/components/ChatbotInfo";
+import CampusInfrastructure from "@/components/CampusInfrastructure";
 
 const Index = () => {
   return (
@@ -34,6 +38,12 @@ const Index = () => {
           <CollegeCards />
         </div>
         <div className="gsap-fade">
+          <NAACAccreditation />
+        </div>
+        <div className="gsap-fade">
+          <NBAAccreditation />
+        </div>
+        <div className="gsap-fade">
           <NoticesAnnouncements />
         </div>
         <div className="gsap-fade">
@@ -44,6 +54,12 @@ const Index = () => {
         </div>
         <div className="gsap-fade">
           <EnhancedFacilities />
+        </div>
+        <div className="gsap-fade">
+          <CampusInfrastructure />
+        </div>
+        <div className="gsap-fade">
+          <ChatbotInfo />
         </div>
         <div className="gsap-fade">
           <CampusCells />

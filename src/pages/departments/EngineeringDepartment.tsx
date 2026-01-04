@@ -37,6 +37,35 @@ const EngineeringDepartment = () => {
       mouPartners?: string[];
     }
   > = {
+    "first-year": {
+      name: "First Year Engineering",
+      description:
+        "Building strong foundations in mathematics, physics, chemistry, and basic engineering principles to prepare students for specialized engineering streams.",
+      icon: "🎓",
+      faculty: "30+ experienced faculty members",
+      labs: ["Physics Lab", "Chemistry Lab", "Engineering Graphics Lab", "Workshop Practice Lab", "Computer Programming Lab"],
+      career: ["Foundation for all engineering disciplines", "Research Assistant", "Teaching Assistant", "Technical Writer"],
+      highlights: [
+        "Comprehensive foundation in basic sciences and mathematics",
+        "Hands-on experience in engineering workshops",
+        "Introduction to computer programming",
+        "Engineering graphics and design fundamentals",
+        "Strong preparation for specialized branches",
+      ],
+      vision: "To provide a solid foundation in engineering sciences and prepare students for advanced studies in their chosen specialization.",
+      mission: [
+        "Impart fundamental knowledge in mathematics, physics, and chemistry.",
+        "Develop problem-solving and analytical skills.",
+        "Introduce engineering concepts and practices.",
+        "Prepare students for specialized engineering branches.",
+      ],
+      achievements: [
+        "Excellent pass percentage in first year examinations.",
+        "Strong foundation for advanced engineering courses.",
+      ],
+      publications: ["Faculty publications in engineering education and pedagogy."],
+      mouPartners: [],
+    },
     "computer-engineering": {
       name: "Computer Engineering",
       description:

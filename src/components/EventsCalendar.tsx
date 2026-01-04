@@ -29,11 +29,11 @@ const EventsCalendar = () => {
       description: "Hands-on workshops on latest technologies including AI, IoT, and Robotics.",
     },
     {
-      title: "Polytechnic Skills Competition",
+      title: "Engineering Skills Competition",
       date: "May 10, 2025",
       time: "9:00 AM - 5:00 PM",
-      location: "Polytechnic Campus",
-      category: "Polytechnic",
+      location: "Engineering Campus",
+      category: "Engineering",
       description: "Students showcase their technical skills in various practical competitions.",
     },
   ];
@@ -46,7 +46,7 @@ const EventsCalendar = () => {
         return "bg-warning text-white";
       case "Engineering":
         return "bg-primary text-primary-foreground";
-      case "Polytechnic":
+      case "Campus":
         return "bg-secondary text-secondary-foreground";
       default:
         return "bg-muted";

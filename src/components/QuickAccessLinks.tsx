@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { FileText, GraduationCap, BookMarked, Users } from "lucide-react";
+import { FileText, GraduationCap, BookMarked, Users, IndianRupee } from "lucide-react";
 
 const links = [
+  { title: "Fee Structure", href: "/fee-structure", icon: IndianRupee },
   { title: "Academic Calendar", href: "/downloads", icon: BookMarked },
   { title: "College Brochure", href: "/downloads", icon: FileText },
   { title: "Placement Cell", href: "/contact", icon: Users },

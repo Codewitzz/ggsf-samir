@@ -22,11 +22,11 @@ const academicClusters = [
     href: "/mba/about",
   },
   {
-    title: "Polytechnic & Skill Programs",
-    summary: "Industry-certified diploma programs powered by Siemens, Bosch and PMKVY skill tracks.",
-    programs: ["Automation & Robotics", "Smart Manufacturing", "Civil & Infrastructure"],
+    title: "Campus Facilities & Infrastructure",
+    summary: "State-of-the-art campus facilities including labs, library, canteen, and modern infrastructure.",
+    programs: ["Engineering Labs", "Central Library", "Cafeteria", "Modern Classrooms"],
     icon: BookOpen,
-    href: "/polytechnic",
+    href: "/engineering/facilities",
   },
   {
     title: "Postgraduate & Research",
@@ -90,7 +90,7 @@ const Departments = () => {
             Departments that reimagine <span className="text-secondary">future-ready</span> education
           </h1>
           <p className="mt-6 text-lg md:text-xl max-w-2xl text-primary-foreground/80">
-            Explore engineering, management, polytechnic, and postgraduate schools connected through shared innovation hubs,
+            Explore engineering, management, and postgraduate programs connected through shared innovation hubs,
             global accreditations, and experiential learning pathways.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">

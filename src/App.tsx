@@ -48,6 +48,11 @@ const SchoolAcademics = lazy(() => import("./pages/SchoolAcademics"));
 const SchoolActivities = lazy(() => import("./pages/SchoolActivities"));
 const SchoolAdmissions = lazy(() => import("./pages/SchoolAdmissions"));
 const SchoolFacilities = lazy(() => import("./pages/SchoolFacilities"));
+const FeeStructure = lazy(() => import("./pages/FeeStructure"));
+const EngineeringCampus = lazy(() => import("./pages/EngineeringCampus"));
+const EngineeringInfrastructure = lazy(() => import("./pages/EngineeringInfrastructure"));
+const Admissions = lazy(() => import("./pages/Admissions"));
+const Placements = lazy(() => import("./pages/Placements"));
 
 const queryClient = new QueryClient();
 
@@ -72,6 +77,9 @@ const App = () => {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/sitemap" element={<Sitemap />} />
+              <Route path="/fee-structure" element={<FeeStructure />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/placements" element={<Placements />} />
 
               {/* MBA Routes */}
               <Route path="/mba/about" element={<MBAAbout />} />
@@ -94,6 +102,8 @@ const App = () => {
               <Route path="/engineering/admissions" element={<EngineeringAdmissions />} />
               <Route path="/engineering/activities" element={<EngineeringActivities />} />
               <Route path="/engineering/research" element={<Engineering />} />
+              <Route path="/engineering/campus" element={<EngineeringCampus />} />
+              <Route path="/engineering/infrastructure" element={<EngineeringInfrastructure />} />
               <Route path="/engineering/departments/:dept" element={<Placeholder />} />
 
               {/* ME (Masters of Engineering) Routes */}

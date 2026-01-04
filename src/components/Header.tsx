@@ -72,6 +72,7 @@ const engineeringMenuItems = [
 ];
 
   const engineeringDepartments = [
+    { title: "First Year Engineering", href: "/engineering/departments/first-year" },
     { title: "Computer Engineering", href: "/engineering/departments/computer-engineering" },
     { title: "Electronics & Communication", href: "/engineering/departments/electronics-communication" },
     { title: "Mechanical Engineering", href: "/engineering/departments/mechanical" },
@@ -85,20 +86,12 @@ const engineeringMenuItems = [
     { title: "Post Graduate (M.E.)", href: "/engineering/departments/post-graduate" },
   ];
 
-  const meMenuItems = [
+  const campusMenuItems = [
     { title: "About ME", href: "/me/about" },
-    { title: "Academics", href: "/me/academics" },
-    { title: "Facilities", href: "/me/facilities" },
-    { title: "Admissions", href: "/me/admissions" },
-    { title: "Activities", href: "/me/activities" },
-  ];
-
-  const polytechnicMenuItems = [
-    { title: "About Polytechnic", href: "/polytechnic/about" },
-    { title: "Courses", href: "/polytechnic/courses" },
-    { title: "Faculty", href: "/polytechnic/faculty" },
-    { title: "Admissions", href: "/polytechnic/admissions" },
-    { title: "Workshops", href: "/polytechnic/workshops" },
+    { title: "ME Academics", href: "/me/academics" },
+    { title: "ME Facilities", href: "/me/facilities" },
+    { title: "ME Admissions", href: "/me/admissions" },
+    { title: "ME Activities", href: "/me/activities" },
   ];
 
   const searchableItems = [
@@ -133,9 +126,11 @@ const engineeringMenuItems = [
     { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering"] },
     { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },
 
-    { title: "About Polytechnic", href: "/polytechnic/about", category: "Polytechnic", keywords: ["polytechnic", "diploma", "technical"] },
-    { title: "Polytechnic Courses", href: "/polytechnic/courses", category: "Polytechnic", keywords: ["polytechnic", "courses", "diploma"] },
-    { title: "Polytechnic Admissions", href: "/polytechnic/admissions", category: "Polytechnic", keywords: ["polytechnic", "admissions"] },
+    { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering", "postgraduate"] },
+    { title: "ME Academics", href: "/me/academics", category: "ME Programs", keywords: ["me", "academics", "curriculum"] },
+    { title: "ME Facilities", href: "/me/facilities", category: "ME Programs", keywords: ["me", "facilities", "labs"] },
+    { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },
+    { title: "ME Activities", href: "/me/activities", category: "ME Programs", keywords: ["me", "activities"] },
   ];
 
   const filteredResults = searchQuery
@@ -294,27 +289,7 @@ const engineeringMenuItems = [
                   <NavigationMenuTrigger className={triggerClassName}>ME</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                      {meMenuItems.map((item) => (
-                        <li key={item.title}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                            >
-                              <div className="text-sm font-medium leading-none">{item.title}</div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className={triggerClassName}>Polytechnic</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                      {polytechnicMenuItems.map((item) => (
+                      {campusMenuItems.map((item) => (
                         <li key={item.title}>
                           <NavigationMenuLink asChild>
                             <Link
@@ -466,19 +441,7 @@ const engineeringMenuItems = [
               </div>
               <div>
                 <p className="font-semibold text-sm text-muted-foreground mb-2">ME</p>
-                {meMenuItems.map((item) => (
-                  <Link
-                    key={item.title}
-                    to={item.href}
-                    className="block py-2 pl-4 hover:text-primary transition-colors"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
-              <div>
-                <p className="font-semibold text-sm text-muted-foreground mb-2">Polytechnic</p>
-                {polytechnicMenuItems.map((item) => (
+                {campusMenuItems.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}

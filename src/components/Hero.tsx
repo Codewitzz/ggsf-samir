@@ -26,7 +26,7 @@ const Hero = () => {
         id: "innovation",
         title: "Innovation & entrepreneurship in every stream",
         description:
-          "From MBA labs to Polytechnic workshops, every learner gets access to start-up studios, hackathons, and co-create spaces.",
+          "From MBA labs to Engineering campus workshops, every learner gets access to start-up studios, hackathons, and co-create spaces.",
         badge: "Start-up Studio",
         image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80",
         stats: [

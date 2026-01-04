@@ -16,8 +16,8 @@ const FAQSection = () => {
       answer: "Yes, we provide separate hostel facilities for boys and girls with all modern amenities including Wi-Fi, mess, gym, and 24/7 security.",
     },
     {
-      question: "What is the duration of Polytechnic diploma programs?",
-      answer: "Our polytechnic diploma programs are typically 3 years after 10th standard. We offer various specializations in mechanical, civil, electrical, and computer engineering.",
+      question: "What campus facilities are available?",
+      answer: "Our engineering campus features state-of-the-art labs, a well-stocked library, modern classrooms, canteen facilities, and recreational areas. We offer various engineering specializations in mechanical, civil, electrical, and computer engineering.",
     },
     {
       question: "Are there placement opportunities for all programs?",

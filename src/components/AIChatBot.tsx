@@ -64,8 +64,9 @@ const AIChatBot = () => {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-      const systemPrompt = `You are a helpful AI assistant for a college foundation that includes three colleges: MBA, Engineering, and Polytechnic. 
+      const systemPrompt = `You are a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Center. 
       Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. 
+      The college offers MBA and Engineering programs with state-of-the-art campus facilities.
       Be concise, friendly, and informative. If you don't know something specific about the college, acknowledge it politely.`;
 
       const chat = model.startChat({

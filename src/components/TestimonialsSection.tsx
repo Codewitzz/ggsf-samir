@@ -20,9 +20,9 @@ const TestimonialsSection = () => {
     },
     {
       name: "Anjali Desai",
-      role: "Polytechnic Student",
+      role: "Engineering Student",
       company: "Current Student",
-      content: "The polytechnic program focuses on practical skills that are directly applicable in the industry. The workshops and lab sessions are outstanding.",
+      content: "The engineering campus provides excellent facilities and practical learning opportunities. The workshops and lab sessions are outstanding.",
       initials: "AD",
     },
     {

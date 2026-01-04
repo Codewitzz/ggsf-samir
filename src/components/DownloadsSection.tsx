@@ -23,12 +23,12 @@ const DownloadsSection = () => {
       url: "https://www.africau.edu/images/default/sample.pdf",
     },
     {
-      title: "Polytechnic Admission Brochure",
-      description: "Information about diploma programs, fees, and admission requirements",
+      title: "Campus Facilities Brochure",
+      description: "Information about campus facilities, infrastructure, and amenities",
       icon: FileText,
       size: "1.8 MB",
       format: "PDF",
-      category: "Polytechnic",
+      category: "Campus",
       url: "https://file-examples.com/storage/fe7d08cfa1f4f185c4b5e0a/2017/10/file-sample_150kB.pdf",
     },
     {

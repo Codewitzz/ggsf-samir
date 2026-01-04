@@ -11,8 +11,7 @@ const About = () => {
         <div className="container mx-auto max-w-4xl space-y-6">
           <h1 className="text-4xl font-bold text-center">About Guru Gobind Singh Foundation</h1>
           <p className="text-muted-foreground text-lg text-center">
-            Guru Gobind Singh Foundation nurtures future-ready graduates through its Engineering, Management, and
-            Polytechnic institutions. With NAAC accreditation, NBA-recognised programs, and strong industry partnerships,
+            Guru Gobind Singh Foundation nurtures future-ready graduates through its Engineering and Management institutions. With NAAC B+ Grade accreditation, NBA-recognised programs, and strong industry partnerships,
             the foundation emphasizes academic excellence, innovation, and holistic development.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

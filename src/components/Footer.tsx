@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">College Foundation</h3>
             <p className="text-sm text-primary-foreground/80 mb-4">
-              Excellence in education across MBA, Engineering, and Polytechnic programs. Shaping future leaders and innovators.
+              Excellence in education across MBA and Engineering programs. Shaping future leaders and innovators.
             </p>
             <div className="flex gap-3">
               <a href="#" className="hover:text-secondary transition-colors">
@@ -46,8 +46,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/polytechnic/about" className="hover:text-secondary transition-colors">
-                  Polytechnic
+                <Link to="/me/about" className="hover:text-secondary transition-colors">
+                  ME Programs
                 </Link>
               </li>
               <li>

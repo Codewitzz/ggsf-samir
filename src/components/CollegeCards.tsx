@@ -23,10 +23,10 @@ const CollegeCards = () => {
       color: "from-info to-primary",
     },
     {
-      title: "Polytechnic College",
-      description: "Diploma Programs - Hands-on technical education for practical skills",
+      title: "ME Programs",
+      description: "Master of Engineering - Advanced specialization and research-oriented postgraduate programs",
       icon: polytechnicIcon,
-      link: "/polytechnic/about",
+      link: "/me/about",
       color: "from-warning to-secondary",
     },
   ];

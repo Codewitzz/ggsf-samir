@@ -10,7 +10,7 @@ const GallerySection = () => {
     { id: 4, title: "Library", category: "Facilities", color: "from-success to-primary" },
     { id: 5, title: "Sports Complex", category: "Campus", color: "from-secondary to-warning" },
     { id: 6, title: "Annual Fest", category: "Events", color: "from-primary-dark to-info" },
-    { id: 7, title: "Polytechnic Workshop", category: "Academics", color: "from-warning to-primary" },
+    { id: 7, title: "Engineering Workshop", category: "Academics", color: "from-warning to-primary" },
     { id: 8, title: "Auditorium", category: "Facilities", color: "from-primary to-secondary" },
   ];
 

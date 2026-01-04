@@ -29,12 +29,17 @@ const Sitemap = () => {
       { title: "Admissions", href: "/engineering/admissions" },
       { title: "Research", href: "/engineering/research" },
     ],
-    "Polytechnic": [
-      { title: "About Polytechnic", href: "/polytechnic/about" },
-      { title: "Courses", href: "/polytechnic/courses" },
-      { title: "Faculty", href: "/polytechnic/faculty" },
-      { title: "Admissions", href: "/polytechnic/admissions" },
-      { title: "Workshops", href: "/polytechnic/workshops" },
+    "ME Programs": [
+      { title: "About ME", href: "/me/about" },
+      { title: "ME Academics", href: "/me/academics" },
+      { title: "ME Facilities", href: "/me/facilities" },
+      { title: "ME Admissions", href: "/me/admissions" },
+      { title: "ME Activities", href: "/me/activities" },
+    ],
+    "Resources": [
+      { title: "Fee Structure", href: "/fee-structure" },
+      { title: "Downloads", href: "/downloads" },
+      { title: "FAQ", href: "/faq" },
     ],
   };
 

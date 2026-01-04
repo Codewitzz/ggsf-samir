@@ -225,7 +225,7 @@ const engineeringMenuItems = [
               <div className="flex-shrink-0">
                 <img
                   src="/ggsf-logo.png"
-                  alt="Guru Gobind Singh Foundation Logo"
+                  alt=" Guru Gobind Singh College of Engineering and Research Center"
                   className="h-16 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
@@ -236,7 +236,7 @@ const engineeringMenuItems = [
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold  ">Guru Gobind Singh Foundation</h1>
+                <h1 className="text-xl font-bold  "> Guru Gobind Singh College of Engineering and Research Center  </h1>
                 <p className="text-xs  ">Knowledge is Divine</p>
               </div>
             </Link>

@@ -9,7 +9,7 @@ const LocationMap = () => {
 
         <div className="rounded-lg overflow-hidden shadow-lg border border-border">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.692894657878!2d73.77608747494156!3d19.958164481456215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb013af2e733%3A0xf9a146b2f1ffe4b0!2sGuru%20Gobind%20Singh%20College%20Of%20Engineering%20And%20Research%20Centre%2C%20Nashik!5e0!3m2!1sen!2sin!4v1700000000000"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.692894657878!2d73.77608747494156!3d19.958164481456215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb013af2e733%3A0xf9a146b2f1ffe4b0!2sGuru%20Gobind%20Singh%20College%20Of%20Engineering%20And%20Research%20Center%2C%20Nashik!5e0!3m2!1sen!2sin!4v1700000000000"
             width="100%"
             height="450"
             style={{ border: 0 }}

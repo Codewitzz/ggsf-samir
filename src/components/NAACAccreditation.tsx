@@ -42,3 +42,4 @@ const NAACAccreditation = () => {
 
 export default NAACAccreditation;
 
+

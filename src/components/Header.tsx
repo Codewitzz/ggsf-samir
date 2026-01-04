@@ -219,7 +219,7 @@ const engineeringMenuItems = [
             <Link to="/" className="flex items-center gap-3">
               <div className="flex-shrink-0">
                 <img
-                  src="/ggsf-logo.png"
+                  src="/ggsf-logo.jpg"
                   alt=" Guru Gobind Singh College of Engineering and Research Center"
                   className="h-16 w-auto object-contain"
                   loading="lazy"

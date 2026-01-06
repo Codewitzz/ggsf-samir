@@ -322,6 +322,12 @@ const engineeringMenuItems = [
                     <NavigationMenuLink className={navLinkClassName}>Contact</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link to="/campus">
+                    <NavigationMenuLink className={navLinkClassName}>Campus</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
               </NavigationMenuList>
               <NavigationMenuIndicator />
             </NavigationMenu>
@@ -459,6 +465,9 @@ const engineeringMenuItems = [
               </Link>
               <Link to="/contact" className="block py-2 hover:text-primary transition-colors">
                 Contact
+              </Link>
+              <Link to="/campus" className="block py-2 hover:text-primary transition-colors">
+                Campus
               </Link>
             </div>
           </div>

@@ -23,6 +23,7 @@ const Polytechnic = lazy(() => import("./pages/Polytechnic"));
 const Sitemap = lazy(() => import("./pages/Sitemap"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Placeholder = lazy(() => import("./pages/Placeholder"));
+const Campus = lazy(() => import("./pages/Campus"));
 const EngineeringDepartment = lazy(() => import("./pages/departments/EngineeringDepartment"));
 const MBASpecialization = lazy(() => import("./pages/departments/MBASpecialization"));
 const PolytechnicCourse = lazy(() => import("./pages/departments/PolytechnicCourse"));
@@ -80,6 +81,7 @@ const App = () => {
               <Route path="/fee-structure" element={<FeeStructure />} />
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/placements" element={<Placements />} />
+              <Route path="/campus" element={<Campus />} />
 
               {/* MBA Routes */}
               <Route path="/mba/about" element={<MBAAbout />} />

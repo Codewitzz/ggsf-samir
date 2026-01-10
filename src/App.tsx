@@ -19,14 +19,12 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const MBA = lazy(() => import("./pages/MBA"));
 const Engineering = lazy(() => import("./pages/Engineering"));
-const Polytechnic = lazy(() => import("./pages/Polytechnic"));
 const Sitemap = lazy(() => import("./pages/Sitemap"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Placeholder = lazy(() => import("./pages/Placeholder"));
 const Campus = lazy(() => import("./pages/Campus"));
 const EngineeringDepartment = lazy(() => import("./pages/departments/EngineeringDepartment"));
 const MBASpecialization = lazy(() => import("./pages/departments/MBASpecialization"));
-const PolytechnicCourse = lazy(() => import("./pages/departments/PolytechnicCourse"));
 const EngineeringAcademics = lazy(() => import("./pages/EngineeringAcademics"));
 const EngineeringFacilities = lazy(() => import("./pages/EngineeringFacilities"));
 const EngineeringActivities = lazy(() => import("./pages/EngineeringActivities"));
@@ -41,9 +39,6 @@ const MEAcademics = lazy(() => import("./pages/MEAcademics"));
 const MEFacilities = lazy(() => import("./pages/MEFacilities"));
 const MEAdmissions = lazy(() => import("./pages/MEAdmissions"));
 const MEActivities = lazy(() => import("./pages/MEActivities"));
-const PolytechnicAcademics = lazy(() => import("./pages/PolytechnicAcademics"));
-const PolytechnicActivities = lazy(() => import("./pages/PolytechnicActivities"));
-const PolytechnicFacilities = lazy(() => import("./pages/PolytechnicFacilities"));
 const SchoolAbout = lazy(() => import("./pages/SchoolAbout"));
 const SchoolAcademics = lazy(() => import("./pages/SchoolAcademics"));
 const SchoolActivities = lazy(() => import("./pages/SchoolActivities"));
@@ -106,7 +101,6 @@ const App = () => {
               <Route path="/engineering/research" element={<Engineering />} />
               <Route path="/engineering/campus" element={<EngineeringCampus />} />
               <Route path="/engineering/infrastructure" element={<EngineeringInfrastructure />} />
-              <Route path="/engineering/departments/:dept" element={<Placeholder />} />
 
               {/* ME (Masters of Engineering) Routes */}
               <Route path="/me/about" element={<MEAbout />} />
@@ -115,17 +109,6 @@ const App = () => {
               <Route path="/me/admissions" element={<MEAdmissions />} />
               <Route path="/me/activities" element={<MEActivities />} />
               <Route path="/me/specializations/:specName" element={<Placeholder />} />
-
-              {/* Polytechnic Routes */}
-              <Route path="/polytechnic/about" element={<Polytechnic />} />
-              <Route path="/polytechnic/academics" element={<PolytechnicAcademics />} />
-              <Route path="/polytechnic/activities" element={<PolytechnicActivities />} />
-              <Route path="/polytechnic/facilities" element={<PolytechnicFacilities />} />
-              <Route path="/polytechnic/courses" element={<Polytechnic />} />
-              <Route path="/polytechnic/courses/:courseName" element={<PolytechnicCourse />} />
-              <Route path="/polytechnic/faculty" element={<Polytechnic />} />
-              <Route path="/polytechnic/admissions" element={<Polytechnic />} />
-              <Route path="/polytechnic/workshops" element={<Polytechnic />} />
 
               {/* School Routes */}
               <Route path="/school/about" element={<SchoolAbout />} />
@@ -199,9 +182,6 @@ const App = () => {
               <Route path="/alumni/register" element={<Placeholder />} />
               <Route path="/alumni/stories" element={<Placeholder />} />
               <Route path="/alumni/gallery" element={<Placeholder />} />
-
-              {/* Admissions Route */}
-              <Route path="/admissions" element={<Placeholder />} />
 
               {/* Placeholder routes for future content */}
               <Route path="/research/:topic" element={<Placeholder />} />

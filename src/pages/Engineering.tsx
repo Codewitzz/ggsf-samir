@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
@@ -21,8 +22,52 @@ import TPCell from "@/components/TPCell";
 import NoticesAnnouncements from "@/components/NoticesAnnouncements";
 import NBAAccreditation from "@/components/NBAAccreditation";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import { cn } from "@/lib/utils";
+
+const SLIDE_DURATION = 5000;
 
 const Engineering = () => {
+  const heroSlides = useMemo(
+    () => [
+      {
+        id: "engineering-innovation",
+        title: "Engineering Excellence & Innovation",
+        description: "Cutting-edge technology and innovative learning to build tomorrow's engineers",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+      },
+      {
+        id: "engineering-labs",
+        title: "State-of-the-Art Laboratories",
+        description: "Modern labs with latest equipment and technology for hands-on learning",
+        image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1600&q=80",
+      },
+      {
+        id: "engineering-industry",
+        title: "Strong Industry Connections",
+        description: "Partnerships with leading companies for projects, internships, and placements",
+        image: "https://images.unsplash.com/photo-1532619675605-1ede6c7edf47?auto=format&fit=crop&w=1600&q=80",
+      },
+      {
+        id: "engineering-research",
+        title: "Research & Development Focus",
+        description: "Active research culture with funded projects and patent mentorship",
+        image: "https://images.unsplash.com/photo-1532619675605-1ede6c7edf47?auto=format&fit=crop&w=1600&q=80",
+      },
+    ],
+    [],
+  );
+
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, SLIDE_DURATION);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [heroSlides.length]);
   const features = [
     {
       icon: Cpu,
@@ -109,22 +154,64 @@ const Engineering = () => {
       <Header />
       <Breadcrumbs />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-info to-primary text-primary-foreground py-20 px-4">
-        <div className="container mx-auto text-center">
-          <div className="mb-6 inline-block">
-            <img
-              src={engineeringIcon}
-              alt="Engineering"
-              className="w-32 h-32 mx-auto"
-              loading="lazy"
-              decoding="async"
-            />
+      {/* Hero Section with Image Slider */}
+      <section className="relative h-[500px] md:h-[600px] overflow-hidden bg-gradient-to-r from-info to-primary">
+        {/* Background Slider */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="flex h-full w-full transition-transform duration-1000 ease-in-out"
+            style={{
+              transform: `translateX(-${activeSlide * 100}%)`,
+            }}
+          >
+            {heroSlides.map((slide) => (
+              <div key={slide.id} className="relative h-full w-full flex-shrink-0">
+                <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+              </div>
+            ))}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Engineering College</h1>
-          <p className="text-xl max-w-3xl mx-auto text-primary-foreground/90">
-            Building tomorrow's engineers with cutting-edge technology and innovative learning
-          </p>
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-info/80 via-primary/80 to-info/80 mix-blend-multiply" />
+
+        {/* Content */}
+        <div className="relative z-10 h-full flex items-center justify-center text-white">
+          <div className="container mx-auto px-4 text-center">
+            <div className="mb-6 inline-block">
+              <img
+                src={engineeringIcon}
+                alt="Engineering"
+                className="w-24 h-24 md:w-32 md:h-32 mx-auto"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Engineering College</h1>
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto text-white/90 mb-2">
+              {heroSlides[activeSlide].title}
+            </p>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/80">
+              {heroSlides[activeSlide].description}
+            </p>
+          </div>
+        </div>
+
+        {/* Slider Indicators */}
+        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-3">
+          {heroSlides.map((slide, index) => (
+            <button
+              key={slide.id}
+              type="button"
+              onClick={() => setActiveSlide(index)}
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                index === activeSlide ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/75",
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 

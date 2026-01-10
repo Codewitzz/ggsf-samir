@@ -63,6 +63,7 @@ const spotlightDepartments = [
     description: "VLSI, 5G communication, and IoT studios backed by global component partners.",
     href: "/engineering/departments/electronics-communication",
   },
+
   {
     title: "Management Studies",
     description: "Interdisciplinary management programs with analytics lab and startup incubator.",

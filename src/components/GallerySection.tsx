@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -45,7 +46,7 @@ const GallerySection = () => {
 
         <div className="text-center mt-8">
           <p className="text-muted-foreground">
-            Want to see more? <a href="/gallery" className="text-primary hover:underline font-medium">View Full Gallery</a>
+            Want to see more? <Link to="/gallery" className="text-primary hover:underline font-medium">View Full Gallery</Link>
           </p>
         </div>
       </div>

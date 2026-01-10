@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import engineeringIcon from "@/assets/engineering-icon.png";
 import mbaIcon from "@/assets/mba-icon.png";
-import polytechnicIcon from "@/assets/polytechnic-icon.png";
 
 const CollegeCards = () => {
   const colleges = [
@@ -25,7 +24,7 @@ const CollegeCards = () => {
     {
       title: "ME Programs",
       description: "Master of Engineering - Advanced specialization and research-oriented postgraduate programs",
-      icon: polytechnicIcon,
+      icon: engineeringIcon,
       link: "/me/about",
       color: "from-warning to-secondary",
     },
@@ -37,7 +36,7 @@ const CollegeCards = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Colleges</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose from our three prestigious institutions, each offering world-class education
+            Choose from our prestigious institutions, each offering world-class education
           </p>
         </div>
 

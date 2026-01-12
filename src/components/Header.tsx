@@ -88,6 +88,7 @@ const engineeringMenuItems = [
 
   const campusMenuItems = [
     { title: "About ME", href: "/me/about" },
+    { title: "ME Departments", href: "/me/about#me-departments" },
     { title: "ME Academics", href: "/me/academics" },
     { title: "ME Facilities", href: "/me/facilities" },
     { title: "ME Admissions", href: "/me/admissions" },
@@ -124,9 +125,21 @@ const engineeringMenuItems = [
     })),
 
     { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering"] },
+    {
+      title: "ME Departments",
+      href: "/me/about#me-departments",
+      category: "ME Programs",
+      keywords: ["me", "departments", "ai", "robotics"],
+    },
     { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },
 
     { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering", "postgraduate"] },
+    {
+      title: "ME Departments",
+      href: "/me/about#me-departments",
+      category: "ME Programs",
+      keywords: ["me", "departments", "ai", "robotics"],
+    },
     { title: "ME Academics", href: "/me/academics", category: "ME Programs", keywords: ["me", "academics", "curriculum"] },
     { title: "ME Facilities", href: "/me/facilities", category: "ME Programs", keywords: ["me", "facilities", "labs"] },
     { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },

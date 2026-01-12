@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useParams } from "react-router-dom";
 import {
   GraduationCap,
@@ -24,6 +25,14 @@ const SLIDE_DURATION = 5000;
 const EngineeringDepartment = () => {
   const { deptName } = useParams<{ deptName: string }>();
 
+  interface FacultyMember {
+    name: string;
+    image?: string;
+    qualifications: string;
+    experience: string;
+    areaOfInterest: string;
+  }
+
   const departmentData: Record<
     string,
     {
@@ -31,6 +40,7 @@ const EngineeringDepartment = () => {
       description: string;
       icon: string;
       faculty: string;
+      facultyMembers?: FacultyMember[];
       labs: string[];
       career: string[];
       highlights: string[];
@@ -76,6 +86,43 @@ const EngineeringDepartment = () => {
         "Leading the digital revolution with cutting-edge programming, software development, and computer systems expertise.",
       icon: "💻",
       faculty: "25+ experienced faculty members",
+      facultyMembers: [
+        {
+          name: "Dr. Arvind Tiwari",
+          image: "/faculty/arvind-tiwari.jpg",
+          qualifications: "Ph.D. in Computer Science, M.Tech in Computer Engineering",
+          experience: "16+ years",
+          areaOfInterest: "Computer Networks, Distributed Systems, Cloud Computing",
+        },
+        {
+          name: "Prof. Sneha Reddy",
+          image: "/faculty/sneha-reddy.jpg",
+          qualifications: "M.Tech in Software Engineering, B.E. Computer",
+          experience: "12+ years",
+          areaOfInterest: "Software Engineering, Web Technologies, Database Systems",
+        },
+        {
+          name: "Prof. Karan Malhotra",
+          image: "/faculty/karan-malhotra.jpg",
+          qualifications: "M.Tech in Network Security, B.E. Computer",
+          experience: "10+ years",
+          areaOfInterest: "Cyber Security, Network Protocols, Information Security",
+        },
+        {
+          name: "Prof. Divya Nair",
+          image: "/faculty/divya-nair.jpg",
+          qualifications: "M.Tech in Data Science, B.E. Computer",
+          experience: "9+ years",
+          areaOfInterest: "Data Analytics, Machine Learning, Big Data",
+        },
+        {
+          name: "Prof. Aditya Rao",
+          image: "/faculty/aditya-rao.jpg",
+          qualifications: "M.Tech in Cloud Computing, B.E. Computer",
+          experience: "8+ years",
+          areaOfInterest: "Cloud Architecture, DevOps, Virtualization",
+        },
+      ],
       labs: ["Programming Lab", "Database Lab", "Network Lab", "AI/ML Lab", "Cyber Security Lab"],
       career: ["Software Engineer", "Data Scientist", "System Architect", "DevOps Engineer", "Full Stack Developer"],
       highlights: [
@@ -125,6 +172,43 @@ const EngineeringDepartment = () => {
       description: "Designing and manufacturing the machines and systems that power our world.",
       icon: "⚙️",
       faculty: "22+ expert faculty members",
+      facultyMembers: [
+        {
+          name: "Dr. Neelkanth G Nikam",
+          image: "/faculty/neelkanth-nikam.jpg",
+          qualifications: "Ph.D. in Mechanical Engineering, M.Tech in Thermal Engineering",
+          experience: "20+ years",
+          areaOfInterest: "Thermal Engineering, Heat Transfer, Energy Systems",
+        },
+        {
+          name: "Prof. Rahul Patel",
+          image: "/faculty/rahul-patel.jpg",
+          qualifications: "M.Tech in CAD/CAM, B.E. Mechanical",
+          experience: "14+ years",
+          areaOfInterest: "CAD/CAM, Product Design, Finite Element Analysis",
+        },
+        {
+          name: "Prof. Sunita Verma",
+          image: "/faculty/sunita-verma.jpg",
+          qualifications: "M.Tech in Manufacturing Engineering, B.E. Mechanical",
+          experience: "12+ years",
+          areaOfInterest: "Manufacturing Processes, Quality Control, Industrial Engineering",
+        },
+        {
+          name: "Prof. Amit Kumar",
+          image: "/faculty/amit-kumar.jpg",
+          qualifications: "M.Tech in Industrial Engineering, B.E. Mechanical",
+          experience: "10+ years",
+          areaOfInterest: "Operations Research, Production Planning, Supply Chain Management",
+        },
+        {
+          name: "Prof. Kavita Nair",
+          image: "/faculty/kavita-nair.jpg",
+          qualifications: "M.Tech in Design Engineering, B.E. Mechanical",
+          experience: "9+ years",
+          areaOfInterest: "Machine Design, Material Science, Stress Analysis",
+        },
+      ],
       labs: ["CAD/CAM Lab", "Thermodynamics Lab", "Manufacturing Lab", "Automation Lab", "Materials Testing Lab"],
       career: ["Mechanical Engineer", "Design Engineer", "Production Engineer", "Quality Engineer", "Maintenance Engineer"],
       highlights: [
@@ -150,6 +234,43 @@ const EngineeringDepartment = () => {
       description: "Building the infrastructure that shapes our cities and communities.",
       icon: "🏗️",
       faculty: "18+ qualified faculty members",
+      facultyMembers: [
+        {
+          name: "Dr. Rajesh Kumar",
+          image: "/faculty/rajesh-kumar.jpg",
+          qualifications: "Ph.D. in Structural Engineering, M.Tech in Civil Engineering",
+          experience: "15+ years",
+          areaOfInterest: "Structural Analysis, Reinforced Concrete Design, Seismic Engineering",
+        },
+        {
+          name: "Prof. Anjali Desai",
+          image: "/faculty/anjali-desai.jpg",
+          qualifications: "M.Tech in Environmental Engineering, B.E. Civil",
+          experience: "12+ years",
+          areaOfInterest: "Environmental Engineering, Water Treatment, Waste Management",
+        },
+        {
+          name: "Prof. Vikram Singh",
+          image: "/faculty/vikram-singh.jpg",
+          qualifications: "M.Tech in Geotechnical Engineering, B.E. Civil",
+          experience: "10+ years",
+          areaOfInterest: "Soil Mechanics, Foundation Engineering, Slope Stability",
+        },
+        {
+          name: "Prof. Priya Sharma",
+          image: "/faculty/priya-sharma.jpg",
+          qualifications: "M.Tech in Construction Management, B.E. Civil",
+          experience: "8+ years",
+          areaOfInterest: "Project Management, Construction Planning, Building Materials",
+        },
+        {
+          name: "Prof. Sunil Mehta",
+          image: "/faculty/sunil-mehta.jpg",
+          qualifications: "M.Tech in Transportation Engineering, B.E. Civil",
+          experience: "9+ years",
+          areaOfInterest: "Highway Engineering, Traffic Engineering, Pavement Design",
+        },
+      ],
       labs: ["Structural Lab", "Concrete Lab", "Surveying Lab", "Geotechnical Lab", "Environmental Lab"],
       career: ["Structural Engineer", "Site Engineer", "Project Manager", "Design Engineer", "Quality Control Engineer"],
       highlights: [
@@ -172,6 +293,43 @@ const EngineeringDepartment = () => {
       description: "Powering the future with electrical systems and renewable energy solutions.",
       icon: "⚡",
       faculty: "20+ experienced faculty members",
+      facultyMembers: [
+        {
+          name: "Dr. Sanjay Mehta",
+          image: "/faculty/sanjay-mehta.jpg",
+          qualifications: "Ph.D. in Power Systems, M.Tech in Electrical Engineering",
+          experience: "18+ years",
+          areaOfInterest: "Power Systems, Smart Grid, Electrical Machines",
+        },
+        {
+          name: "Prof. Deepak Shah",
+          image: "/faculty/deepak-shah.jpg",
+          qualifications: "M.Tech in Control Systems, B.E. Electrical",
+          experience: "13+ years",
+          areaOfInterest: "Control Systems, Automation, PLC Programming",
+        },
+        {
+          name: "Prof. Meera Joshi",
+          image: "/faculty/meera-joshi.jpg",
+          qualifications: "M.Tech in Renewable Energy, B.E. Electrical",
+          experience: "11+ years",
+          areaOfInterest: "Renewable Energy Systems, Solar Power, Wind Energy",
+        },
+        {
+          name: "Prof. Ramesh Iyer",
+          image: "/faculty/ramesh-iyer.jpg",
+          qualifications: "M.Tech in Power Electronics, B.E. Electrical",
+          experience: "9+ years",
+          areaOfInterest: "Power Electronics, Drives, Converters",
+        },
+        {
+          name: "Prof. Nisha Reddy",
+          image: "/faculty/nisha-reddy.jpg",
+          qualifications: "M.Tech in Electrical Machines, B.E. Electrical",
+          experience: "8+ years",
+          areaOfInterest: "Electrical Machines, Motor Control, Transformers",
+        },
+      ],
       labs: ["Power Systems Lab", "Control Systems Lab", "Electrical Machines Lab", "Renewable Energy Lab", "PLC Lab"],
       career: ["Electrical Engineer", "Power Systems Engineer", "Control Engineer", "Renewable Energy Engineer", "Maintenance Engineer"],
       highlights: [
@@ -217,6 +375,91 @@ const EngineeringDepartment = () => {
         "Foundation of engineering principles covering mathematics, physics, chemistry, and basic engineering concepts.",
       icon: "📚",
       faculty: "15+ experienced faculty members",
+      facultyMembers: [
+        {
+          name: "Dr. Umakant D Butkar (HOD)",
+          image: "public/faculty/umakant-butkar.jpg",
+          qualifications: "Ph.D. in Physics, M.Sc. Physics, B.Ed",
+          experience: "16+ years",
+          areaOfInterest: "Computer Network",
+        },
+        {
+          name: "Prof.  Kushdip Kucheriya",
+          image: "public/faculty/kushdip-kucheriya.jpg",
+          qualifications: "M.Sc. Maths.SET",
+          experience: "6+ years",
+          areaOfInterest: "Applied Mathematics, Numerical Methods, Engineering Mathematics",
+        },
+        {
+          name: "Prof. Manisha A Sonawane",
+          image: "public/faculty/manisha-sonawane.jpg",
+          qualifications: "M.Sc. B.Ed(SET),PhD (Pursuing)",
+          experience: "13+ years",
+          areaOfInterest: " Organic Chemistry",
+        },
+        {
+          name: "Prof. Farhat J Shaikh",
+          image: "public/faculty/farhat-shaikh.png",
+          qualifications: "MSc(Maths), SET , PET, B.Ed. Ph.D Pursuing",
+          experience: "6+ years",
+          areaOfInterest: "Mathematics",
+        },
+      {
+          name: "Prof. Vimal S Bodke",
+          image: "public/faculty/vimal-bodke.jpeg",
+          qualifications: "ME (E & TC)",
+          experience: "12+ years",
+          areaOfInterest: "VLSI & Embedded System",
+        },
+      {
+          name: "Prof.Ms. Arjita K Srivastava",
+          image: "public/faculty/arjita-srivastava.jpg",
+          qualifications: "M.sc Physics",
+          experience: "7+ years",
+          areaOfInterest: "Physics",
+        },
+      {
+          name: "Dr. Megha K Kothawade",
+          image: "public/faculty/megha-kothawade.png",
+          qualifications: "Ph. D (Mathematics)",
+          experience: "13+ years",
+          areaOfInterest: "Real Analysis",
+        },
+      {
+          name: "Prof. Rupali B Bhusare",
+          image: "public/faculty/rupali-bhusare.jpg",
+          qualifications: "M.Sc. Physics B.Ed. SET",
+          experience: "12+ years",
+          areaOfInterest: "physics",
+        },
+      {
+          name: "Prof. Ms.Pranita S Bhosale",
+          image: "public/faculty/pranita-bhosale.jpg",
+          qualifications: "M.S.C Mathematics",
+          experience: "2+ years",
+          areaOfInterest: "Mathematics and Computing ",
+        },
+      {
+          name: "Prof. Pooja K Borade",
+          image: "public/faculty/pooja-borade.png",
+          qualifications: "BSc. Chemistry ",
+          experience: "3+ years",
+          areaOfInterest: "Chemistry",
+        },
+      {
+          name: "Prof.  Kalyani Dattatray Gholap",
+          image: "public/faculty/kalyani-gholap.jpg",
+          qualifications: "Bsc Comp Science",
+          experience: "2+ years",
+          areaOfInterest: "Computer",
+        },
+      {
+          name: "Prof.Mr.Abhijit Sharma",
+          image: "public/faculty/abhijit-sharma.jpg",
+          qualifications: "M.Com",
+          experience: "2+ years",
+          areaOfInterest: "Computer science",
+        },      ],
       labs: ["Physics Lab", "Chemistry Lab", "Mathematics Lab", "Engineering Graphics Lab", "Workshop Practice Lab"],
       career: ["Foundation for all engineering disciplines", "Research Assistant", "Teaching Assistant", "Technical Writer"],
       highlights: [
@@ -234,6 +477,43 @@ const EngineeringDepartment = () => {
       description: "Cutting-edge program in AI, machine learning, and data science to prepare students for the future of technology.",
       icon: "🤖",
       faculty: "18+ AI and Data Science experts",
+      facultyMembers: [
+        {
+          name: "Dr. Manoj Agarwal",
+          image: "/faculty/manoj-agarwal.jpg",
+          qualifications: "Ph.D. in Machine Learning, M.Tech in Computer Science",
+          experience: "15+ years",
+          areaOfInterest: "Machine Learning, Deep Learning, Neural Networks",
+        },
+        {
+          name: "Prof. Swati Kulkarni",
+          image: "/faculty/swati-kulkarni.jpg",
+          qualifications: "M.Tech in Artificial Intelligence, B.E. Computer",
+          experience: "11+ years",
+          areaOfInterest: "Artificial Intelligence, Expert Systems, Knowledge Representation",
+        },
+        {
+          name: "Prof. Rohit Deshmukh",
+          image: "/faculty/rohit-deshmukh.jpg",
+          qualifications: "M.Tech in Data Science, B.E. Computer",
+          experience: "9+ years",
+          areaOfInterest: "Data Science, Data Mining, Predictive Analytics",
+        },
+        {
+          name: "Prof. Neha Gupta",
+          image: "/faculty/neha-gupta.jpg",
+          qualifications: "M.Tech in Deep Learning, B.E. Computer",
+          experience: "8+ years",
+          areaOfInterest: "Deep Learning, Computer Vision, Pattern Recognition",
+        },
+        {
+          name: "Prof. Varun Pillai",
+          image: "/faculty/varun-pillai-ai.jpg",
+          qualifications: "M.Tech in Natural Language Processing, B.E. Computer",
+          experience: "7+ years",
+          areaOfInterest: "Natural Language Processing, Text Mining, Chatbots",
+        },
+      ],
       labs: ["AI/ML Lab", "Data Science Lab", "Deep Learning Lab", "Big Data Lab", "Computer Vision Lab"],
       career: ["AI Engineer", "Data Scientist", "ML Engineer", "Data Analyst", "AI Researcher", "Business Intelligence Analyst"],
       highlights: [
@@ -257,6 +537,36 @@ const EngineeringDepartment = () => {
       description: "Pioneering automation technologies and robotics systems for Industry 4.0 and smart manufacturing.",
       icon: "🤖",
       faculty: "16+ automation and robotics specialists",
+      facultyMembers: [
+        {
+          name: "Dr. Pradeep Menon",
+          image: "/faculty/pradeep-menon.jpg",
+          qualifications: "Ph.D. in Robotics, M.Tech in Automation",
+          experience: "14+ years",
+          areaOfInterest: "Industrial Robotics, Automation Systems, Robot Control",
+        },
+        {
+          name: "Prof. Kiran Shetty",
+          image: "/faculty/kiran-shetty.jpg",
+          qualifications: "M.Tech in Industrial Automation, B.E. Mechanical",
+          experience: "11+ years",
+          areaOfInterest: "PLC Programming, SCADA Systems, Industrial Automation",
+        },
+        {
+          name: "Prof. Varun Pillai",
+          image: "/faculty/varun-pillai-robotics.jpg",
+          qualifications: "M.Tech in Mechatronics, B.E. Mechanical",
+          experience: "9+ years",
+          areaOfInterest: "Mechatronics, Embedded Systems, Sensor Integration",
+        },
+        {
+          name: "Prof. Aishwarya Nair",
+          image: "/faculty/aishwarya-nair.jpg",
+          qualifications: "M.Tech in Robotics Engineering, B.E. Mechanical",
+          experience: "8+ years",
+          areaOfInterest: "Robot Kinematics, Path Planning, Human-Robot Interaction",
+        },
+      ],
       labs: ["Robotics Lab", "Automation Lab", "PLC Lab", "Mechatronics Lab", "Industrial Automation Lab"],
       career: ["Robotics Engineer", "Automation Engineer", "Control Systems Engineer", "PLC Programmer", "Mechatronics Engineer"],
       highlights: [
@@ -273,6 +583,63 @@ const EngineeringDepartment = () => {
       ],
       achievements: ["Workshops and training aligned with Industry 4.0."],
       publications: ["Applied research in robotics and automation."],
+    },
+    "me-computer-engineering-ai-ds": {
+      name: "ME - Computer Engineering (AI & DS)",
+      description:
+        "Advanced postgraduate program focused on artificial intelligence, machine learning, big data engineering, and MLOps for research and industry innovation.",
+      icon: "🧠",
+      faculty: "10+ research-oriented faculty and industry mentors",
+      labs: ["AI/ML Research Lab", "Big Data & Cloud Lab", "Deep Learning Lab", "Cyber Security Lab", "High Performance Computing Lab"],
+      career: ["Data Scientist", "AI/ML Engineer", "Research Engineer", "MLOps Engineer", "Solution Architect", "Academic/Research Scholar"],
+      highlights: [
+        "NVIDIA-powered compute clusters for deep learning",
+        "Industry projects with real datasets and publication mentorship",
+        "Advanced coursework in MLOps, big data pipelines, and generative AI",
+        "Hackathons, Kaggle-style competitions, and research paper writing support",
+        "Collaborations with tech partners for certifications and internships",
+      ],
+      vision: "To develop AI leaders with strong research capabilities and industry readiness.",
+      mission: [
+        "Deliver rigorous AI/ML curriculum aligned with industry needs.",
+        "Enable research publications and patents in data science and AI.",
+        "Provide experiential learning through real-world datasets and cloud platforms.",
+      ],
+      achievements: ["Student papers in reputed AI/ML conferences; winning teams in hackathons."],
+      publications: ["Faculty and student publications in deep learning, NLP, and data engineering."],
+      mouPartners: ["CISCO", "AWS Academy", "Red Hat Academy", "Industry AI partners"],
+    },
+    "me-mechanical-engineering-automation-robotics": {
+      name: "ME - Mechanical Engineering (Automation and Robotics)",
+      description:
+        "Postgraduate specialization integrating mechanical systems with robotics, mechatronics, advanced controls, and Industry 4.0 automation.",
+      icon: "🏭",
+      faculty: "12+ experts in robotics, mechatronics, and automation",
+      labs: ["Robotics & Mechatronics Lab", "Automation & PLC/SCADA Lab", "Advanced Manufacturing Lab", "CAD/CAM & Simulation Lab", "Smart Factory Lab"],
+      career: [
+        "Robotics Engineer",
+        "Automation Specialist",
+        "Mechatronics Engineer",
+        "Controls Engineer",
+        "Industrial R&D Engineer",
+        "Manufacturing Systems Engineer",
+      ],
+      highlights: [
+        "Hands-on training with industrial robots, cobots, and PLC/SCADA systems",
+        "Digital twin and smart factory simulations for Industry 4.0",
+        "Projects in predictive maintenance, advanced controls, and machine vision",
+        "Collaborations with automation OEMs for certifications and internships",
+        "Focus on sustainable and efficient manufacturing automation",
+      ],
+      vision: "To create automation and robotics specialists who can lead smart manufacturing initiatives.",
+      mission: [
+        "Blend mechanical engineering fundamentals with modern robotics and automation.",
+        "Provide lab-intensive learning with industrial-grade equipment.",
+        "Promote research and innovation in smart factories and intelligent systems.",
+      ],
+      achievements: ["Student projects showcased in Industry 4.0 exhibitions; consultancy mini-projects with local industry."],
+      publications: ["Research outputs in automation, robotics, and smart manufacturing domains."],
+      mouPartners: ["Bosch", "Siemens", "Industry robotics partners"],
     },
     "management-studies": {
       name: "Management Studies (MBA, BBA)",
@@ -358,6 +725,16 @@ const EngineeringDepartment = () => {
       window.clearInterval(interval);
     };
   }, [heroSlides.length, dept]);
+
+  // Helper function to get initials from name
+  const getInitials = (name: string): string => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   if (!dept) {
     return (
@@ -457,6 +834,53 @@ const EngineeringDepartment = () => {
           </Card>
         </div>
       </section>
+
+      {/* Faculty Members */}
+      {dept.facultyMembers && dept.facultyMembers.length > 0 && (
+        <section className="py-16 px-4 bg-muted/30 gsap-fade">
+          <div className="container mx-auto max-w-7xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-2">Our Faculty</h2>
+              <div className="h-1 w-24 bg-info rounded-full mx-auto"></div>
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+                Meet our experienced and dedicated faculty members who bring industry expertise and academic excellence to
+                the classroom.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {dept.facultyMembers.map((member, index) => (
+                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:border-info/50">
+                  <CardHeader className="pb-4">
+                    <div className="flex flex-col items-center text-center">
+                      <Avatar className="h-28 w-28 mb-4 border-4 border-info/20">
+                        <AvatarImage src={member.image || "/placeholder.svg"} alt={member.name} />
+                        <AvatarFallback className="bg-info/10 text-info text-xl font-semibold">
+                          {getInitials(member.name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <CardTitle className="text-lg font-semibold mb-2">{member.name}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0 space-y-3">
+                    <div>
+                      <p className="text-xs font-semibold text-info mb-1">QUALIFICATIONS</p>
+                      <p className="text-sm text-muted-foreground">{member.qualifications}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-info mb-1">EXPERIENCE</p>
+                      <p className="text-sm text-muted-foreground">{member.experience}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-info mb-1">AREA OF INTEREST</p>
+                      <p className="text-sm text-muted-foreground">{member.areaOfInterest}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Laboratories */}
       <section className="py-16 px-4 bg-muted/30 gsap-fade">

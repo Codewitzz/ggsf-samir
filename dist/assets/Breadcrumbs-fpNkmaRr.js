@@ -1,0 +1,6 @@
+import{c as i,x as m,j as e,L as a}from"./index-DrXIuK2-.js";import{H as l}from"./house-BCdbfQVK.js";/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const x=i("ChevronRight",[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]]),u=()=>{const r=m().pathname.split("/").filter(t=>t),o=t=>t.split("-").map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(" ");return e.jsx("nav",{className:"bg-muted py-3 px-4",children:e.jsx("div",{className:"container mx-auto",children:e.jsxs("ol",{className:"flex items-center gap-2 text-sm",children:[e.jsx("li",{children:e.jsxs(a,{to:"/",className:"flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors",children:[e.jsx(l,{className:"h-4 w-4"}),"Home"]})}),r.map((t,s)=>{const n=`/${r.slice(0,s+1).join("/")}`,c=s===r.length-1;return e.jsxs("li",{className:"flex items-center gap-2",children:[e.jsx(x,{className:"h-4 w-4 text-muted-foreground"}),c?e.jsx("span",{className:"text-foreground font-medium",children:o(t)}):e.jsx(a,{to:n,className:"text-muted-foreground hover:text-primary transition-colors",children:o(t)})]},t)})]})})})};export{u as B};

@@ -24,6 +24,27 @@ import { cn } from "@/lib/utils";
 const SLIDE_DURATION = 5000;
 
 const MEAbout = () => {
+  const meDepartments = [
+    {
+      name: "ME - Computer Engineering (AI & DS)",
+      seats: "12 seats",
+      description:
+        "Advanced postgraduate specialization in artificial intelligence, machine learning, and data science with a research-driven curriculum.",
+      details:
+        "Deep learning, big data engineering, and MLOps with NVIDIA-powered clusters, industry datasets, publication mentorship, and cloud-native pipelines.",
+      highlights: ["NVIDIA GPU clusters", "MLOps & big data pipelines", "Industry projects & research papers"],
+    },
+    {
+      name: "ME - Mechanical Engineering (Automation and Robotics)",
+      seats: "12 seats",
+      description:
+        "Integrates mechanical systems with robotics, mechatronics, and Industry 4.0 automation for smart manufacturing leadership.",
+      details:
+        "Industrial robotics, cobots, PLC/SCADA, digital twins, and smart factory simulations with strong industry mentorship and lab immersion.",
+      highlights: ["Industrial robots & cobots", "PLC/SCADA & digital twins", "Smart factory simulations"],
+    },
+  ];
+
   const heroSlides = useMemo(
     () => [
       {
@@ -184,6 +205,44 @@ const MEAbout = () => {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
+        </div>
+      </section>
+
+      {/* ME Departments */}
+      <section id="me-departments" className="py-16 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">M.E. Departments</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Explore our postgraduate engineering specializations designed for research, innovation, and industry impact.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {meDepartments.map((dept) => (
+              <Card key={dept.name} className="h-full hover:shadow-lg transition-shadow">
+                <CardHeader className="space-y-2">
+                  <div className="flex items-start justify-between gap-3">
+                    <CardTitle className="text-xl leading-tight">{dept.name}</CardTitle>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/10 text-warning">
+                      {dept.seats}
+                    </span>
+                  </div>
+                  <CardDescription className="text-muted-foreground">{dept.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm text-muted-foreground leading-relaxed">{dept.details}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {dept.highlights.map((item) => (
+                      <span key={item} className="inline-flex items-center px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-medium">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 

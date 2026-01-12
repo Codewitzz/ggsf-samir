@@ -1,0 +1,1 @@
+import{j as r}from"./index-DrXIuK2-.js";import{H as s,F as o}from"./Footer-CUStgHZr.js";import{B as a}from"./Breadcrumbs-fpNkmaRr.js";import{C as t,L as m}from"./LocationMap-DNTp9yBG.js";import"./house-BCdbfQVK.js";const j=()=>r.jsxs("div",{className:"min-h-screen bg-background",children:[r.jsx(s,{}),r.jsx(a,{}),r.jsx(t,{}),r.jsx(m,{}),r.jsx(o,{})]});export{j as default};

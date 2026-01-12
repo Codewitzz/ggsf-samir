@@ -93,59 +93,53 @@ const Engineering = () => {
 
   const departments = [
     {
-      name: "Computer Engineering",
-      description: "Software engineering, algorithms, and computer systems",
-      slug: "computer-engineering",
-    },
-    {
-      name: "Electronics & Communication Engineering",
-      description: "Communication systems, signal processing, and electronics",
-      slug: "electronics-communication",
-    },
-    {
-      name: "Mechanical Engineering",
-      description: "Design, manufacturing, and thermal systems",
-      slug: "mechanical",
-    },
-    {
-      name: "Civil Engineering",
-      description: "Infrastructure, construction, and structural engineering",
-      slug: "civil",
-    },
-    {
-      name: "Electrical Engineering",
-      description: "Power systems, control systems, and electrical machines",
-      slug: "electrical",
-    },
-    {
-      name: "Information Technology",
-      description: "IT systems, networking, and information management",
-      slug: "information-technology",
-    },
-    {
-      name: "Artificial Intelligence & Data Science",
-      description: "AI, ML, data analytics, and intelligent systems",
-      slug: "artificial-intelligence-data-science",
-    },
-    {
-      name: "Automation & Robotics",
-      description: "Industry 4.0 automation, robotics, and mechatronics",
-      slug: "automation-robotics",
-    },
-    {
-      name: "Basic Engineering Science",
-      description: "Mathematics, physics, chemistry, and foundational engineering",
+      name: "Department of Basic Engineering Science",
+      description: "Foundation year program covering mathematics, physics, chemistry, and basic engineering principles to prepare students for specialized engineering streams.",
       slug: "basic-engineering-science",
+      seats: "1st Year",
+      details: "Comprehensive foundation in basic sciences and mathematics with hands-on experience in engineering workshops and introduction to computer programming.",
     },
     {
-      name: "Management Studies (MBA, BBA)",
-      description: "Business management, analytics, finance, HR and operations",
-      slug: "management-studies",
+      name: "Department of Civil Engineering",
+      description: "Building the infrastructure that shapes our cities and communities through sustainable construction practices and modern engineering solutions.",
+      slug: "civil",
+      seats: "60 seats",
+      details: "Comprehensive civil engineering laboratories with field visits, modern surveying equipment, and focus on sustainable construction practices.",
     },
     {
-      name: "Post Graduate Program (M.E.)",
-      description: "Advanced engineering specialisations and research",
-      slug: "post-graduate",
+      name: "Department of Computer Engineering",
+      description: "Leading the digital revolution with cutting-edge programming, software development, computer systems, and industry partnerships with leading tech companies.",
+      slug: "computer-engineering",
+      seats: "120 seats",
+      details: "State-of-the-art computer labs with latest hardware, active participation in coding competitions, internship opportunities with top IT firms, and research projects in AI and Machine Learning.",
+    },
+    {
+      name: "Department of Electrical Engineering",
+      description: "Powering the future with electrical systems, renewable energy solutions, smart grid technologies, and automation systems.",
+      slug: "electrical",
+      seats: "60 seats",
+      details: "Advanced electrical engineering laboratories with training in renewable energy systems, industry partnerships with power companies, and focus on smart grid and automation.",
+    },
+    {
+      name: "Department of Mechanical Engineering",
+      description: "Designing and manufacturing the machines and systems that power our world with industry-standard CAD/CAM software and automation training.",
+      slug: "mechanical",
+      seats: "60 seats",
+      details: "Well-equipped workshops and manufacturing labs, industry-standard CAD/CAM software, automation and robotics training, and strong placement record in manufacturing sector.",
+    },
+    {
+      name: "Department of Artificial Intelligence and Data Science",
+      description: "Pioneering AI, ML, data analytics, and intelligent systems with deep learning labs, NVIDIA-powered clusters, and global AI hackathons.",
+      slug: "artificial-intelligence-data-science",
+      seats: "120 seats",
+      details: "Deep learning labs, NVIDIA-powered clusters, global AI hackathons, industry partnerships, and research projects in machine learning and data science.",
+    },
+    {
+      name: "Department of Automation and Robotics",
+      description: "Industry 4.0 automation, robotics, and mechatronics with PLC training, cobots, and Bosch-Siemens excellence centre partnerships.",
+      slug: "automation-robotics",
+      seats: "60 seats",
+      details: "Industry 4.0 training arena with PLC, cobots, and Bosch-Siemens excellence centre. Focus on automation systems, robotics, and mechatronics for modern manufacturing.",
     },
   ];
 
@@ -240,17 +234,42 @@ const Engineering = () => {
       {/* Departments */}
       <section className="py-16 px-4 bg-muted/30 gsap-fade">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Departments</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">Engineering Departments</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Explore our comprehensive range of engineering departments, each offering specialized programs designed to prepare students for successful careers in their chosen fields.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {departments.map((dept, index) => (
               <Link
                 key={index}
                 to={`/engineering/departments/${dept.slug}`}
               >
-                <Card className="hover:shadow-md transition-shadow cursor-pointer hover:border-primary">
-                  <CardContent className="p-6 text-center">
-                    <p className="font-medium text-foreground">{dept.name}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{dept.description}</p>
+                <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-primary h-full flex flex-col">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <CardTitle className="text-lg font-semibold text-foreground leading-tight text-left">
+                        {dept.name}
+                      </CardTitle>
+                    </div>
+                    {dept.seats && (
+                      <div className="mt-2">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                          {dept.seats}
+                        </span>
+                      </div>
+                    )}
+                  </CardHeader>
+                  <CardContent className="pt-0 pb-6 flex-grow flex flex-col">
+                    <CardDescription className="text-sm text-muted-foreground mb-3 text-left leading-relaxed">
+                      {dept.description}
+                    </CardDescription>
+                    {dept.details && (
+                      <div className="mt-auto pt-3 border-t border-border/50">
+                        <p className="text-xs text-muted-foreground text-left leading-relaxed">
+                          {dept.details}
+                        </p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </Link>

@@ -88,39 +88,172 @@ const EngineeringDepartment = () => {
       faculty: "25+ experienced faculty members",
       facultyMembers: [
         {
-          name: "Dr. Arvind Tiwari",
-          image: "/faculty/arvind-tiwari.jpg",
-          qualifications: "Ph.D. in Computer Science, M.Tech in Computer Engineering",
+          name: "Prof. Sandeep G Shukla (HOD) ",
+          image: "/Faculty/sandip-shukla.jpg",
+          qualifications: "M.Tech I.T. , PhD (Pursuing)",
+          experience: "17+ years",
+          areaOfInterest: " Cloud Computing",
+        },
+        {
+          name: "Prof. Pradnya K Bachhav",
+          image: "/Faculty/pradnya-bachhav.jpg",
+          qualifications: "M.E. Computer , PhD (Pursuing)",
+          experience: "14+ years",
+          areaOfInterest: "Cloud Computing, Networking, Artificial Intelligence",
+        },
+        {
+          name: "Prof.Pramod C Patil",
+          image: "/Faculty/promod-patil.jpg",
+          qualifications: "M. E. Software Engineering , PhD (Pursuing)",
           experience: "16+ years",
-          areaOfInterest: "Computer Networks, Distributed Systems, Cloud Computing",
+          areaOfInterest: "Data mining",
         },
         {
-          name: "Prof. Sneha Reddy",
-          image: "/faculty/sneha-reddy.jpg",
-          qualifications: "M.Tech in Software Engineering, B.E. Computer",
+          name: "Prof. Piyush R Kulkarni",
+          image: "/Faculty/piyush-kulkarni.jpg",
+          qualifications: "M.Tech CSE , PhD (Pursuing)",
           experience: "12+ years",
-          areaOfInterest: "Software Engineering, Web Technologies, Database Systems",
+          areaOfInterest: "Data Mining, Web Development",
         },
         {
-          name: "Prof. Karan Malhotra",
-          image: "/faculty/karan-malhotra.jpg",
-          qualifications: "M.Tech in Network Security, B.E. Computer",
-          experience: "10+ years",
-          areaOfInterest: "Cyber Security, Network Protocols, Information Security",
+          name: "Dr. Sweety G Jachak",
+          image: "/Faculty/sweety-jachak.png",
+          qualifications: "PhD , M.Tech CSE",
+          experience: "16+ years",
+          areaOfInterest: "Cloud computing, distributed systems, deep learning",
         },
         {
-          name: "Prof. Divya Nair",
-          image: "/faculty/divya-nair.jpg",
-          qualifications: "M.Tech in Data Science, B.E. Computer",
-          experience: "9+ years",
-          areaOfInterest: "Data Analytics, Machine Learning, Big Data",
+          name: "Prof .  Shyamrao A Gade",
+          image: "/Faculty/shyamrao-gade.jpg",
+          qualifications: "M.E.Computer , PhD (Pursuing)",
+          experience: "15+ years",
+          areaOfInterest: "Web Development ,Software Testing",
         },
         {
-          name: "Prof. Aditya Rao",
-          image: "/faculty/aditya-rao.jpg",
-          qualifications: "M.Tech in Cloud Computing, B.E. Computer",
-          experience: "8+ years",
-          areaOfInterest: "Cloud Architecture, DevOps, Virtualization",
+          name: "Prof . Manish P Gangawane",
+          image: "/Faculty/Manish-gangawane.jpg",
+          qualifications: "M.E. I. T. ,PhD (Pursuing)",
+          experience: "14+ years",
+          areaOfInterest: "",
+        },
+        {
+          name: "Prof. Akshay R Jain",
+          image: "/Faculty/akshay-jain.jpg",
+          qualifications: "M Tech CSE, PhD (Pursuing)",
+          experience: "12 years",
+          areaOfInterest: "Design and Analysis of Algorithm,Computer Network",
+        },
+        {
+          name: "Prof. Farhat A Patel",
+          image: "/Faculty/farhat-patel.png",
+          qualifications: "M.E. Computer , PhD (Pursuing)",
+          experience: "12 years",
+          areaOfInterest: "Image Processing",
+        },
+        {
+          name: "Prof. Nilam M Deshmukh",
+          image: "/Faculty/nilam-deshmukh.jpg",
+          qualifications: "M.E. Computer",
+          experience: "6 years",
+          areaOfInterest: "Cloud computing",
+        },
+        {
+          name: "Prof. Ajit R Pagar",
+          image: "/Faculty/ajit-pagar.png",
+          qualifications: "M.E. Computer",
+          experience: "11 years",
+          areaOfInterest: "Cloud Computing",
+        },
+        {
+          name: "Prof. Riya R Chinchwadkar",
+          image: "public/Faculty/riya-chinchwadkar.png",
+          qualifications: "M.E. Computer",
+          experience: "8 Years",
+          areaOfInterest: "Machin Learning",
+        },
+        {
+          name: "Prof. Swati R Khokale",
+          image: "/Faculty/swati-ghokhle.jpeg",
+          qualifications: "M.E. Computer , PhD (Pursuing)",
+          experience: "14 years",
+          areaOfInterest: "Machin Learning",
+        },
+        {
+          name: "Prof. Gauri M Puranik",
+          image: "/Faculty/gauri-puranik.jpeg",
+          qualifications: "M.E. Computer",
+          experience: "10 years",
+          areaOfInterest: "Cloud Computing, Big Data",
+        },
+        {
+          name: "Prof. Bharti P Ahuja",
+          image: "/Faculty/bharti-ahuja.jpg",
+          qualifications: "M.E. Computer",
+          experience: "13 Years",
+          areaOfInterest: "Data Science",
+        },
+        {
+          name: "Prof. Sharada N Jundre",
+          image: "/Faculty/sharda-jundre.png",
+          qualifications: "M. E. Computer",
+          experience: "6 years",
+          areaOfInterest: "Machine Learning",
+        },
+        {
+          name: "Prof.Priyanka M Salunke",
+          image: "/Faculty/priyanka-salunke.png",
+          qualifications: "M E Computer",
+          experience: "9 years",
+          areaOfInterest: "Cloud Computing",
+        },
+        {
+          name: "Prof. Akshata V Dighe",
+          image: "/Faculty/akshata-dighe.jpeg",
+          qualifications: "M.Tech. COMPUTER",
+          experience: "12 years",
+          areaOfInterest: "Natural Language Processing",
+        },
+        {
+          name: "Prof . Pradnya A Shirsath",
+          image: "/Faculty/pradnya-shirsath.jpeg",
+          qualifications: "M.Tech (Computer Science and Engineering)",
+          experience: "6 years",
+          areaOfInterest: "Data Mining",
+        },
+        {
+          name: "Prof. Roshani S Patil",
+          image: "/Faculty/roshani-patil.jpeg",
+          qualifications: "M.sc (Computer science)",
+          experience: "1 year, Industry : 3 years",
+          areaOfInterest: "Computer Science",
+        },
+        {
+          name: "Prof. Vilas R Kuyate",
+          image: "/Faculty/vilas-kuyate.jpg",
+          qualifications: "D.C.E. and Hardware Networking",
+          experience: "13 years",
+          areaOfInterest: "Hardware ,Networking",
+        },
+        {
+          name: "Prof. Sushma R Gore",
+          image: "/Faculty/sushma-gore.jpg",
+          qualifications: "B.E. Computer, D.C.E.",
+          experience: "13 Years",
+          areaOfInterest: "Software Installation &Testing",
+        },
+        {
+          name: "Prof. Amol Ugale",
+          image: "/Faculty/amol-ugale.png",
+          qualifications: "Diploma in Computer",
+          experience: "8 Years",
+          areaOfInterest: "Networking",
+        },
+        {
+          name: "Prof. Kunal Londhe",
+          image: "/Faculty/kunal-londhe.jpg",
+          qualifications: "Diploma in E & TC",
+          experience: "4 Years",
+          areaOfInterest: "Software Installation &Testing",
         },
       ],
       labs: ["Programming Lab", "Database Lab", "Network Lab", "AI/ML Lab", "Cyber Security Lab"],
@@ -378,84 +511,84 @@ const EngineeringDepartment = () => {
       facultyMembers: [
         {
           name: "Dr. Umakant D Butkar (HOD)",
-          image: "public/faculty/umakant-butkar.jpg",
+          image: "/Faculty/umakant-butkar.jpg",
           qualifications: "Ph.D. in Physics, M.Sc. Physics, B.Ed",
           experience: "16+ years",
           areaOfInterest: "Computer Network",
         },
         {
           name: "Prof.  Kushdip Kucheriya",
-          image: "public/faculty/kushdip-kucheriya.jpg",
+          image: "/Faculty/kushdip-kucheriya.jpg",
           qualifications: "M.Sc. Maths.SET",
           experience: "6+ years",
           areaOfInterest: "Applied Mathematics, Numerical Methods, Engineering Mathematics",
         },
         {
           name: "Prof. Manisha A Sonawane",
-          image: "public/faculty/manisha-sonawane.jpg",
+          image: "/Faculty/manisha-sonawane.jpg",
           qualifications: "M.Sc. B.Ed(SET),PhD (Pursuing)",
           experience: "13+ years",
           areaOfInterest: " Organic Chemistry",
         },
         {
           name: "Prof. Farhat J Shaikh",
-          image: "public/faculty/farhat-shaikh.png",
+          image: "/Faculty/farhat-shaikh.png",
           qualifications: "MSc(Maths), SET , PET, B.Ed. Ph.D Pursuing",
           experience: "6+ years",
           areaOfInterest: "Mathematics",
         },
       {
           name: "Prof. Vimal S Bodke",
-          image: "public/faculty/vimal-bodke.jpeg",
+          image: "/Faculty/vimal-bodke.jpeg",
           qualifications: "ME (E & TC)",
           experience: "12+ years",
           areaOfInterest: "VLSI & Embedded System",
         },
       {
           name: "Prof.Ms. Arjita K Srivastava",
-          image: "public/faculty/arjita-srivastava.jpg",
+          image: "/Faculty/arjita-srivastava.jpg",
           qualifications: "M.sc Physics",
           experience: "7+ years",
           areaOfInterest: "Physics",
         },
       {
           name: "Dr. Megha K Kothawade",
-          image: "public/faculty/megha-kothawade.png",
+          image: "/Faculty/megha-kothawade.png",
           qualifications: "Ph. D (Mathematics)",
           experience: "13+ years",
           areaOfInterest: "Real Analysis",
         },
       {
           name: "Prof. Rupali B Bhusare",
-          image: "public/faculty/rupali-bhusare.jpg",
+          image: "/Faculty/rupali-bhusare.jpg",
           qualifications: "M.Sc. Physics B.Ed. SET",
           experience: "12+ years",
           areaOfInterest: "physics",
         },
       {
           name: "Prof. Ms.Pranita S Bhosale",
-          image: "public/faculty/pranita-bhosale.jpg",
+          image: "/Faculty/pranita-bhosale.jpg",
           qualifications: "M.S.C Mathematics",
           experience: "2+ years",
           areaOfInterest: "Mathematics and Computing ",
         },
       {
           name: "Prof. Pooja K Borade",
-          image: "public/faculty/pooja-borade.png",
+          image: "/Faculty/pooja-borade.png",
           qualifications: "BSc. Chemistry ",
           experience: "3+ years",
           areaOfInterest: "Chemistry",
         },
       {
           name: "Prof.  Kalyani Dattatray Gholap",
-          image: "public/faculty/kalyani-gholap.jpg",
+          image: "/Faculty/kalyani-gholap.jpg",
           qualifications: "Bsc Comp Science",
           experience: "2+ years",
           areaOfInterest: "Computer",
         },
       {
           name: "Prof.Mr.Abhijit Sharma",
-          image: "public/faculty/abhijit-sharma.jpg",
+          image: "/Faculty/abhijit-sharma.jpg",
           qualifications: "M.Com",
           experience: "2+ years",
           areaOfInterest: "Computer science",
@@ -768,14 +901,11 @@ const EngineeringDepartment = () => {
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
                 <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/35 to-black/20" />
               </div>
             ))}
           </div>
         </div>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-info/80 via-primary/80 to-info/80 mix-blend-multiply" />
 
         {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center text-white">
@@ -849,30 +979,39 @@ const EngineeringDepartment = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {dept.facultyMembers.map((member, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:border-info/50">
+                <Card
+                  key={index}
+                  className="group relative overflow-hidden border border-info/20 bg-gradient-to-b from-background via-background to-info/10 hover:shadow-2xl hover:border-info/70 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-info via-primary to-info" />
                   <CardHeader className="pb-4">
                     <div className="flex flex-col items-center text-center">
-                      <Avatar className="h-28 w-28 mb-4 border-4 border-info/20">
+                      <Avatar className="h-28 w-28 mb-4 ring-4 ring-info/30 bg-background shadow-md group-hover:ring-info/60 transition-all duration-300">
                         <AvatarImage src={member.image || "/placeholder.svg"} alt={member.name} />
                         <AvatarFallback className="bg-info/10 text-info text-xl font-semibold">
                           {getInitials(member.name)}
                         </AvatarFallback>
                       </Avatar>
-                      <CardTitle className="text-lg font-semibold mb-2">{member.name}</CardTitle>
+                      <CardTitle className="text-lg font-semibold mb-1 group-hover:text-info transition-colors duration-300">
+                        {member.name}
+                      </CardTitle>
+                      <p className="text-xs uppercase tracking-wide px-3 py-1 rounded-full bg-info/10 text-info font-medium">
+                        Faculty Member
+                      </p>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0 space-y-3">
-                    <div>
+                  <CardContent className="pt-2 space-y-3">
+                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
                       <p className="text-xs font-semibold text-info mb-1">QUALIFICATIONS</p>
                       <p className="text-sm text-muted-foreground">{member.qualifications}</p>
                     </div>
-                    <div>
+                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
                       <p className="text-xs font-semibold text-info mb-1">EXPERIENCE</p>
                       <p className="text-sm text-muted-foreground">{member.experience}</p>
                     </div>
-                    <div>
+                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
                       <p className="text-xs font-semibold text-info mb-1">AREA OF INTEREST</p>
-                      <p className="text-sm text-muted-foreground">{member.areaOfInterest}</p>
+                      <p className="text-sm text-muted-foreground">{member.areaOfInterest || "—"}</p>
                     </div>
                   </CardContent>
                 </Card>

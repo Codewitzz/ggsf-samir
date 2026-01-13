@@ -160,14 +160,11 @@ const MEAbout = () => {
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
                 <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/35 to-black/20" />
               </div>
             ))}
           </div>
         </div>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-warning/80 via-secondary/80 to-warning/80 mix-blend-multiply" />
 
         {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center text-white">

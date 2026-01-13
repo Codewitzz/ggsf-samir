@@ -28,18 +28,37 @@ The following faculty members have image paths configured. Place the correspondi
 - `/faculty/kavita-nair.jpg` - Prof. Kavita Nair
 
 ### Civil Engineering
-- `/faculty/rajesh-kumar.jpg` - Dr. Rajesh Kumar
-- `/faculty/anjali-desai.jpg` - Prof. Anjali Desai
-- `/faculty/vikram-singh.jpg` - Prof. Vikram Singh
-- `/faculty/priya-sharma.jpg` - Prof. Priya Sharma
-- `/faculty/sunil-mehta.jpg` - Prof. Sunil Mehta
+- `/faculty/v-m-natraj.jpg` - Dr. V M Natraj (HOD)
+- `/faculty/vishvanath-n-kanthe.jpg` - Dr. Vishvanath N Kanthe
+- `/faculty/p-a-padalkar.jpg` - Prof. P A Padalkar
+- `/faculty/a-g-chaudhari.jpg` - Prof. A G Chaudhari
+- `/faculty/chetan-g-joshi.jpg` - Prof. Chetan G Joshi
+- `/faculty/t-a-kulkarni.jpg` - Dr. T A Kulkarni
+- `/faculty/p-b-shinde.jpg` - Prof. P B Shinde
+- `/faculty/v-s-bhalerao.jpg` - Prof. V S Bhalerao
+- `/faculty/v-v-pawar.jpg` - Prof. V V Pawar
+- `/faculty/d-s-desale.jpg` - Prof. D S Desale
+- `/faculty/r-k-paikarao.jpg` - Prof. R K Paikarao
+- `/faculty/kamlesh-p-bhagat.jpg` - Prof. Kamlesh P Bhagat
+- `/faculty/pavan-k-jadhav.jpg` - Prof. Pavan K Jadhav
+- `/faculty/radheshyam-i-patil.jpg` - Prof. Radheshyam I Patil
 
 ### Electrical Engineering
-- `/faculty/sanjay-mehta.jpg` - Dr. Sanjay Mehta
-- `/faculty/deepak-shah.jpg` - Prof. Deepak Shah
-- `/faculty/meera-joshi.jpg` - Prof. Meera Joshi
-- `/faculty/ramesh-iyer.jpg` - Prof. Ramesh Iyer
-- `/faculty/nisha-reddy.jpg` - Prof. Nisha Reddy
+- `/faculty/rahul-agrawal.jpg` - Dr. Rahul Agrawal (HOD)
+- `/faculty/sunil-m-more.jpg` - Dr. Sunil M More
+- `/faculty/b-g-dhabhade.jpg` - Prof. B G Dhabhade
+- `/faculty/swapnil-n-jadhav.jpg` - Prof. Swapnil N Jadhav
+- `/faculty/nilima-j-bhamare.jpg` - Prof. Nilima J Bhamare
+- `/faculty/rutika-s-more.jpg` - Prof. Rutika S More
+- `/faculty/vishakha-ananda-chavan.jpg` - Prof. Vishakha Ananda Chavan
+- `/faculty/sonali-p-gosavi.jpg` - Prof. Sonali P Gosavi
+- `/faculty/sushant-s-sananse.jpg` - Prof. Sushant S Sananse
+- `/faculty/diba-a-ansari.jpg` - Prof. Diba A Ansari
+- `/faculty/harshal-shelar.jpg` - Prof. Harshal Shelar
+- `/faculty/sagar-n-deo.jpg` - Prof. Sagar N Deo
+- `/faculty/pankaj-b-mahale.jpg` - Prof. Pankaj B Mahale
+- `/faculty/hemant-jadhav.jpg` - Prof. Hemant Jadhav
+- `/faculty/manoj-amale.jpg` - Prof. Manoj Amale
 
 ### Basic Engineering Science
 - `/faculty/umakant-butkar.jpg` - Dr. Umakant D Butkar (HOD)

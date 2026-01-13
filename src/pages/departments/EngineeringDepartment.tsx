@@ -307,39 +307,158 @@ const EngineeringDepartment = () => {
       faculty: "22+ expert faculty members",
       facultyMembers: [
         {
-          name: "Dr. Neelkanth G Nikam",
-          image: "/faculty/neelkanth-nikam.jpg",
-          qualifications: "Ph.D. in Mechanical Engineering, M.Tech in Thermal Engineering",
-          experience: "20+ years",
-          areaOfInterest: "Thermal Engineering, Heat Transfer, Energy Systems",
+          name: "Prof. Dr C D Mohod (HOD)",
+          image: "public/Faculty/c-d-mohod.jpg",
+          qualifications: "PhD, M.E (Production Engineering)",
+          experience: "31 years",
+          areaOfInterest: "Production",
         },
         {
-          name: "Prof. Rahul Patel",
-          image: "/faculty/rahul-patel.jpg",
-          qualifications: "M.Tech in CAD/CAM, B.E. Mechanical",
-          experience: "14+ years",
-          areaOfInterest: "CAD/CAM, Product Design, Finite Element Analysis",
+          name: "Prof. Sandip S Patil",
+          image: "public/Faculty/sandip-patil.jpg",
+          qualifications: "M.E. Production, PhD (Pursuing)",
+          experience: "17 years",
+          areaOfInterest: "Production",
         },
         {
-          name: "Prof. Sunita Verma",
-          image: "/faculty/sunita-verma.jpg",
-          qualifications: "M.Tech in Manufacturing Engineering, B.E. Mechanical",
-          experience: "12+ years",
-          areaOfInterest: "Manufacturing Processes, Quality Control, Industrial Engineering",
+          name: "Dr. M S Patil",
+          image: "public/Faculty/m-s-patil.jpg",
+          qualifications: "PhD, M.Tech (Thermal and Fluids Engineering)",
+          experience: "29 years",
+          areaOfInterest: "Thermal & Fluids Engineering",
         },
         {
-          name: "Prof. Amit Kumar",
-          image: "/faculty/amit-kumar.jpg",
-          qualifications: "M.Tech in Industrial Engineering, B.E. Mechanical",
-          experience: "10+ years",
-          areaOfInterest: "Operations Research, Production Planning, Supply Chain Management",
+          name: "Prof. S H Kondo",
+          image: "public/Faculty/s-h-kondo.jpg",
+          qualifications: "M.E (Design)",
+          experience: "17 years",
+          areaOfInterest: "Design",
         },
         {
-          name: "Prof. Kavita Nair",
-          image: "/faculty/kavita-nair.jpg",
-          qualifications: "M.Tech in Design Engineering, B.E. Mechanical",
-          experience: "9+ years",
-          areaOfInterest: "Machine Design, Material Science, Stress Analysis",
+          name: "Dr. V B Sarode",
+          image: "public/Faculty/v-b-sarode.jpg",
+          qualifications: "PhD, M.E (Design)",
+          experience: "25 years",
+          areaOfInterest: "Design",
+        },
+        {
+          name: "Prof. V J Dhore",
+          image: "public/Faculty/v-j-dhore.jpg",
+          qualifications: "M.E (CAAD), PhD (Pursuing)",
+          experience: "16 years",
+          areaOfInterest: "CAAD, Mechanical Design, Engineering Metallurgy",
+        },
+        {
+          name: "Prof. K V Dhande",
+          image: "public/Faculty/k-v-dhande.jpg",
+          qualifications: "M.E.(Design), PhD (Pursuing)",
+          experience: "15 years",
+          areaOfInterest: "Design",
+        },
+        {
+          name: "Prof. D D Patil",
+          image: "public/Faculty/d-d-patil.jpg",
+          qualifications: "M.E (Production Technology & Management)",
+          experience: "18 years",
+          areaOfInterest: "Production Technology, Manufacturing Processes & 3D Modelling",
+        },
+        {
+          name: "Prof. R S Khandare",
+          image: "public/Faculty/r-s-khandare.jpg",
+          qualifications: "M.E (Design)",
+          experience: "16 years",
+          areaOfInterest: "Design",
+        },
+        {
+          name: "Prof. D P Chavan",
+          image: "public/Faculty/d-p-chavan.jpg",
+          qualifications: "M.E (Design)",
+          experience: "16 years",
+          areaOfInterest: "Design",
+        },
+        {
+          name: "Prof. V S Gawali",
+          image: "public/Faculty/v-s-gawali.jpg",
+          qualifications: "M.E (CAD/CAM), PhD (Pursuing)",
+          experience: "14 years",
+          areaOfInterest: "CAD/CAM",
+        },
+        {
+          name: "Prof. Parag Desale",
+          image: "public/Faculty/parag-desale.jpg",
+          qualifications: "M.E. (Heat Power)",
+          experience: "16 years",
+          areaOfInterest: "Thermal Engineering",
+        },
+        {
+          name: "Prof . Kiran Rajendra Sonawane",
+          image: "public/Faculty/kiran-sonawane.jpg",
+          qualifications: "M.E. (Heat Power)",
+          experience: "16 Years",
+          areaOfInterest: "Thermal Engineering",
+        },
+        {
+          name: "Prof. S V Shinde",
+          image: "public/Faculty/s-v-shinde.jpg",
+          qualifications: "M.E. (Heat Power), PhD (Pursuing)",
+          experience: "10 years",
+          areaOfInterest: "Heat Power Engineering",
+        },
+        {
+          name: " Prof . Ankita Kailas Patil",
+          image: "public/Faculty/ankita-patil.jpg",
+          qualifications: "M. E. (Design)",
+          experience: "10 Years",
+          areaOfInterest: "Design",
+        },
+        {
+          name: "Mr. Vilas R Kuyate",
+          image: "/Faculty/vilas-kuyate.jpg",
+          qualifications: "D.C.E. and Hardware Networking",
+          experience: "13 years",
+          areaOfInterest: "Hardware ,Networking",
+        },
+        {
+          name: "Prof. G D Gadilohar",
+          image: "public/Faculty/g-d-gadilohar.jpg",
+          qualifications: "I.T.I.(Carpentry), NCTVT",
+          experience: "19 years",
+          areaOfInterest: "Carpentry",
+        },
+        {
+          name: "Prof . S M Kele",
+          image: "public/Faculty/s-m-kele.jpg",
+          qualifications: "I.T.I.(Turner), NCTVT",
+          experience: "13 years",
+          areaOfInterest: "Turner",
+        },
+        {
+          name: "Prof. B T Khairnar",
+          image: "public/Faculty/b-t-khairnar.jpg",
+          qualifications: "I.T.I.(Welder), NCTVT",
+          experience: "11 years",
+          areaOfInterest: "Welding",
+        },
+        {
+          name: "Prof . V P Apsingkar",
+          image: "public/Faculty/v-p-apsingkar.jpg",
+          qualifications: "D.M.E.",
+          experience: "02 years",
+          areaOfInterest: "Engg. Drawing",
+        },
+        {
+          name: "Prof . R G Dixit",
+          image: "public/Faculty/r-g-dixit.jpg",
+          qualifications: "1st Class in Boiler Proficiency",
+          experience: "31 years",
+          areaOfInterest: "Technical Work regarding Boiler, Engine.",
+        },
+        {
+          name: "Mr. Aditya Jadhav",
+          image: "/Faculty/aditya-jadhav.jpg",
+          qualifications: "Diploma in Automobile Engineering",
+          experience: "3 years",
+          areaOfInterest: "Technical Work regarding Machinery.",
         },
       ],
       labs: ["CAD/CAM Lab", "Thermodynamics Lab", "Manufacturing Lab", "Automation Lab", "Materials Testing Lab"],
@@ -366,42 +485,105 @@ const EngineeringDepartment = () => {
       name: "Civil Engineering",
       description: "Building the infrastructure that shapes our cities and communities.",
       icon: "🏗️",
-      faculty: "18+ qualified faculty members",
+      faculty: "14 qualified faculty members",
       facultyMembers: [
         {
-          name: "Dr. Rajesh Kumar",
-          image: "/faculty/rajesh-kumar.jpg",
-          qualifications: "Ph.D. in Structural Engineering, M.Tech in Civil Engineering",
-          experience: "15+ years",
-          areaOfInterest: "Structural Analysis, Reinforced Concrete Design, Seismic Engineering",
+          name: "Dr. V M Natraj (HOD)",
+          image: "public/faculty/v-m-natraj.jpg",
+          qualifications: "PhD (Env Mgmt), MTech (Hydraulics)",
+          experience: "35 years",
+          areaOfInterest: "Hydraulics",
         },
         {
-          name: "Prof. Anjali Desai",
-          image: "/faculty/anjali-desai.jpg",
-          qualifications: "M.Tech in Environmental Engineering, B.E. Civil",
-          experience: "12+ years",
-          areaOfInterest: "Environmental Engineering, Water Treatment, Waste Management",
+          name: "Dr. Vishvanath N Kanthe",
+          image: "public/faculty/vn-kanthe.jpg",
+          qualifications: "Ph.D (Structural Engineering), MTech (Structural Engineering)",
+          experience: "12 years",
+          areaOfInterest: "Concrete Technology",
         },
         {
-          name: "Prof. Vikram Singh",
-          image: "/faculty/vikram-singh.jpg",
-          qualifications: "M.Tech in Geotechnical Engineering, B.E. Civil",
-          experience: "10+ years",
-          areaOfInterest: "Soil Mechanics, Foundation Engineering, Slope Stability",
+          name: "Prof. P A Padalkar",
+          image: "public/faculty/pa-padalkar.jpg",
+          qualifications: "M.E. (Geotechnical Engineering)",
+          experience: "14 years",
+          areaOfInterest: "Geotechnical Engineering",
         },
         {
-          name: "Prof. Priya Sharma",
-          image: "/faculty/priya-sharma.jpg",
-          qualifications: "M.Tech in Construction Management, B.E. Civil",
-          experience: "8+ years",
-          areaOfInterest: "Project Management, Construction Planning, Building Materials",
+          name: "Prof. A G Chaudhari",
+          image: "public/faculty/a-g-chaudhari.jpg",
+          qualifications: "M.E.(Structure), PhD.(Structure)(Pursuing)",
+          experience: "25 years",
+          areaOfInterest: "Structure",
         },
         {
-          name: "Prof. Sunil Mehta",
-          image: "/faculty/sunil-mehta.jpg",
-          qualifications: "M.Tech in Transportation Engineering, B.E. Civil",
-          experience: "9+ years",
-          areaOfInterest: "Highway Engineering, Traffic Engineering, Pavement Design",
+          name: "Prof. Chetan G Joshi",
+          image: "public/faculty/chetan-g-joshi.jpg",
+          qualifications: "M.Tech.( Transportation Engg & Management)",
+          experience: "11 years",
+          areaOfInterest: "Transportation Engg.& Management",
+        },
+        {
+          name: "Dr. T A Kulkarni",
+          image: "public/faculty/t-a-kulkarni.jpg",
+          qualifications: "PhD ,M.E. (Geotechnical Engineering)",
+          experience: "10 years",
+          areaOfInterest: "Geotechnical Engineering",
+        },
+        {
+          name: "Prof. P B Shinde",
+          image: "public/faculty/p-b-shinde.jpg",
+          qualifications: "M.E.(Structure),PhD Pursuing",
+          experience: "10 years",
+          areaOfInterest: "Structure & Water Resource",
+        },
+        {
+          name: "Prof. V S Bhalerao",
+          image: "public/faculty/v-s-bhalerao.jpg",
+          qualifications: "M.E.(Structure), PhD Pursuing",
+          experience: "11 years 9 Months",
+          areaOfInterest: "Structures",
+        },
+        {
+          name: "Prof. V V Pawar",
+          image: "public/faculty/v-v-pawar.jpg",
+          qualifications: "M.E. Structure",
+          experience: "6 years",
+          areaOfInterest: "Structure",
+        },
+        {
+          name: "Prof. D S Desale",
+          image: "public/faculty/d-s-desale.jpg",
+          qualifications: "M.E.(Structure)",
+          experience: "12 years",
+          areaOfInterest: "Structure",
+        },
+        {
+          name: "Prof. R K Paikarao",
+          image: "public/faculty/r-k-paikarao.jpg",
+          qualifications: "M.E. (Structure)",
+          experience: "4 years",
+          areaOfInterest: "Structure",
+        },
+        {
+          name: "Prof. Kamlesh P Bhagat",
+          image: "public/faculty/kamlesh-p-bhagat.jpg",
+          qualifications: "M.E.(Construction and Management )",
+          experience: "6.5 Years",
+          areaOfInterest: "Construction Management & Estimation and Valuation",
+        },
+        {
+          name: "Prof. Pavan K Jadhav",
+          image: "public/faculty/pavan-k-jadhav.jpg",
+          qualifications: "Civil Diploma",
+          experience: "3 year industry, 1 year college",
+          areaOfInterest: "civil",
+        },
+        {
+          name: "Prof. Radheshyam I Patil",
+          image: "public/faculty/radheshyam-i-patil.jpg",
+          qualifications: "D.C.E ,BE (Pursing)",
+          experience: "Industrial 02 & Educational 03 Yrs",
+          areaOfInterest: "Construction Technology Construction Management 2 D Modelling",
         },
       ],
       labs: ["Structural Lab", "Concrete Lab", "Surveying Lab", "Geotechnical Lab", "Environmental Lab"],
@@ -425,42 +607,112 @@ const EngineeringDepartment = () => {
       name: "Electrical Engineering",
       description: "Powering the future with electrical systems and renewable energy solutions.",
       icon: "⚡",
-      faculty: "20+ experienced faculty members",
+      faculty: "15 qualified faculty members",
       facultyMembers: [
         {
-          name: "Dr. Sanjay Mehta",
-          image: "/faculty/sanjay-mehta.jpg",
-          qualifications: "Ph.D. in Power Systems, M.Tech in Electrical Engineering",
-          experience: "18+ years",
-          areaOfInterest: "Power Systems, Smart Grid, Electrical Machines",
+          name: "Dr. Rahul Agrawal (HOD)",
+          image: "public/faculty/rahul-agrawal.jpg",
+          qualifications: "PhD (Power System Optimization)",
+          experience: "24 years",
+          areaOfInterest: "Power System Optimization, Power Quality",
         },
         {
-          name: "Prof. Deepak Shah",
-          image: "/faculty/deepak-shah.jpg",
-          qualifications: "M.Tech in Control Systems, B.E. Electrical",
-          experience: "13+ years",
-          areaOfInterest: "Control Systems, Automation, PLC Programming",
+          name: "Dr. Sunil M More",
+          image: "public/faculty/sunil-m-more.jpg",
+          qualifications: "PhD",
+          experience: "16 years",
+          areaOfInterest: "Power System",
         },
         {
-          name: "Prof. Meera Joshi",
-          image: "/faculty/meera-joshi.jpg",
-          qualifications: "M.Tech in Renewable Energy, B.E. Electrical",
-          experience: "11+ years",
-          areaOfInterest: "Renewable Energy Systems, Solar Power, Wind Energy",
+          name: "Prof. B G Dhabhade",
+          image: "public/faculty/b-g-dhabhade.jpg",
+          qualifications: "M.E.(Electrical Machine & Drives)",
+          experience: "13.6 years",
+          areaOfInterest: "Electrical Machine & Drives",
         },
         {
-          name: "Prof. Ramesh Iyer",
-          image: "/faculty/ramesh-iyer.jpg",
-          qualifications: "M.Tech in Power Electronics, B.E. Electrical",
-          experience: "9+ years",
-          areaOfInterest: "Power Electronics, Drives, Converters",
+          name: "Prof. Swapnil N Jadhav",
+          image: "public/faculty/swapnil-n-jadhav.png",
+          qualifications: "M.E. (Embedded Systems), PhD (Pursuing)",
+          experience: "16 years",
+          areaOfInterest: "IOT, Embedded systems",
         },
         {
-          name: "Prof. Nisha Reddy",
-          image: "/faculty/nisha-reddy.jpg",
-          qualifications: "M.Tech in Electrical Machines, B.E. Electrical",
-          experience: "8+ years",
-          areaOfInterest: "Electrical Machines, Motor Control, Transformers",
+          name: "Prof. Nilima J Bhamare",
+          image: "public/faculty/nilima-j-bhamare.jpg",
+          qualifications: "ME Power System",
+          experience: "6.1 Years",
+          areaOfInterest: "Power System Basic Electrical",
+        },
+        {
+          name: "Prof. Rutika S More",
+          image: "public/faculty/rutika-s-more.jpg",
+          qualifications: "M.Tech Power System",
+          experience: "4 Years",
+          areaOfInterest: "Power System PLC & SCADA Renewable Energy",
+        },
+        {
+          name: "Prof. Vishakha Ananda Chavan",
+          image: "public/faculty/vishakha-ananda-chavan.jpg",
+          qualifications: "M. E( Power Electronics and drives)",
+          experience: "11 Years",
+          areaOfInterest: "Power System, HVDC and FACTS, Power Electronics",
+        },
+        {
+          name: "Prof. Sonali P Gosavi",
+          image: "public/faculty/sonali-p-gosavi.jpg",
+          qualifications: "M.E (Electrical Power System)",
+          experience: "3.3 years",
+          areaOfInterest: "Power System",
+        },
+        {
+          name: "Prof. Sushant S Sananse",
+          image: "public/faculty/sushant-s-sananse.jpg",
+          qualifications: "M.Tech (EPS)",
+          experience: "13.5 years",
+          areaOfInterest: "Power system",
+        },
+        {
+          name: "Prof. Diba A Ansari",
+          image: "public/faculty/diba-a-ansari.jpg",
+          qualifications: "M.E. (VLSI & Embedded systems),PhD (Pursuing)",
+          experience: "15.5 Years",
+          areaOfInterest: "VLSI & Embedded systems",
+        },
+        {
+          name: "Prof. Harshal Shelar",
+          image: "public/faculty/harshal-shelar.jpg",
+          qualifications: "M.Tech (Power Electronics & Power Systems)",
+          experience: "11 Years",
+          areaOfInterest: "Power Electronics",
+        },
+        {
+          name: "Prof. Sagar N Deo",
+          image: "public/faculty/sagar-n-deo.jpg",
+          qualifications: "ME (Power System)",
+          experience: "11 Years",
+          areaOfInterest: "Power System, Power Quality",
+        },
+        {
+          name: "Prof. Pankaj B Mahale",
+          image: "public/faculty/pankaj-b-mahale.jpg",
+          qualifications: "Diploma in Computer Engineering",
+          experience: "18 Years",
+          areaOfInterest: "Hardware & Networking",
+        },
+        {
+          name: "Prof. Hemant Jadhav",
+          image: "public/faculty/hemant-jadhav.jpg",
+          qualifications: "Diploma (Electrical)",
+          experience: "3.3 years",
+          areaOfInterest: "Machine",
+        },
+        {
+          name: "Prof. Manoj Amale",
+          image: "public/faculty/manoj-amale.jpg",
+          qualifications: "Diploma in Electrical Engineering",
+          experience: "3 Years",
+          areaOfInterest: "Electrical Engineering",
         },
       ],
       labs: ["Power Systems Lab", "Control Systems Lab", "Electrical Machines Lab", "Renewable Energy Lab", "PLC Lab"],
@@ -609,42 +861,70 @@ const EngineeringDepartment = () => {
       name: "Artificial Intelligence & Data Science",
       description: "Cutting-edge program in AI, machine learning, and data science to prepare students for the future of technology.",
       icon: "🤖",
-      faculty: "18+ AI and Data Science experts",
+      faculty: "9+ AI and Data Science experts",
       facultyMembers: [
         {
-          name: "Dr. Manoj Agarwal",
-          image: "/faculty/manoj-agarwal.jpg",
-          qualifications: "Ph.D. in Machine Learning, M.Tech in Computer Science",
-          experience: "15+ years",
-          areaOfInterest: "Machine Learning, Deep Learning, Neural Networks",
+          name: "Prof.Charushila D Patil (HOD)",
+          image: "public/Faculty/charushila-patil.jpg",
+          qualifications: "M.E.(Computer),PhD (Pursuing)",
+          experience: "20years",
+          areaOfInterest: "Data Mining",
         },
         {
-          name: "Prof. Swati Kulkarni",
-          image: "/faculty/swati-kulkarni.jpg",
-          qualifications: "M.Tech in Artificial Intelligence, B.E. Computer",
-          experience: "11+ years",
-          areaOfInterest: "Artificial Intelligence, Expert Systems, Knowledge Representation",
+          name: "Prof.Apurva M Bhavsar",
+          image: "public/Faculty/apurva-bhavsar.jpg",
+          qualifications: "M.E. Computer",
+          experience: "11 Years",
+          areaOfInterest: "Computer Network",
         },
         {
-          name: "Prof. Rohit Deshmukh",
-          image: "/faculty/rohit-deshmukh.jpg",
-          qualifications: "M.Tech in Data Science, B.E. Computer",
-          experience: "9+ years",
-          areaOfInterest: "Data Science, Data Mining, Predictive Analytics",
+          name: "Prof.Nilesh S Sonawane",
+          image: "public/Faculty/nilesh-sonawane.jpg",
+          qualifications: "ME Computer",
+          experience: "10 Years-Teaching & 1 Years- Industry",
+          areaOfInterest: "Machine learning, Deep Learning, NLP Learning",
         },
         {
-          name: "Prof. Neha Gupta",
-          image: "/faculty/neha-gupta.jpg",
-          qualifications: "M.Tech in Deep Learning, B.E. Computer",
-          experience: "8+ years",
-          areaOfInterest: "Deep Learning, Computer Vision, Pattern Recognition",
+          name: "Prof.Tanvi P Deshmukh",
+          image: "public/Faculty/tanvi-deshmukh.jpg",
+          qualifications: "ME IT, PhD (Pursuing)",
+          experience: "7+ Years",
+          areaOfInterest: "Machine Learning",
         },
         {
-          name: "Prof. Varun Pillai",
-          image: "/faculty/varun-pillai-ai.jpg",
-          qualifications: "M.Tech in Natural Language Processing, B.E. Computer",
-          experience: "7+ years",
-          areaOfInterest: "Natural Language Processing, Text Mining, Chatbots",
+          name: "Prof.Jayshree M Khairnar",
+          image: "public/Faculty/jayshree-khairnar.jpg",
+          qualifications: "ME Computer",
+          experience: "1 Year-Teaching & 4.6 Years- Industry",
+          areaOfInterest: "Image processing",
+        },
+        {
+          name: "Prof . Nutan A Dheringe",
+          image: "public/Faculty/nutan-dheringe.jpg",
+          qualifications: "ME (Electronics (Digital Systems))",
+          experience: "7 Years",
+          areaOfInterest: "Data Science",
+        },
+        {
+          name: "Prof.Dipak P Kandare",
+          image: "public/Faculty/dipak-kandare.jpeg",
+          qualifications: "BE (Computer)",
+          experience: "6 Years",
+          areaOfInterest: "Cloud Compuing",
+        },
+        {
+          name: "Prof.Yogita P Nirgude",
+          image: "public/Faculty/yogita-nirgude.jpg",
+          qualifications: "Diploma in Computer Engineering",
+          experience: "14 Years",
+          areaOfInterest: "Hardware & Software",
+        },
+        {
+          name: "Prof . Ankita Gore",
+          image: "public/Faculty/ankita-gore.jpg",
+          qualifications: "B.E. Computer",
+          experience: "3 Years",
+          areaOfInterest: "Data Science",
         },
       ],
       labs: ["AI/ML Lab", "Data Science Lab", "Deep Learning Lab", "Big Data Lab", "Computer Vision Lab"],
@@ -669,35 +949,56 @@ const EngineeringDepartment = () => {
       name: "Automation & Robotics",
       description: "Pioneering automation technologies and robotics systems for Industry 4.0 and smart manufacturing.",
       icon: "🤖",
-      faculty: "16+ automation and robotics specialists",
+      faculty: "6+ automation and robotics specialists",
       facultyMembers: [
         {
-          name: "Dr. Pradeep Menon",
-          image: "/faculty/pradeep-menon.jpg",
-          qualifications: "Ph.D. in Robotics, M.Tech in Automation",
-          experience: "14+ years",
-          areaOfInterest: "Industrial Robotics, Automation Systems, Robot Control",
+          name: "Prof. Sandip S Patil (HOD)",
+          image: "/Faculty/sandip-patil.jpg",
+          qualifications: "M.E. Production, PhD (Pursuing)",
+          experience: "17 years",
+          areaOfInterest: "Production",
         },
         {
-          name: "Prof. Kiran Shetty",
-          image: "/faculty/kiran-shetty.jpg",
-          qualifications: "M.Tech in Industrial Automation, B.E. Mechanical",
-          experience: "11+ years",
-          areaOfInterest: "PLC Programming, SCADA Systems, Industrial Automation",
+          name: "Dr. Manoj D Salunke",
+          image: "public/Faculty/manoj-salunke.jpg",
+          qualifications: "PhD ,M.E. Production",
+          experience: "15 years",
+          areaOfInterest: "Production",
         },
         {
-          name: "Prof. Varun Pillai",
-          image: "/faculty/varun-pillai-robotics.jpg",
-          qualifications: "M.Tech in Mechatronics, B.E. Mechanical",
-          experience: "9+ years",
-          areaOfInterest: "Mechatronics, Embedded Systems, Sensor Integration",
+          name: "Prof . Gokul R Jadhav",
+          image: "public/Faculty/gokul-jadhav.jpg",
+          qualifications: "M.E. Design",
+          experience: "11 years",
+          areaOfInterest: "Robotics",
         },
         {
-          name: "Prof. Aishwarya Nair",
-          image: "/faculty/aishwarya-nair.jpg",
-          qualifications: "M.Tech in Robotics Engineering, B.E. Mechanical",
-          experience: "8+ years",
-          areaOfInterest: "Robot Kinematics, Path Planning, Human-Robot Interaction",
+          name: "Prof . Subodh A Shirsath",
+          image: "public/Faculty/subodh-shirsath.jpg",
+          qualifications: "PhD (Pursuing) (Mechanical) M. E. (Production)",
+          experience: "7 Years",
+          areaOfInterest: "Production",
+        },
+        {
+          name: "Prof.Sonali V Panchawatkar",
+          image: "public/Faculty/sonali-panchawatkar.jpg",
+          qualifications: "M.E (Electronics Eng)",
+          experience: "7 Years",
+          areaOfInterest: "Electronics",
+        },
+        {
+          name: "Prof. Tushar R Sonawane",
+          image: "public/Faculty/tushar-sonawane.jpeg",
+          qualifications: "B.E. Mechanical",
+          experience: "2 years Industry",
+          areaOfInterest: "Production",
+        },
+        {
+          name: "Prof. Hujefa B Pinjari",
+          image: "public/Faculty/hujefa-pinjari.jpeg",
+          qualifications: "Diploma in Mechanical Engineering",
+          experience: "0.5 years",
+          areaOfInterest: "Design",
         },
       ],
       labs: ["Robotics Lab", "Automation Lab", "PLC Lab", "Mechatronics Lab", "Industrial Automation Lab"],
@@ -981,38 +1282,53 @@ const EngineeringDepartment = () => {
               {dept.facultyMembers.map((member, index) => (
                 <Card
                   key={index}
-                  className="group relative overflow-hidden border border-info/20 bg-gradient-to-b from-background via-background to-info/10 hover:shadow-2xl hover:border-info/70 hover:-translate-y-1 transition-all duration-300"
+                  className="group relative overflow-hidden border-2 border-info/20 bg-gradient-to-br from-background via-background to-info/5 hover:shadow-2xl hover:border-info/50 hover:-translate-y-2 transition-all duration-500 rounded-xl"
                 >
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-info via-primary to-info" />
-                  <CardHeader className="pb-4">
-                    <div className="flex flex-col items-center text-center">
-                      <Avatar className="h-28 w-28 mb-4 ring-4 ring-info/30 bg-background shadow-md group-hover:ring-info/60 transition-all duration-300">
-                        <AvatarImage src={member.image || "/placeholder.svg"} alt={member.name} />
-                        <AvatarFallback className="bg-info/10 text-info text-xl font-semibold">
-                          {getInitials(member.name)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <CardTitle className="text-lg font-semibold mb-1 group-hover:text-info transition-colors duration-300">
-                        {member.name}
+                  {/* Decorative top border */}
+                  <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-info via-primary to-info opacity-80" />
+                  
+                  {/* Hover effect overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-info/0 to-primary/0 group-hover:from-info/5 group-hover:to-primary/5 transition-all duration-500 rounded-xl" />
+                  
+                  <CardHeader className="pb-4 relative z-10">
+                    <div className="flex flex-col items-center text-center space-y-3">
+                      <div className="relative">
+                        <Avatar className="h-32 w-32 ring-4 ring-info/20 bg-background shadow-lg group-hover:ring-info/50 group-hover:scale-105 transition-all duration-500">
+                          <AvatarImage 
+                            src={member.image || "/placeholder.svg"} 
+                            alt={member.name}
+                            className="object-cover"
+                          />
+                          <AvatarFallback className="bg-gradient-to-br from-info/20 to-primary/20 text-info text-2xl font-bold">
+                            {getInitials(member.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                        {/* Decorative circle behind avatar */}
+                        <div className="absolute inset-0 rounded-full bg-info/10 blur-xl group-hover:bg-info/20 transition-all duration-500 -z-10" />
+                      </div>
+                      <CardTitle className="text-lg font-bold mb-0 group-hover:text-info transition-colors duration-300 leading-tight px-2">
+                        {member.name.trim()}
                       </CardTitle>
-                      <p className="text-xs uppercase tracking-wide px-3 py-1 rounded-full bg-info/10 text-info font-medium">
-                        Faculty Member
-                      </p>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-2 space-y-3">
-                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
-                      <p className="text-xs font-semibold text-info mb-1">QUALIFICATIONS</p>
-                      <p className="text-sm text-muted-foreground">{member.qualifications}</p>
+                  
+                  <CardContent className="pt-2 space-y-3 relative z-10 pb-6">
+                    <div className="rounded-lg bg-gradient-to-br from-info/5 to-primary/5 border border-info/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-info/20 transition-all duration-300">
+                      <p className="text-xs font-bold text-info mb-2 uppercase tracking-wider">Qualifications</p>
+                      <p className="text-sm text-foreground leading-relaxed break-words">{member.qualifications || "—"}</p>
                     </div>
-                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
-                      <p className="text-xs font-semibold text-info mb-1">EXPERIENCE</p>
-                      <p className="text-sm text-muted-foreground">{member.experience}</p>
+                    
+                    <div className="rounded-lg bg-gradient-to-br from-info/5 to-primary/5 border border-info/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-info/20 transition-all duration-300">
+                      <p className="text-xs font-bold text-info mb-2 uppercase tracking-wider">Experience</p>
+                      <p className="text-sm text-foreground font-medium">{member.experience || "—"}</p>
                     </div>
-                    <div className="rounded-lg bg-background/80 px-3 py-2 shadow-sm">
-                      <p className="text-xs font-semibold text-info mb-1">AREA OF INTEREST</p>
-                      <p className="text-sm text-muted-foreground">{member.areaOfInterest || "—"}</p>
-                    </div>
+                    
+                    {member.areaOfInterest && (
+                      <div className="rounded-lg bg-gradient-to-br from-info/5 to-primary/5 border border-info/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-info/20 transition-all duration-300">
+                        <p className="text-xs font-bold text-info mb-2 uppercase tracking-wider">Area of Interest</p>
+                        <p className="text-sm text-foreground leading-relaxed break-words">{member.areaOfInterest}</p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}

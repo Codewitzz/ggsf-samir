@@ -49,6 +49,7 @@ const EngineeringCampus = lazy(() => import("./pages/EngineeringCampus"));
 const EngineeringInfrastructure = lazy(() => import("./pages/EngineeringInfrastructure"));
 const Admissions = lazy(() => import("./pages/Admissions"));
 const Placements = lazy(() => import("./pages/Placements"));
+const Alumni = lazy(() => import("./pages/Alumni"));
 
 const queryClient = new QueryClient();
 
@@ -76,6 +77,7 @@ const App = () => {
               <Route path="/fee-structure" element={<FeeStructure />} />
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/placements" element={<Placements />} />
+              <Route path="/alumni" element={<Alumni />} />
               <Route path="/campus" element={<Campus />} />
 
               {/* MBA Routes */}

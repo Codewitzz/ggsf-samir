@@ -53,46 +53,34 @@ const Header = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [searchOpen]);
 
-  const mbaMenuItems = [
-    { title: "About MBA", href: "/mba/about" },
-    { title: "Academics", href: "/mba/academics" },
-    { title: "Facilities", href: "/mba/facilities" },
-    { title: "Admissions", href: "/mba/admissions" },
-    { title: "Activities", href: "/mba/activities" },
-  ];
-
-const engineeringMenuItems = [
-  { title: "Departments Overview", href: "/engineering/departments" },
-  { title: "About Engineering", href: "/engineering/about" },
-  { title: "Admissions", href: "/engineering/admissions" },
-  { title: "Facilities", href: "/engineering/facilities" },
-  { title: "Research", href: "/engineering/research" },
-  { title: "Activities", href: "/engineering/activities" },
-  { title: "Faculty", href: "/engineering/faculty" },
-];
-
+  // Engineering departments
   const engineeringDepartments = [
-    { title: "First Year Engineering", href: "/engineering/departments/first-year" },
-    { title: "Computer Engineering", href: "/engineering/departments/computer-engineering" },
-    { title: "Electronics & Communication", href: "/engineering/departments/electronics-communication" },
-    { title: "Mechanical Engineering", href: "/engineering/departments/mechanical" },
-    { title: "Civil Engineering", href: "/engineering/departments/civil" },
-    { title: "Electrical Engineering", href: "/engineering/departments/electrical" },
-    { title: "Information Technology", href: "/engineering/departments/information-technology" },
-    { title: "AI & Data Science", href: "/engineering/departments/artificial-intelligence-data-science" },
-    { title: "Automation & Robotics", href: "/engineering/departments/automation-robotics" },
     { title: "Basic Engineering Science", href: "/engineering/departments/basic-engineering-science" },
-    { title: "Management Studies", href: "/engineering/departments/management-studies" },
-    { title: "Post Graduate (M.E.)", href: "/engineering/departments/post-graduate" },
+    { title: "Artificial Intelligence & Data Science", href: "/engineering/departments/artificial-intelligence-data-science" },
+    { title: "Automation & Robotics", href: "/engineering/departments/automation-robotics" },
+    { title: "Civil Engineering", href: "/engineering/departments/civil" },
+    { title: "Computer Engineering", href: "/engineering/departments/computer-engineering" },
+    { title: "Electrical Engineering", href: "/engineering/departments/electrical" },
+    { title: "Mechanical Engineering", href: "/engineering/departments/mechanical" },
   ];
 
-  const campusMenuItems = [
-    { title: "About ME", href: "/me/about" },
-    { title: "ME Departments", href: "/me/about#me-departments" },
-    { title: "ME Academics", href: "/me/academics" },
-    { title: "ME Facilities", href: "/me/facilities" },
-    { title: "ME Admissions", href: "/me/admissions" },
-    { title: "ME Activities", href: "/me/activities" },
+  // MBA departments
+  const mbaDepartments = [
+    { title: "Management Studies (MBA, BBA)", href: "/engineering/departments/management-studies" },
+  ];
+
+  // ME departments
+  const meDepartments = [
+    { title: "Post Graduate Program (M.E.)", href: "/engineering/departments/post-graduate" },
+  ];
+
+  // Engineering menu items
+  const engineeringMenuItems = [
+    { title: "Departments Overview", href: "/engineering/departments" },
+    { title: "About Engineering", href: "/engineering/about" },
+    { title: "Admissions", href: "/engineering/admissions" },
+    { title: "Facilities", href: "/engineering/facilities" },
+    { title: "Activities", href: "/engineering/activities" },
   ];
 
   const searchableItems = [
@@ -104,18 +92,15 @@ const engineeringMenuItems = [
     { title: "Downloads", href: "/downloads", category: "Main Pages", keywords: ["downloads", "documents", "forms"] },
     { title: "FAQ", href: "/faq", category: "Main Pages", keywords: ["faq", "questions", "help"] },
     { title: "Testimonials", href: "/testimonials", category: "Main Pages", keywords: ["testimonials", "reviews", "feedback"] },
+    { title: "Alumni", href: "/alumni", category: "Main Pages", keywords: ["alumni", "graduates", "network"] },
+    { title: "Placements", href: "/placements", category: "Main Pages", keywords: ["placements", "jobs", "careers", "recruitment"] },
 
-    { title: "About MBA", href: "/mba/about", category: "MBA Programs", keywords: ["mba", "business", "administration", "management"] },
-    { title: "MBA Academics", href: "/mba/academics", category: "MBA Programs", keywords: ["mba", "academics", "curriculum"] },
-    { title: "MBA Facilities", href: "/mba/facilities", category: "MBA Programs", keywords: ["mba", "facilities", "campus"] },
-    { title: "MBA Admissions", href: "/mba/admissions", category: "MBA Programs", keywords: ["mba", "admissions", "apply", "enrollment"] },
-    { title: "MBA Activities", href: "/mba/activities", category: "MBA Programs", keywords: ["mba", "activities", "clubs"] },
-
-    { title: "About Engineering", href: "/engineering/about", category: "Engineering", keywords: ["engineering", "bachelor", "be", "btech"] },
-    { title: "Engineering Admissions", href: "/engineering/admissions", category: "Engineering", keywords: ["engineering", "admissions", "jee", "entrance"] },
-    { title: "Engineering Facilities", href: "/engineering/facilities", category: "Engineering", keywords: ["engineering", "facilities", "labs"] },
-    { title: "Engineering Activities", href: "/engineering/activities", category: "Engineering", keywords: ["engineering", "activities", "clubs"] },
-    { title: "Engineering Academics", href: "/engineering/academics", category: "Engineering", keywords: ["engineering", "academics", "curriculum"] },
+    ...engineeringMenuItems.map((item) => ({
+      title: item.title,
+      href: item.href,
+      category: "Engineering",
+      keywords: item.title.toLowerCase().split(" "),
+    })),
 
     ...engineeringDepartments.map((dept) => ({
       title: dept.title,
@@ -124,26 +109,19 @@ const engineeringMenuItems = [
       keywords: dept.title.toLowerCase().split(" "),
     })),
 
-    { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering"] },
-    {
-      title: "ME Departments",
-      href: "/me/about#me-departments",
-      category: "ME Programs",
-      keywords: ["me", "departments", "ai", "robotics"],
-    },
-    { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },
+    ...mbaDepartments.map((dept) => ({
+      title: dept.title,
+      href: dept.href,
+      category: "MBA Departments",
+      keywords: dept.title.toLowerCase().split(" "),
+    })),
 
-    { title: "About ME", href: "/me/about", category: "ME Programs", keywords: ["me", "masters", "engineering", "postgraduate"] },
-    {
-      title: "ME Departments",
-      href: "/me/about#me-departments",
-      category: "ME Programs",
-      keywords: ["me", "departments", "ai", "robotics"],
-    },
-    { title: "ME Academics", href: "/me/academics", category: "ME Programs", keywords: ["me", "academics", "curriculum"] },
-    { title: "ME Facilities", href: "/me/facilities", category: "ME Programs", keywords: ["me", "facilities", "labs"] },
-    { title: "ME Admissions", href: "/me/admissions", category: "ME Programs", keywords: ["me", "admissions", "pg"] },
-    { title: "ME Activities", href: "/me/activities", category: "ME Programs", keywords: ["me", "activities"] },
+    ...meDepartments.map((dept) => ({
+      title: dept.title,
+      href: dept.href,
+      category: "M.E. Departments",
+      keywords: dept.title.toLowerCase().split(" "),
+    })),
   ];
 
   const filteredResults = searchQuery
@@ -210,6 +188,9 @@ const engineeringMenuItems = [
               7768004585
             </a>
           </div>
+          <div className="text-xs hidden pl-1.5 pr-1.5 font-bold  text-red-400 animate-pulse sm:block">
+            Mechanical Engineering Program is Accredited by NBA
+          </div>
           <div className="hidden md:block">
             <Link to="/contact" className="hover:bg-yellow-900 font-medium bg-yellow-600  rounded-full p-1 pr-3 pl-3 transition-colors">
               Apply Now
@@ -257,64 +238,81 @@ const engineeringMenuItems = [
                     <NavigationMenuLink className={navLinkClassName}>Home</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className={triggerClassName}>MBA</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                      {mbaMenuItems.map((item) => (
-                        <li key={item.title}>
-                          <NavigationMenuLink asChild >
-                            <Link
-                              to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none bg-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                            >
-                              <div className="text-sm  font-medium leading-none">{item.title}</div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={triggerClassName}>Engineering</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-[280px] space-y-2 p-4">
-                      <li className="px-2 py-1 text-xs uppercase text-muted-foreground">Quick Links</li>
-                      {engineeringMenuItems.map((item) => (
-                        <li key={item.title}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={item.href}
-                              className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                            >
-                              {item.title}
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className={triggerClassName}>ME</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                      {campusMenuItems.map((item) => (
-                        <li key={item.title}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={item.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                            >
-                              <div className="text-sm font-medium leading-none">{item.title}</div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="grid w-[700px] gap-4 p-4 md:grid-cols-3">
+                      {/* Engineering Section */}
+                      <div>
+                        <h4 className="mb-3 text-sm font-semibold text-primary">Engineering</h4>
+                        <ul className="space-y-2">
+                          {engineeringMenuItems.map((item) => (
+                            <li key={item.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.href}
+                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                        <h5 className="mt-4 mb-2 text-xs font-semibold text-muted-foreground uppercase">Engineering Departments</h5>
+                        <ul className="space-y-1">
+                          {engineeringDepartments.map((item) => (
+                            <li key={item.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.href}
+                                  className="block select-none rounded-md p-1.5 text-xs leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* MBA Section */}
+                      <div>
+                        <h4 className="mb-3 text-sm font-semibold text-primary">MBA</h4>
+                        <ul className="space-y-1">
+                          {mbaDepartments.map((item) => (
+                            <li key={item.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.href}
+                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* ME Section */}
+                      <div>
+                        <h4 className="mb-3 text-sm font-semibold text-primary">M.E.</h4>
+                        <ul className="space-y-1">
+                          {meDepartments.map((item) => (
+                            <li key={item.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.href}
+                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
@@ -325,20 +323,32 @@ const engineeringMenuItems = [
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
+                  <Link to="/alumni">
+                    <NavigationMenuLink className={navLinkClassName}>Alumni</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link to="/placements">
+                    <NavigationMenuLink className={navLinkClassName}>Placements</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
                   <Link to="/gallery">
                     <NavigationMenuLink className={navLinkClassName}>Gallery</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/contact">
-                    <NavigationMenuLink className={navLinkClassName}>Contact</NavigationMenuLink>
+                  <Link to="/campus">
+                    <NavigationMenuLink className={navLinkClassName}>Campus</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                  <Link to="/campus">
-                    <NavigationMenuLink className={navLinkClassName}>Campus</NavigationMenuLink>
+                 <NavigationMenuItem>
+                  <Link to="/contact">
+                    <NavigationMenuLink className={navLinkClassName}>Contact</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -435,36 +445,43 @@ const engineeringMenuItems = [
                 Home
               </Link>
               <div>
-                <p className="font-semibold text-sm text-muted-foreground mb-2">MBA</p>
-                {mbaMenuItems.map((item) => (
-                  <Link
-                    key={item.title}
-                    to={item.href}
-                    className="block py-2 pl-4 hover:text-primary transition-colors"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
-              <div>
-                <p className="font-semibold text-sm text-muted-foreground mb-2">Engineering</p>
+                <p className="font-semibold text-sm text-muted-foreground mb-2">Departments</p>
+                <p className="text-xs text-muted-foreground mb-1 pl-4">Engineering</p>
                 {engineeringMenuItems.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-2 pl-4 hover:text-primary transition-colors"
+                    className="block py-2 pl-6 hover:text-primary transition-colors"
                   >
                     {item.title}
                   </Link>
                 ))}
-              </div>
-              <div>
-                <p className="font-semibold text-sm text-muted-foreground mb-2">ME</p>
-                {campusMenuItems.map((item) => (
+                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">Engineering Departments</p>
+                {engineeringDepartments.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-2 pl-4 hover:text-primary transition-colors"
+                    className="block py-2 pl-6 hover:text-primary transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">MBA</p>
+                {mbaDepartments.map((item) => (
+                  <Link
+                    key={item.title}
+                    to={item.href}
+                    className="block py-2 pl-6 hover:text-primary transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">M.E.</p>
+                {meDepartments.map((item) => (
+                  <Link
+                    key={item.title}
+                    to={item.href}
+                    className="block py-2 pl-6 hover:text-primary transition-colors"
                   >
                     {item.title}
                   </Link>
@@ -472,6 +489,12 @@ const engineeringMenuItems = [
               </div>
               <Link to="/events" className="block py-2 hover:text-primary transition-colors">
                 Events
+              </Link>
+              <Link to="/alumni" className="block py-2 hover:text-primary transition-colors">
+                Alumni
+              </Link>
+              <Link to="/placements" className="block py-2 hover:text-primary transition-colors">
+                Placements
               </Link>
               <Link to="/gallery" className="block py-2 hover:text-primary transition-colors">
                 Gallery

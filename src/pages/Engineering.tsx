@@ -167,8 +167,7 @@ const Engineering = () => {
           </div>
         </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-info/80 via-primary/80 to-info/80 mix-blend-multiply" />
+        {/* Overlay - removed bluish color */}
 
         {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center text-white">

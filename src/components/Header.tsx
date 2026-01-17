@@ -242,27 +242,12 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[700px] gap-4 p-4 md:grid-cols-3">
+                    <div className="grid w-[700px] gap-3 p-3 md:grid-cols-3">
                       {/* Engineering Section */}
                       <div>
                         <h4 className="mb-3 text-sm font-semibold text-primary">Engineering</h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-1.5">
                           {engineeringMenuItems.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={item.href}
-                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                                >
-                                  {item.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                        <h5 className="mt-4 mb-2 text-xs font-semibold text-muted-foreground uppercase">Engineering Departments</h5>
-                        <ul className="space-y-1">
-                          {engineeringDepartments.map((item) => (
                             <li key={item.title}>
                               <NavigationMenuLink asChild>
                                 <Link
@@ -275,17 +260,32 @@ const Header = () => {
                             </li>
                           ))}
                         </ul>
+                        <h5 className="mt-3 mb-1.5 text-[10px] font-semibold text-muted-foreground uppercase">Engineering Departments</h5>
+                        <ul className="space-y-0.5">
+                          {engineeringDepartments.map((item) => (
+                            <li key={item.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={item.href}
+                                  className="block select-none rounded-md p-1 text-[10px] leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                       {/* MBA Section */}
                       <div>
                         <h4 className="mb-3 text-sm font-semibold text-primary">MBA</h4>
-                        <ul className="space-y-1">
+                        <ul className="space-y-0.5">
                           {mbaDepartments.map((item) => (
                             <li key={item.title}>
                               <NavigationMenuLink asChild>
                                 <Link
                                   to={item.href}
-                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                  className="block select-none rounded-md p-1 text-xs leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                                 >
                                   {item.title}
                                 </Link>
@@ -297,13 +297,13 @@ const Header = () => {
                       {/* ME Section */}
                       <div>
                         <h4 className="mb-3 text-sm font-semibold text-primary">M.E.</h4>
-                        <ul className="space-y-1">
+                        <ul className="space-y-0.5">
                           {meDepartments.map((item) => (
                             <li key={item.title}>
                               <NavigationMenuLink asChild>
                                 <Link
                                   to={item.href}
-                                  className="block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
+                                  className="block select-none rounded-md p-1 text-xs leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
                                 >
                                   {item.title}
                                 </Link>

@@ -1,12 +1,18 @@
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Users, GraduationCap, Network, Award, Quote, Mail, Phone, Linkedin } from "lucide-react";
 
 const Alumni = () => {
+  const sliderImages = [
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=80",
+  ];
   const stats = [
     { icon: Users, label: "Alumni Network", value: "5000+" },
     { icon: GraduationCap, label: "Graduates", value: "4000+" },
@@ -76,13 +82,22 @@ const Alumni = () => {
       <Header />
       <Breadcrumbs />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-light text-primary-foreground py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Alumni Association</h1>
-          <p className="text-xl max-w-3xl mx-auto text-primary-foreground/90">
-            Connecting past, present, and future - Building a strong network of successful professionals
-          </p>
+      {/* Hero Section with Image Slider */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <ImageSlider 
+            images={sliderImages} 
+            height="h-[400px]"
+            className="rounded-none"
+          />
+        </div>
+        <div className="relative z-10 bg-black/50 py-20 px-4">
+          <div className="container mx-auto text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Alumni Association</h1>
+            <p className="text-xl max-w-3xl mx-auto text-white/90">
+              Connecting past, present, and future - Building a strong network of successful professionals
+            </p>
+          </div>
         </div>
       </section>
 

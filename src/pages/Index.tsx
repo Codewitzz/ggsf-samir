@@ -24,6 +24,8 @@ import NAACAccreditation from "@/components/NAACAccreditation";
 import NBAAccreditation from "@/components/NBAAccreditation";
 import ChatbotInfo from "@/components/ChatbotInfo";
 import CampusInfrastructure from "@/components/CampusInfrastructure";
+import VisionMission from "@/components/VisionMission";
+import LeadersMessage from "@/components/LeadersMessage";
 
 const Index = () => {
   return (
@@ -36,6 +38,12 @@ const Index = () => {
         </div>
         <div className="gsap-fade">
           <CollegeCards />
+        </div>
+        <div className="gsap-fade">
+          <VisionMission />
+        </div>
+        <div className="gsap-fade">
+          <LeadersMessage />
         </div>
         <div className="gsap-fade">
           <NAACAccreditation />

@@ -28,7 +28,7 @@ const Hero = () => {
         description:
           "From MBA labs to Engineering campus workshops, every learner gets access to start-up studios, hackathons, and co-create spaces.",
         badge: "Start-up Studio",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop&q=80",
         stats: [
           { label: "Student ventures", value: "45" },
           { label: "Incubated ideas", value: "120+" },
@@ -40,7 +40,7 @@ const Hero = () => {
         description:
           "Experience lush grounds, digital classrooms, and vibrant student clubs that nurture leadership and community.",
         badge: "360° Campus Tour",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&h=900&fit=crop&q=80",
         stats: [
           { label: "Student clubs", value: "32" },
           { label: "Scholarships", value: "₹2 Cr" },
@@ -52,7 +52,7 @@ const Hero = () => {
         description:
           "Benefit from international MoUs, semester abroad programs, and dual certifications curated with leading universities.",
         badge: "Global Immersion 2025",
-        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&h=900&fit=crop&q=80",
         stats: [
           { label: "International MoUs", value: "25" },
           { label: "Exchange seats", value: "140+" },
@@ -64,7 +64,7 @@ const Hero = () => {
         description:
           "Join multidisciplinary labs focused on EV, green energy, AI, and med-tech with seed funding and patent mentorship.",
         badge: "Innovation Grants",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=900&fit=crop&q=80",
         stats: [
           { label: "Patents filed", value: "60+" },
           { label: "Funded projects", value: "₹5 Cr" },
@@ -107,11 +107,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Additional overlay tint */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary-dark/60 to-transparent mix-blend-multiply"
-      />
+      {/* Additional overlay tint - removed bluish color */}
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center md:text-left">
@@ -125,7 +121,7 @@ const Hero = () => {
         </div>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-            <Link to="/contact">
+            <Link to="/admissions">
               Apply Now <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
@@ -136,6 +132,14 @@ const Hero = () => {
             className="border-white/60 bg-white/10 text-white hover:bg-white hover:text-primary"
           >
             <Link to="/departments">Explore Departments</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/60 bg-white/10 text-white hover:bg-white hover:text-primary"
+          >
+            <Link to="/contact">Contact Us</Link>
           </Button>
         </div>
         <div className="mt-10 grid grid-cols-2 gap-6 text-left max-w-md">

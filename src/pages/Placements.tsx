@@ -1,10 +1,18 @@
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, TrendingUp, Users, Award, Briefcase } from "lucide-react";
 
 const Placements = () => {
+  const sliderImages = [
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=900&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=900&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=900&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&h=900&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&h=900&fit=crop&q=80",
+  ];
   const stats = [
     { icon: Building2, label: "Partner Companies", value: "300+" },
     { icon: TrendingUp, label: "Placement Rate", value: "85%+" },
@@ -46,13 +54,22 @@ const Placements = () => {
       <Header />
       <Breadcrumbs />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-light text-primary-foreground py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Placements</h1>
-          <p className="text-xl max-w-3xl mx-auto text-primary-foreground/90">
-            Connecting talented students with leading companies for successful career launches
-          </p>
+      {/* Hero Section with Image Slider */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <ImageSlider 
+            images={sliderImages} 
+            height="h-[500px]"
+            className="rounded-none"
+          />
+        </div>
+        <div className="relative h-[500px] z-10 bg-black/50 py-20 px-4">
+          <div className="container mt-20 mx-auto text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Placements</h1>
+            <p className="text-xl max-w-3xl mx-auto text-white/90">
+              Connecting talented students with leading companies for successful career launches
+            </p>
+          </div>
         </div>
       </section>
 

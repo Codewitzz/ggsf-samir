@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -72,39 +73,53 @@ const spotlightDepartments = [
 ];
 
 const Departments = () => {
+  const sliderImages = [
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1600&q=80",
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Breadcrumbs />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary-dark to-primary-dark text-primary-foreground py-20 px-4">
+      {/* Hero with Image Slider */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <ImageSlider 
+            images={sliderImages} 
+            height="h-[500px]"
+            className="rounded-none"
+          />
+        </div>
+        <div className="relative z-10 bg-black/60 py-20 px-4">
         <div className="absolute inset-y-0 right-0 w-1/2 opacity-40 pointer-events-none">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.2),_transparent_60%)]" />
         </div>
-        <div className="container mx-auto relative z-10">
-          <p className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/70">
-            <span className="h-2 w-2 rounded-full bg-secondary" />
-            Academic Architecture
-          </p>
-          <h1 className="mt-6 text-4xl md:text-5xl font-bold max-w-3xl">
-            Departments that reimagine <span className="text-secondary">future-ready</span> education
-          </h1>
-          <p className="mt-6 text-lg md:text-xl max-w-2xl text-primary-foreground/80">
-            Explore engineering, management, and postgraduate programs connected through shared innovation hubs,
-            global accreditations, and experiential learning pathways.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-              <Link to="/contact">
-                Meet Academic Advisors
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/60 text-black hover:bg-white hover:text-primary">
-              <Link to="/downloads">Download Prospectus</Link>
-            </Button>
+          <div className="container mx-auto">
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/90">
+              <span className="h-2 w-2 rounded-full bg-secondary" />
+              Academic Architecture
+            </p>
+            <h1 className="mt-6 text-4xl md:text-5xl font-bold max-w-3xl text-white">
+              Departments that reimagine <span className="text-secondary">future-ready</span> education
+            </h1>
+            <p className="mt-6 text-lg md:text-xl max-w-2xl text-white/90">
+              Explore engineering, management, and postgraduate programs connected through shared innovation hubs,
+              global accreditations, and experiential learning pathways.
+            </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                <Link to="/contact">
+                  Meet Academic Advisors
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white/60 bg-white/10 text-white hover:bg-white hover:text-primary">
+                <Link to="/downloads">Download Prospectus</Link>
+              </Button>
+            </div>
           </div>
-        </div>
       </section>
 
       {/* Stats */}

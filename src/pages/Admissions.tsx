@@ -1,12 +1,18 @@
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, FileText, CheckCircle } from "lucide-react";
 
 const Admissions = () => {
+  const sliderImages = [
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1600&q=80",
+  ];
   const programs = [
     {
       title: "Engineering (B.E.)",
@@ -45,13 +51,22 @@ const Admissions = () => {
       <Header />
       <Breadcrumbs />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-light text-primary-foreground py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Admissions</h1>
-          <p className="text-xl max-w-3xl mx-auto text-primary-foreground/90">
-            Begin your journey towards excellence in engineering and management education
-          </p>
+      {/* Hero Section with Image Slider */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <ImageSlider 
+            images={sliderImages} 
+            height="h-[400px]"
+            className="rounded-none"
+          />
+        </div>
+        <div className="relative z-10 bg-black/50 py-20 px-4">
+          <div className="container mx-auto text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Admissions</h1>
+            <p className="text-xl max-w-3xl mx-auto text-white/90">
+              Begin your journey towards excellence in engineering and management education
+            </p>
+          </div>
         </div>
       </section>
 

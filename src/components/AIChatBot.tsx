@@ -615,7 +615,7 @@ const AIChatBot = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50 bg-primary hover:bg-primary/90"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 h-14 w-14 rounded-full shadow-lg z-50 bg-primary hover:bg-primary/90"
           size="icon"
         >
           <MessageCircle className="h-6 w-6" />
@@ -624,25 +624,30 @@ const AIChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-card border border-border rounded-lg shadow-xl z-50 flex flex-col">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col overflow-hidden border border-border bg-card shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-card/90 rounded-2xl w-[calc(100vw-2rem)] max-w-[360px] h-[70vh] max-h-[640px] min-h-[420px]">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-border bg-primary text-primary-foreground rounded-t-lg">
-            <div className="flex items-center gap-2">
-              <MessageCircle className="h-5 w-5" />
-              <h3 className="font-semibold">GCOERC-Bot</h3>
+          <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-primary via-primary/95 to-primary-dark text-primary-foreground shadow-md">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/20 ring-2 ring-white/30 shadow-lg">
+                <MessageCircle className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold leading-tight truncate text-base">GCOERC-Bot</h3>
+                <p className="text-xs text-primary-foreground/90 truncate font-medium">AI Assistant • Always Online</p>
+              </div>
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(false)}
-              className="h-8 w-8 hover:bg-primary-foreground/10"
+              className="h-9 w-9 rounded-xl hover:bg-primary-foreground/20 transition-colors"
             >
               <X className="h-4 w-4" />
             </Button>
           </div>
 
           {/* Messages */}
-          <ScrollArea className="flex-1 p-4">
+          <ScrollArea className="flex-1 p-4 bg-gradient-to-b from-background to-muted/20">
             <div className="space-y-4 h-full" ref={scrollRef}>
               {messages.map((message, index) => (
                 <div
@@ -650,43 +655,138 @@ const AIChatBot = () => {
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-md transition-all ${
                       message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-foreground"
+                        ? "bg-gradient-to-br from-primary to-primary-dark text-primary-foreground"
+                        : "bg-gradient-to-br from-muted/90 to-muted/70 text-foreground border border-border/50"
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
                   </div>
                 </div>
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-muted text-foreground rounded-lg p-3">
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                  <div className="bg-gradient-to-br from-muted/90 to-muted/70 text-foreground border border-border/50 rounded-2xl px-4 py-3 shadow-md">
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                      <span className="text-xs text-muted-foreground font-medium">Thinking…</span>
+                    </div>
                   </div>
                 </div>
               )}
+              
+              {/* Suggestions */}
+              {messages.length === 1 && !isLoading && (
+                <div className="space-y-2">
+                  <p className="text-xs text-muted-foreground font-medium px-1">Quick suggestions:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "What courses are offered?",
+                      "Admission process?",
+                      "Placement information",
+                      "College facilities"
+                    ].map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        onClick={async () => {
+                          const trimmed = suggestion.trim();
+                          if (!trimmed || isLoading) return;
+
+                          const userMessage: Message = { role: "user", content: trimmed };
+                          const updatedHistory = [...messages, userMessage];
+                          setMessages(updatedHistory);
+                          setInput("");
+
+                          const fallbackAnswer = findAnswerFromKB(trimmed);
+                          
+                          if (!genAI) {
+                            if (fallbackAnswer) {
+                              setMessages((prev) => [
+                                ...prev,
+                                {
+                                  role: "assistant",
+                                  content: fallbackAnswer,
+                                },
+                              ]);
+                            } else {
+                              setMessages((prev) => [
+                                ...prev,
+                                {
+                                  role: "assistant",
+                                  content: "I'm sorry, I couldn't find a specific answer to your question. Please contact us directly:\n\n• Phone: +91-0253-2372766 / +91-0253-2372666 / +91-7768004581 / +91-7768004582\n• Email: gcoerc.nashik@ggsf.edu.in\n• Website: https://engg.ggsf.edu.in/\n\nOr visit our contact page for more information.",
+                                },
+                              ]);
+                            }
+                            return;
+                          }
+
+                          setIsLoading(true);
+
+                          try {
+                            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+                            const systemPrompt = `You are GCOERC-Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Center (GCOERC). Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. Be concise, friendly, and informative.`;
+                            const chat = model.startChat({
+                              history: updatedHistory.slice(1).map((msg) => ({
+                                role: msg.role === "assistant" ? "model" : "user",
+                                parts: [{ text: msg.content }],
+                              })),
+                            });
+                            const result = await chat.sendMessage(`${systemPrompt}\n\nStudent question: ${trimmed}`);
+                            const response = await result.response;
+                            const text = response.text();
+                            setMessages((prev) => [...prev, { role: "assistant", content: text }]);
+                          } catch (error) {
+                            console.error("Error calling Gemini API:", error);
+                            const fallbackAnswer = findAnswerFromKB(trimmed);
+                            if (fallbackAnswer) {
+                              setMessages((prev) => [
+                                ...prev,
+                                { role: "assistant", content: fallbackAnswer },
+                              ]);
+                            } else {
+                              setMessages((prev) => [
+                                ...prev,
+                                {
+                                  role: "assistant",
+                                  content: "I apologize, but I'm having trouble connecting to the AI service right now. Please try again later or contact us directly.",
+                                },
+                              ]);
+                            }
+                          } finally {
+                            setIsLoading(false);
+                          }
+                        }}
+                        className="text-xs px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 transition-all hover:scale-105 font-medium cursor-pointer"
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
               {/* Scroll target element */}
               <div ref={messagesEndRef} className="h-1" />
             </div>
           </ScrollArea>
 
           {/* Input */}
-          <div className="p-4 border-t border-border">
+          <div className="p-3 sm:p-4 border-t border-border bg-gradient-to-b from-background to-muted/10">
             <div className="flex gap-2">
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyPress}
-                placeholder="Ask a question..."
+                placeholder="Type your question..."
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 h-11 rounded-xl border-border/50 focus:border-primary transition-colors"
               />
               <Button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
                 size="icon"
+                className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary to-primary-dark hover:from-primary-dark hover:to-primary transition-all shadow-md hover:shadow-lg disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
               </Button>

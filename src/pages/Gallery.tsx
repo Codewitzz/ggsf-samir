@@ -8,7 +8,7 @@ const Gallery = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <Breadcrumbs />
-      <div className="py-12">
+      <div className="py-8 sm:py-12">
         <GallerySection />
       </div>
       <Footer />

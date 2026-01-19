@@ -383,16 +383,23 @@ const Header = () => {
           {/* Search Bar */}
           {searchOpen && (
             <div ref={searchRef} className="pb-4 relative">
-              <Command className="rounded-lg border shadow-md">
+              <Command className="rounded-xl border-2 border-primary/20 shadow-2xl bg-background/95 backdrop-blur-md">
                 <CommandInput
                   placeholder="Search courses, departments, faculty..."
                   value={searchQuery}
                   onValueChange={setSearchQuery}
                   autoFocus
+                  className="h-12 text-base"
                 />
-                <CommandList>
+                <CommandList className="max-h-[400px]">
                   {filteredResults.length === 0 && searchQuery ? (
-                    <CommandEmpty>No results found.</CommandEmpty>
+                    <CommandEmpty className="py-8">
+                      <div className="flex flex-col items-center gap-2">
+                        <Search className="h-8 w-8 text-muted-foreground opacity-50" />
+                        <p className="text-sm font-medium">No results found.</p>
+                        <p className="text-xs text-muted-foreground">Try a different search term</p>
+                      </div>
+                    </CommandEmpty>
                   ) : (
                     <>
                       {filteredResults.length > 0 && (
@@ -406,16 +413,16 @@ const Header = () => {
                               return acc;
                             }, {} as Record<string, typeof filteredResults>)
                           ).map(([category, items]) => (
-                            <CommandGroup key={category} heading={category}>
+                            <CommandGroup key={category} heading={category} className="px-2">
                               {items.map((item) => (
                                 <CommandItem
                                   key={item.href}
                                   value={item.title}
                                   onSelect={() => handleSelect(item.href)}
-                                  className="cursor-pointer"
+                                  className="cursor-pointer rounded-lg px-3 py-2.5 hover:bg-primary/10 transition-colors my-1"
                                 >
-                                  <div className="flex flex-col">
-                                    <span className="font-medium">{item.title}</span>
+                                  <div className="flex flex-col gap-0.5">
+                                    <span className="font-semibold text-sm">{item.title}</span>
                                     <span className="text-xs text-muted-foreground">{category}</span>
                                   </div>
                                 </CommandItem>
@@ -425,8 +432,20 @@ const Header = () => {
                         </>
                       )}
                       {!searchQuery && (
-                        <div className="px-4 py-6 text-sm text-muted-foreground">
-                          Start typing to search across departments, programs, and resources.
+                        <div className="px-4 py-8 text-center">
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="p-3 bg-primary/10 rounded-full">
+                              <Search className="h-6 w-6 text-primary" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-semibold text-foreground mb-1">Start typing to search</p>
+                              <p className="text-xs text-muted-foreground">Search across departments, programs, and resources</p>
+                            </div>
+                            <div className="flex flex-wrap gap-2 justify-center mt-2">
+                              <span className="text-xs px-2 py-1 bg-muted rounded-md text-muted-foreground">Ctrl+K</span>
+                              <span className="text-xs px-2 py-1 bg-muted rounded-md text-muted-foreground">to open</span>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </>

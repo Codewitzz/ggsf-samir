@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   GraduationCap,
   Award,
@@ -139,6 +140,49 @@ const MEAbout = () => {
     {
       title: "Entrepreneurship",
       description: "Start your own technology venture with incubation support and mentorship",
+    },
+  ];
+
+  // Helper function to get initials from name
+  const getInitials = (name: string): string => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const facultyMembers = [
+    {
+      name: "Dr. Umakant D Butkar",
+      designation: "Head of Department",
+      qualifications: "Ph.D, Post Doc USA - Computer Science and Engineering",
+      experience: "16 years",
+      image: "/Faculty/umakant-butkar.jpg",
+      areaOfInterest: "Computer Network",
+    },
+    {
+      name: "Dr. Sweety G. Jachak",
+      designation: "Assistant Professor and PG coordinator",
+      qualifications: "PhD, M.Tech CSE",
+      experience: "16 years",
+      areaOfInterest: "Cloud computing, distributed systems, deep learning",
+    },
+    {
+      name: "Mr. Sandeep G Shukla",
+      designation: "Assistant Professor",
+      qualifications: "M.Tech I.T., PhD (Pursuing)",
+      experience: "17 years",
+      areaOfInterest: "Cloud Computing and IoT",
+    },
+    
+    {
+      name: "Prof. Pradnya K Bachhav",
+      image: "/Faculty/pradnya-bachhav.jpg",
+      qualifications: "M.E. Computer , PhD (Pursuing)",
+      experience: "14+ years",
+      areaOfInterest: "Cloud Computing, Networking, Artificial Intelligence",
     },
   ];
 
@@ -434,6 +478,76 @@ const MEAbout = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base">{opportunity.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Faculty Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Our Faculty</h2>
+            <div className="h-1 w-24 bg-warning rounded-full mx-auto"></div>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Meet our experienced and dedicated faculty members who bring industry expertise and academic excellence to
+              the classroom.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {facultyMembers.map((member, index) => (
+              <Card
+                key={index}
+                className="group relative overflow-hidden border-2 border-warning/20 bg-gradient-to-br from-background via-background to-warning/5 hover:shadow-2xl hover:border-warning/50 hover:-translate-y-2 transition-all duration-500 rounded-xl"
+              >
+                {/* Decorative top border */}
+                <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-warning via-warning to-warning opacity-80" />
+                
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-warning/0 to-warning/0 group-hover:from-warning/5 group-hover:to-warning/5 transition-all duration-500 rounded-xl" />
+                
+                <CardHeader className="pb-4 relative z-10">
+                  <div className="flex flex-col items-center text-center space-y-3">
+                    <div className="relative">
+                      <Avatar className="h-32 w-32 ring-4 ring-warning/20 bg-background shadow-lg group-hover:ring-warning/50 group-hover:scale-105 transition-all duration-500">
+                        <AvatarImage 
+                          src={undefined} 
+                          alt={member.name}
+                          className="object-cover"
+                        />
+                        <AvatarFallback className="bg-gradient-to-br from-warning/20 to-warning/20 text-warning text-2xl font-bold">
+                          {getInitials(member.name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      {/* Decorative circle behind avatar */}
+                      <div className="absolute inset-0 rounded-full bg-warning/10 blur-xl group-hover:bg-warning/20 transition-all duration-500 -z-10" />
+                    </div>
+                    <CardTitle className="text-lg font-bold mb-0 group-hover:text-warning transition-colors duration-300 leading-tight px-2">
+                      {member.name.trim()}
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground font-medium">{member.designation}</p>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="pt-2 space-y-3 relative z-10 pb-6">
+                  <div className="rounded-lg bg-gradient-to-br from-warning/5 to-warning/5 border border-warning/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-warning/20 transition-all duration-300">
+                    <p className="text-xs font-bold text-warning mb-2 uppercase tracking-wider">Qualifications</p>
+                    <p className="text-sm text-foreground leading-relaxed break-words">{member.qualifications || "—"}</p>
+                  </div>
+                  
+                  <div className="rounded-lg bg-gradient-to-br from-warning/5 to-warning/5 border border-warning/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-warning/20 transition-all duration-300">
+                    <p className="text-xs font-bold text-warning mb-2 uppercase tracking-wider">Experience</p>
+                    <p className="text-sm text-foreground font-medium">{member.experience || "—"}</p>
+                  </div>
+                  
+                  {member.areaOfInterest && (
+                    <div className="rounded-lg bg-gradient-to-br from-warning/5 to-warning/5 border border-warning/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-warning/20 transition-all duration-300">
+                      <p className="text-xs font-bold text-warning mb-2 uppercase tracking-wider">Area of Interest</p>
+                      <p className="text-sm text-foreground leading-relaxed break-words">{member.areaOfInterest}</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}

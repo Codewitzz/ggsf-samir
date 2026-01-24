@@ -19,11 +19,17 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import MBA from "@/pages/MBA";
 
 const SLIDE_DURATION = 5000;
 
 const EngineeringDepartment = () => {
   const { deptName } = useParams<{ deptName: string }>();
+
+  // If management-studies, render the MBA component
+  if (deptName === "management-studies") {
+    return <MBA />;
+  }
 
   interface FacultyMember {
     name: string;
@@ -87,6 +93,14 @@ const EngineeringDepartment = () => {
       icon: "💻",
       faculty: "25+ experienced faculty members",
       facultyMembers: [
+        {
+          name: "Dr . Nita M. Thakare (HOD) ",
+          image: "/Faculty/Nita-thakare.jpg",
+          qualifications: "PhD (CSE)",
+          experience: "29+ years",
+          areaOfInterest: "  Data Structures , OOP, Machine Learning",
+        },
+       
         {
           name: "Prof. Sandeep G Shukla (HOD) ",
           image: "/Faculty/sandip-shukla.jpg",
@@ -1093,6 +1107,57 @@ const EngineeringDepartment = () => {
       mission: ["Deliver industry-aligned curriculum with live projects."],
       achievements: ["Strong placements and entrepreneurship initiatives."],
       publications: ["Case studies and business research publications."],
+      facultyMembers: [
+        {
+          name: "Prof. Rida Shaikh (HoD)",
+          image: undefined,
+          qualifications: "MMM, Ph.D (Pursuing)",
+          experience: "15 years",
+          areaOfInterest: "Management Studies",
+        },
+        {
+          name: "Prof. Amogh Kshirsagar",
+          image: undefined,
+          qualifications: "M.A. Psychology, Master of Personnel Management",
+          experience: "20 years",
+          areaOfInterest: "Human Resource Management",
+        },
+        {
+          name: "Prof. Aditi Kulkarni",
+          image: undefined,
+          qualifications: "MBA (Finance), MBA (HR- Additional Spl.), M.Com, GDC&A, DTL, Ph.D (Pursuing)",
+          experience: "9 years",
+          areaOfInterest: "Finance & HR",
+        },
+        {
+          name: "Prof. Radhika Gaikwad",
+          image: undefined,
+          qualifications: "MBA (HR)",
+          experience: "5 years",
+          areaOfInterest: "Human Resource Management",
+        },
+        {
+          name: "Prof. Satbir Singh Hundal",
+          image: undefined,
+          qualifications: "MBA (HR), BE (IT)",
+          experience: "9 years",
+          areaOfInterest: "Human Resource Management",
+        },
+        {
+          name: "Prof. Nivedita Pawar",
+          image: undefined,
+          qualifications: "BTech Biotechnology, MBA (Finance)",
+          experience: "4 years",
+          areaOfInterest: "Finance",
+        },
+        {
+          name: "Prof. Rachana Badode",
+          image: undefined,
+          qualifications: "B.E. Computer",
+          experience: "—",
+          areaOfInterest: "Business Analytics",
+        },
+      ],
     },
     "post-graduate": {
       name: "Post Graduate Program (M.E.)",

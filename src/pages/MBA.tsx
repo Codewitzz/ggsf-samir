@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   BookOpen,
   Users,
@@ -131,6 +132,61 @@ const MBA = () => {
       title: "Analytics & Data Science",
       description: "Business analytics, data science, and decision-making roles",
       icon: BarChart3,
+    },
+  ];
+
+  // Helper function to get initials from name
+  const getInitials = (name: string): string => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const facultyMembers = [
+    {
+      name: "Prof. Rida Shaikh (HoD)",
+      designation: "Head of Department",
+      qualifications: "MMM, Ph.D (Pursuing)",
+      experience: "15 years",
+    },
+    {
+      name: "Prof. Amogh Kshirsagar",
+      designation: "Professor",
+      qualifications: "M.A. Psychology, Master of Personnel Management",
+      experience: "20 years",
+    },
+    {
+      name: "Prof. Aditi Kulkarni",
+      designation: "Professor",
+      qualifications: "MBA (Finance), MBA (HR- Additional Spl.), M.Com, GDC&A, DTL, Ph.D (Pursuing)",
+      experience: "9 years",
+    },
+    {
+      name: "Prof. Radhika Gaikwad",
+      designation: "Professor",
+      qualifications: "MBA (HR)",
+      experience: "5 years",
+    },
+    {
+      name: "Prof. Satbir Singh Hundal",
+      designation: "Professor",
+      qualifications: "MBA (HR), BE (IT)",
+      experience: "9 years",
+    },
+    {
+      name: "Prof. Nivedita Pawar",
+      designation: "Professor",
+      qualifications: "BTech Biotechnology, MBA (Finance)",
+      experience: "4 years",
+    },
+    {
+      name: "Prof. Rachana Badode",
+      designation: "Professor",
+      qualifications: "B.E. Computer",
+      experience: "—",
     },
   ];
 
@@ -276,6 +332,69 @@ const MBA = () => {
         </div>
       </section>
 
+      {/* Faculty Section */}
+      <section className="py-16 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Our Faculty</h2>
+            <div className="h-1 w-24 bg-primary rounded-full mx-auto"></div>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Meet our experienced and dedicated faculty members who bring industry expertise and academic excellence to
+              the classroom.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {facultyMembers.map((member, index) => (
+              <Card
+                key={index}
+                className="group relative overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background via-background to-primary/5 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-2 transition-all duration-500 rounded-xl"
+              >
+                {/* Decorative top border */}
+                <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-primary to-primary opacity-80" />
+                
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-primary/5 transition-all duration-500 rounded-xl" />
+                
+                <CardHeader className="pb-4 relative z-10">
+                  <div className="flex flex-col items-center text-center space-y-3">
+                    <div className="relative">
+                      <Avatar className="h-32 w-32 ring-4 ring-primary/20 bg-background shadow-lg group-hover:ring-primary/50 group-hover:scale-105 transition-all duration-500">
+                        <AvatarImage 
+                          src={undefined} 
+                          alt={member.name}
+                          className="object-cover"
+                        />
+                        <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/20 text-primary text-2xl font-bold">
+                          {getInitials(member.name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      {/* Decorative circle behind avatar */}
+                      <div className="absolute inset-0 rounded-full bg-primary/10 blur-xl group-hover:bg-primary/20 transition-all duration-500 -z-10" />
+                    </div>
+                    <CardTitle className="text-lg font-bold mb-0 group-hover:text-primary transition-colors duration-300 leading-tight px-2">
+                      {member.name.trim()}
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground font-medium">{member.designation}</p>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="pt-2 space-y-3 relative z-10 pb-6">
+                  <div className="rounded-lg bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-primary/20 transition-all duration-300">
+                    <p className="text-xs font-bold text-primary mb-2 uppercase tracking-wider">Qualifications</p>
+                    <p className="text-sm text-foreground leading-relaxed break-words">{member.qualifications || "—"}</p>
+                  </div>
+                  
+                  <div className="rounded-lg bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-primary/20 transition-all duration-300">
+                    <p className="text-xs font-bold text-primary mb-2 uppercase tracking-wider">Experience</p>
+                    <p className="text-sm text-foreground font-medium">{member.experience || "—"}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Program Details */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
@@ -320,37 +439,76 @@ const MBA = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Program Details</CardTitle>
+              <CardDescription>
+                Comprehensive information about the MBA program structure, eligibility, admissions, and pedagogy.
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-8">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Eligibility</h3>
+                <h3 className="font-semibold text-lg mb-2">Program Overview</h3>
                 <p className="text-muted-foreground">
-                  Bachelor's degree in any discipline with minimum 50% aggregate marks (45% for reserved categories).
-                  Valid CAT/MAT/CMAT/ATMA/XAT or equivalent entrance examination scores required. Candidates appearing
-                  for final year examination can also apply.
+                  The Master of Business Administration (MBA) is a two-year, full-time program following the trimester
+                  system. It is AICTE approved and affiliated to Savitribai Phule Pune University (SPPU). The curriculum
+                  is designed to build strategic thinking, leadership, and analytical skills through a blend of core
+                  management subjects, electives, live projects, and industry internships. Students can opt for dual
+                  specializations across Finance, Marketing, HR, Operations, International Business, and Business
+                  Analytics.
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-2">Admission Process</h3>
+                <h3 className="font-semibold text-lg mb-2">Eligibility</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>Entrance exam score (CAT/MAT/CMAT/ATMA/XAT)</li>
-                  <li>Group Discussion (GD)</li>
-                  <li>Personal Interview (PI)</li>
-                  <li>Academic performance and work experience</li>
+                  <li>Bachelor&apos;s degree in any discipline from a recognized university</li>
+                  <li>Minimum 50% aggregate marks (45% for reserved categories: SC, ST, OBC, PWD)</li>
+                  <li>Valid score in CAT / MAT / CMAT / ATMA / XAT or equivalent national-level MBA entrance examination</li>
+                  <li>Candidates appearing for the final year of graduation may apply, subject to fulfilling eligibility at the time of admission</li>
+                  <li>Relaxation in aggregate marks as per SPPU and AICTE norms for eligible categories</li>
                 </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Admission Process</h3>
+                <p className="text-muted-foreground mb-3">
+                  Admissions are conducted through a transparent process that considers entrance scores, academic record,
+                  and performance in selection rounds.
+                </p>
+                <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                  <li><strong>Entrance exam:</strong> CAT, MAT, CMAT, ATMA, or XAT score (as per institute norms)</li>
+                  <li><strong>Group Discussion (GD):</strong> Assessment of communication, teamwork, and reasoning</li>
+                  <li><strong>Personal Interview (PI):</strong> Evaluation of motivation, clarity of goals, and fit for the program</li>
+                  <li><strong>Academic performance:</strong> Past academic record and consistency</li>
+                  <li><strong>Work experience:</strong> Given due weightage where applicable</li>
+                  <li>Final merit list prepared based on composite score as per SPPU and institute guidelines</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Intake & Duration</h3>
+                <p className="text-muted-foreground">
+                  The program has an AICTE-approved intake. Duration is 2 years (4 trimesters). The trimester system
+                  allows faster-paced learning and multiple touchpoints with industry through projects and internships.
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold text-lg mb-2">Key Features</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>Dual specialization option</li>
-                  <li>Industry internships with leading companies</li>
-                  <li>Live consulting projects and case studies</li>
-                  <li>Guest lectures from industry leaders</li>
-                  <li>International exchange programs</li>
-                  <li>Entrepreneurship development and incubation support</li>
-                  <li>State-of-the-art business simulation labs</li>
-                  <li>Strong alumni network</li>
+                  <li>Dual specialization option from six tracks: Finance, Marketing, HR, Operations, International Business, Business Analytics</li>
+                  <li>Industry internships with leading companies across sectors</li>
+                  <li>Live consulting projects and real-world case studies</li>
+                  <li>Guest lectures and workshops from industry leaders and Fortune 500 executives</li>
+                  <li>International exchange programs and global business immersion</li>
+                  <li>Entrepreneurship development cell and incubation support for aspiring entrepreneurs</li>
+                  <li>State-of-the-art business simulation labs and analytics tools</li>
+                  <li>Strong alumni network and corporate connect for placements</li>
+                  <li>Active student clubs: Finance, Marketing, HR, and Analytics</li>
+                  <li>90%+ placement record with MNCs, consulting firms, and corporates</li>
                 </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Pedagogy & Assessment</h3>
+                <p className="text-muted-foreground">
+                  The program uses a mix of lectures, case discussions, simulations, group projects, and presentations.
+                  Continuous evaluation includes internal assessments, mid-term and end-term examinations, and
+                  project reports. Emphasis is placed on practical application through internships and live projects.
+                </p>
               </div>
             </CardContent>
           </Card>

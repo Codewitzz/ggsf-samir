@@ -50,6 +50,7 @@ const EngineeringInfrastructure = lazy(() => import("./pages/EngineeringInfrastr
 const Admissions = lazy(() => import("./pages/Admissions"));
 const Placements = lazy(() => import("./pages/Placements"));
 const Alumni = lazy(() => import("./pages/Alumni"));
+const Library = lazy(() => import("./pages/Library"));
 
 const queryClient = new QueryClient();
 
@@ -79,6 +80,7 @@ const App = () => {
               <Route path="/placements" element={<Placements />} />
               <Route path="/alumni" element={<Alumni />} />
               <Route path="/campus" element={<Campus />} />
+              <Route path="/library" element={<Library />} />
 
               {/* MBA Routes */}
               <Route path="/mba/about" element={<MBAAbout />} />

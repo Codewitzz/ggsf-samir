@@ -120,26 +120,10 @@ const Hero = () => {
           <p className="mt-6 text-lg md:text-xl text-primary-foreground/90">{currentSlide.description}</p>
         </div>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+          <Button asChild size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-lg hover:shadow-xl transition-all">
             <Link to="/admissions">
               Apply Now <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-white/60 bg-white/10 text-white hover:bg-white hover:text-primary"
-          >
-            <Link to="/departments">Explore Departments</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-white/60 bg-white/10 text-white hover:bg-white hover:text-primary"
-          >
-            <Link to="/contact">Contact Us</Link>
           </Button>
         </div>
         <div className="mt-10 grid grid-cols-2 gap-6 text-left max-w-md">

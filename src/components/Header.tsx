@@ -64,23 +64,30 @@ const Header = () => {
     { title: "Mechanical Engineering", href: "/engineering/departments/mechanical" },
   ];
 
-  // MBA departments
-  const mbaDepartments = [
-    { title: "Management Studies (MBA, BBA)", href: "/engineering/departments/management-studies" },
-  ];
-
-  // ME departments
-  const meDepartments = [
-    { title: "Post Graduate Program (M.E.)", href: "/engineering/departments/post-graduate" },
-  ];
-
   // Engineering menu items
   const engineeringMenuItems = [
-    { title: "Departments Overview", href: "/engineering/departments" },
     { title: "About Engineering", href: "/engineering/about" },
     { title: "Admissions", href: "/engineering/admissions" },
     { title: "Facilities", href: "/engineering/facilities" },
-    { title: "Activities", href: "/engineering/activities" },
+    
+  ];
+
+  // MBA menu items
+  const mbaMenuItems = [
+    { title: "About MBA", href: "/mba/about" },
+    { title: "Academics", href: "/mba/academics" },
+    { title: "Facilities", href: "/mba/facilities" },
+    { title: "Admissions", href: "/mba/admissions" },
+    { title: "Activities", href: "/mba/activities" },
+  ];
+
+  // ME menu items
+  const meMenuItems = [
+    { title: "About M.E.", href: "/me/about" },
+    { title: "Academics", href: "/me/academics" },
+    { title: "Facilities", href: "/me/facilities" },
+    { title: "Admissions", href: "/me/admissions" },
+    { title: "Activities", href: "/me/activities" },
   ];
 
   const searchableItems = [
@@ -94,6 +101,7 @@ const Header = () => {
     { title: "Testimonials", href: "/testimonials", category: "Main Pages", keywords: ["testimonials", "reviews", "feedback"] },
     { title: "Alumni", href: "/alumni", category: "Main Pages", keywords: ["alumni", "graduates", "network"] },
     { title: "Placements", href: "/placements", category: "Main Pages", keywords: ["placements", "jobs", "careers", "recruitment"] },
+    { title: "Library", href: "/library", category: "Main Pages", keywords: ["library", "books", "resources", "reading"] },
 
     ...engineeringMenuItems.map((item) => ({
       title: item.title,
@@ -109,18 +117,18 @@ const Header = () => {
       keywords: dept.title.toLowerCase().split(" "),
     })),
 
-    ...mbaDepartments.map((dept) => ({
-      title: dept.title,
-      href: dept.href,
-      category: "MBA Departments",
-      keywords: dept.title.toLowerCase().split(" "),
+    ...mbaMenuItems.map((item) => ({
+      title: item.title,
+      href: item.href,
+      category: "MBA",
+      keywords: item.title.toLowerCase().split(" "),
     })),
 
-    ...meDepartments.map((dept) => ({
-      title: dept.title,
-      href: dept.href,
-      category: "M.E. Departments",
-      keywords: dept.title.toLowerCase().split(" "),
+    ...meMenuItems.map((item) => ({
+      title: item.title,
+      href: item.href,
+      category: "M.E. Programs",
+      keywords: item.title.toLowerCase().split(" "),
     })),
   ];
 
@@ -159,14 +167,14 @@ const Header = () => {
   };
 
   const triggerClassName = cn(
-    "bg-transparent data-[state=open]:bg-primary/10 transition-colors text-sm font-medium px-4 py-2 rounded-md",
-    isScrolled ? "text-white hover:text-secondary" : "text-foreground/90 hover:text-primary",
+    "bg-transparent data-[state=open]:bg-gradient-to-r data-[state=open]:from-secondary/20 data-[state=open]:to-primary/20 transition-all duration-300 text-sm font-medium px-3 py-1.5 rounded-md",
+    isScrolled ? "text-white hover:text-secondary hover:bg-white/10" : "text-gray-800 hover:text-primary hover:bg-primary/5",
   );
   const navLinkClassName = cn(
-    "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     isScrolled
-      ? "text-white hover:text-secondary focus-visible:ring-white/40 focus-visible:ring-offset-primary"
-      : "text-foreground/90 hover:text-primary focus-visible:ring-primary/40 focus-visible:ring-offset-background",
+      ? "text-white hover:text-secondary hover:bg-white/10 focus-visible:ring-white/40 focus-visible:ring-offset-primary"
+      : "text-gray-800 hover:text-primary hover:bg-primary/5 focus-visible:ring-primary/40 focus-visible:ring-offset-background",
   );
 
   return (
@@ -225,8 +233,8 @@ const Header = () => {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold  "> Guru Gobind Singh College of Engineering and Research Center  </h1>
-                <p className="text-xs  ">Knowledge is Divine</p>
+                <h1 className="text-lg font-bold"> Guru Gobind Singh College of Engineering and Research Center</h1>
+                <p className="text-xs">Knowledge is Divine</p>
               </div>
             </Link>
 
@@ -242,75 +250,94 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[700px] gap-3 p-3 md:grid-cols-3">
-                      {/* Engineering Section */}
-                      <div>
-                        <h4 className="mb-3 text-sm font-semibold text-primary">Engineering</h4>
-                        <ul className="space-y-1.5">
-                          {engineeringMenuItems.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={item.href}
-                                  className="block select-none rounded-md p-1.5 text-xs leading-none no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                                >
-                                  {item.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                        <h5 className="mt-3 mb-1.5 text-[10px] font-semibold text-muted-foreground uppercase">Engineering Departments</h5>
-                        <ul className="space-y-0.5">
-                          {engineeringDepartments.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={item.href}
-                                  className="block select-none rounded-md p-1 text-[10px] leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                                >
-                                  {item.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* MBA Section */}
-                      <div>
-                        <h4 className="mb-3 text-sm font-semibold text-primary">MBA</h4>
-                        <ul className="space-y-0.5">
-                          {mbaDepartments.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={item.href}
-                                  className="block select-none rounded-md p-1 text-xs leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                                >
-                                  {item.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* ME Section */}
-                      <div>
-                        <h4 className="mb-3 text-sm font-semibold text-primary">M.E.</h4>
-                        <ul className="space-y-0.5">
-                          {meDepartments.map((item) => (
-                            <li key={item.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={item.href}
-                                  className="block select-none rounded-md p-1 text-xs leading-tight no-underline outline-none transition-colors hover:bg-primary/10 hover:text-primary"
-                                >
-                                  {item.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="w-[800px] p-5 bg-gradient-to-br from-white to-gray-50">
+                      <div className="grid grid-cols-4 gap-5">
+                        {/* Engineering */}
+                        <div className="group col-span-2 bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                          <Link to="/engineering/about">
+                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
+                              <span className="w-1 h-5 bg-primary rounded-full"></span>
+                              Engineering
+                            </h4>
+                          </Link>
+                          <ul className="space-y-1.5 mb-3">
+                            {engineeringMenuItems.map((item) => (
+                              <li key={item.title}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={item.href}
+                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                          <h5 className="mt-3 mb-2 text-[10px] font-bold text-gray-600 uppercase tracking-wide border-t pt-2">Engineering Departments</h5>
+                          <ul className="grid grid-cols-2 gap-1.5">
+                            {engineeringDepartments.map((item) => (
+                              <li key={item.title}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={item.href}
+                                    className="block select-none rounded-md p-1.5 text-[11px] font-medium leading-tight no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* MBA */}
+                        <div className="group bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                          <Link to="/mba/about">
+                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
+                              <span className="w-1 h-5 bg-primary rounded-full"></span>
+                              MBA
+                            </h4>
+                          </Link>
+                          <ul className="space-y-1.5">
+                            {mbaMenuItems.map((item) => (
+                              <li key={item.title}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={item.href}
+                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* ME */}
+                        <div className="group bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                          <Link to="/me/about">
+                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
+                              <span className="w-1 h-5 bg-primary rounded-full"></span>
+                              M.E.
+                            </h4>
+                          </Link>
+                          <ul className="space-y-1.5">
+                            {meMenuItems.map((item) => (
+                              <li key={item.title}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={item.href}
+                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </NavigationMenuContent>
@@ -343,6 +370,12 @@ const Header = () => {
                 <NavigationMenuItem>
                   <Link to="/campus">
                     <NavigationMenuLink className={navLinkClassName}>Campus</NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link to="/library">
+                    <NavigationMenuLink className={navLinkClassName}>Library</NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
@@ -460,69 +493,89 @@ const Header = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-border bg-background">
             <div className="container mx-auto px-4 py-4 space-y-4">
-              <Link to="/" className="block py-2 hover:text-primary transition-colors">
+              <Link to="/" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
+              
+              {/* Departments Section */}
               <div>
-                <p className="font-semibold text-sm text-muted-foreground mb-2">Departments</p>
-                <p className="text-xs text-muted-foreground mb-1 pl-4">Engineering</p>
+                <p className="font-semibold text-sm mb-2">Departments</p>
+                
+                {/* Engineering */}
+                <p className="text-xs font-semibold text-primary mb-1 pl-4">Engineering</p>
                 {engineeringMenuItems.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-2 pl-6 hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
                   </Link>
                 ))}
-                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">Engineering Departments</p>
-                {engineeringDepartments.map((item) => (
+                
+                {/* MBA */}
+                <p className="text-xs font-semibold text-primary mb-1 mt-3 pl-4">MBA</p>
+                {mbaMenuItems.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-2 pl-6 hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
                   </Link>
                 ))}
-                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">MBA</p>
-                {mbaDepartments.map((item) => (
+                
+                {/* M.E. */}
+                <p className="text-xs font-semibold text-primary mb-1 mt-3 pl-4">M.E.</p>
+                {meMenuItems.map((item) => (
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-2 pl-6 hover:text-primary transition-colors"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-                <p className="text-xs text-muted-foreground mb-1 mt-3 pl-4">M.E.</p>
-                {meDepartments.map((item) => (
-                  <Link
-                    key={item.title}
-                    to={item.href}
-                    className="block py-2 pl-6 hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
                   </Link>
                 ))}
               </div>
-              <Link to="/events" className="block py-2 hover:text-primary transition-colors">
+
+              {/* Engineering Departments Section */}
+              <div>
+                <p className="font-semibold text-sm mb-2">Engineering Departments</p>
+                {engineeringDepartments.map((item) => (
+                  <Link
+                    key={item.title}
+                    to={item.href}
+                    className="block py-1.5 pl-4 text-sm hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+
+              <Link to="/events" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Events
               </Link>
-              <Link to="/alumni" className="block py-2 hover:text-primary transition-colors">
+              <Link to="/alumni" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Alumni
               </Link>
-              <Link to="/placements" className="block py-2 hover:text-primary transition-colors">
+              <Link to="/placements" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Placements
               </Link>
-              <Link to="/gallery" className="block py-2 hover:text-primary transition-colors">
+              <Link to="/gallery" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Gallery
               </Link>
-              <Link to="/contact" className="block py-2 hover:text-primary transition-colors">
-                Contact
-              </Link>
-              <Link to="/campus" className="block py-2 hover:text-primary transition-colors">
+              <Link to="/campus" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Campus
+              </Link>
+              <Link to="/library" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                Library
+              </Link>
+              <Link to="/contact" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                Contact
               </Link>
             </div>
           </div>

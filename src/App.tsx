@@ -34,6 +34,11 @@ const MBAAcademics = lazy(() => import("./pages/MBAAcademics"));
 const MBAFacilities = lazy(() => import("./pages/MBAFacilities"));
 const MBAAdmissions = lazy(() => import("./pages/MBAAdmissions"));
 const MBAActivities = lazy(() => import("./pages/MBAActivities"));
+const BBAAbout = lazy(() => import("./pages/BBAAbout"));
+const BBAAcademics = lazy(() => import("./pages/BBAAcademics"));
+const BBAFacilities = lazy(() => import("./pages/BBAFacilities"));
+const BBAAdmissions = lazy(() => import("./pages/BBAAdmissions"));
+const BBAActivities = lazy(() => import("./pages/BBAActivities"));
 const MEAbout = lazy(() => import("./pages/MEAbout"));
 const MEAcademics = lazy(() => import("./pages/MEAcademics"));
 const MEFacilities = lazy(() => import("./pages/MEFacilities"));
@@ -51,6 +56,8 @@ const Admissions = lazy(() => import("./pages/Admissions"));
 const Placements = lazy(() => import("./pages/Placements"));
 const Alumni = lazy(() => import("./pages/Alumni"));
 const Library = lazy(() => import("./pages/Library"));
+const CanteenCafeteria = lazy(() => import("./pages/CanteenCafeteria"));
+const MoU = lazy(() => import("./pages/MoU"));
 
 const queryClient = new QueryClient();
 
@@ -80,7 +87,9 @@ const App = () => {
               <Route path="/placements" element={<Placements />} />
               <Route path="/alumni" element={<Alumni />} />
               <Route path="/campus" element={<Campus />} />
+              <Route path="/campus/canteen-cafeteria" element={<CanteenCafeteria />} />
               <Route path="/library" element={<Library />} />
+              <Route path="/mou" element={<MoU />} />
 
               {/* MBA Routes */}
               <Route path="/mba/about" element={<MBAAbout />} />
@@ -92,6 +101,13 @@ const App = () => {
               <Route path="/mba/faculty" element={<MBA />} />
               <Route path="/mba/placements" element={<MBA />} />
               <Route path="/mba/specializations/:specName" element={<MBASpecialization />} />
+
+              {/* BBA Routes */}
+              <Route path="/bba/about" element={<BBAAbout />} />
+              <Route path="/bba/academics" element={<BBAAcademics />} />
+              <Route path="/bba/facilities" element={<BBAFacilities />} />
+              <Route path="/bba/admissions" element={<BBAAdmissions />} />
+              <Route path="/bba/activities" element={<BBAActivities />} />
 
               {/* Engineering Routes */}
               <Route path="/engineering/about" element={<Engineering />} />

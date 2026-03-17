@@ -78,7 +78,7 @@ const Library = () => {
       qualifications: "B. Sc (Chemistry) M.LIB. I. Sc. SET & NET",
       experience: "9+ years",
       image: "/Faculty/nishigandha-khaire.jpg",
-      areaOfInterest: " - "
+      
     },
     {
       name: "Mr. Yogesh Shyamkant Chumbhale",
@@ -86,15 +86,15 @@ const Library = () => {
       qualifications: "M.A.M.LIB.I.Sc.",
       experience: "9+ years",
       image: "/Faculty/yogesh-shyamkant.jpg",
-      areaOfInterest: " - "
+      
     },
     {
       name: "Ms. Savita K Bahirat",
       designation: "Library Attendant",
       qualifications: "-",
-      experience: "-",
+      experience: "8+ years",
       image: "/Faculty/savita-bahirat.jpg",
-      areaOfInterest: " - "
+      areaOfInterest: " fdgdg "
     },
   ];
 
@@ -356,10 +356,7 @@ const Library = () => {
                     <p className="text-sm text-foreground font-medium">{member.experience || "—"}</p>
                   </div>
 
-                  <div className="rounded-lg bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-primary/20 transition-all duration-300">
-                    <p className="text-xs font-bold text-primary mb-2 uppercase tracking-wider">Area of Interest</p>
-                    <p className="text-sm text-foreground leading-relaxed break-words">{member.areaOfInterest || "—"}</p>
-                  </div>
+                 
                 </CardContent>
               </Card>
             ))}
@@ -374,9 +371,9 @@ const Library = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">Library Timings</h3>
               <div className="space-y-3 text-lg">
-                <p><span className="font-semibold">Monday - Friday:</span> 8:00 AM - 8:00 PM</p>
-                <p><span className="font-semibold">Saturday:</span> 9:00 AM - 6:00 PM</p>
-                <p><span className="font-semibold">Sunday:</span> 10:00 AM - 4:00 PM</p>
+                <p><span className="font-semibold">Monday - Friday :</span> 9:00 AM - 5:00 PM</p>
+                <p><span className="font-semibold">Saturday :</span> 9:00 AM - 2:00 PM</p>
+                <p><span className="font-semibold">Sunday :</span> Closed .</p>
                 <p className="text-sm opacity-90 mt-4">
                   * Extended hours during examination periods
                 </p>
@@ -386,11 +383,8 @@ const Library = () => {
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-3 text-lg">
                 <p><span className="font-semibold">Email:</span> library@ggsf.edu.in</p>
-                <p><span className="font-semibold">Phone:</span> 0253-237-3547 (Ext: 234)</p>
-                <p><span className="font-semibold">Location:</span> Ground Floor, Main Building</p>
-                <Button className="mt-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-                  Request Library Card
-                </Button>
+                <p><span className="font-semibold">Location:</span> Second Floor, Main Building</p>
+                
               </div>
             </div>
           </div>

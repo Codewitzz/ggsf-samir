@@ -5,8 +5,26 @@ import CampusInfrastructure from "@/components/CampusInfrastructure";
 import CampusCells from "@/components/CampusCells";
 import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useLocation } from "react-router-dom";
 
 const Campus = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash?.replace("#", "");
+    if (!hash) return;
+
+    const el = document.getElementById(hash);
+    if (!el) return;
+
+    // allow layout to paint before scrolling
+    const t = window.setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+
+    return () => window.clearTimeout(t);
+  }, [location.hash]);
+
   // Campus images for slider
   const campusImages = [
     "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&h=900&fit=crop&q=80",
@@ -84,6 +102,77 @@ const Campus = () => {
       {/* Campus Infrastructure */}
       <CampusInfrastructure />
 
+      {/* Quick Campus Highlights (for menu anchors) */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl space-y-10">
+          <div id="canteen-cafeteria" className="scroll-mt-28">
+            <Card className="overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="relative min-h-64 md:min-h-[320px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
+                    alt="Canteen and Cafeteria"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
+                  />
+                </div>
+                <div className="p-6 md:p-8">
+                  <CardHeader className="p-0 mb-3">
+                    <CardTitle className="text-2xl">Canteen &amp; Cafeteria</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0 text-muted-foreground space-y-2">
+                    <p>
+                      Hygienic food options and comfortable seating for students and staff, designed to be accessible and
+                      convenient throughout the day.
+                    </p>
+                    <p className="text-sm">
+                      Tip: Visit during breaks for quick service; the space is also used for informal group discussions.
+                    </p>
+                  </CardContent>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <div id="sport" className="scroll-mt-28">
+            <Card className="overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="relative min-h-64 md:min-h-[320px] md:order-2">
+                  <img
+                    src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=80"
+                    alt="Sports facilities"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
+                  />
+                </div>
+                <div className="p-6 md:p-8 md:order-1">
+                  <CardHeader className="p-0 mb-3">
+                    <CardTitle className="text-2xl">Sport</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0 text-muted-foreground space-y-2">
+                    <p>
+                      Dedicated spaces and activities that encourage fitness, teamwork, and a healthy campus culture—both
+                      recreational and competitive.
+                    </p>
+                    <p className="text-sm">
+                      Regular events and tournaments are organized across the academic year.
+                    </p>
+                  </CardContent>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Campus Photo Gallery */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
@@ -115,6 +204,7 @@ const Campus = () => {
               </Card>
             ))}
           </div>
+
         </div>
       </section>
 

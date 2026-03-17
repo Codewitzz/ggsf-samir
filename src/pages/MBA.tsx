@@ -222,7 +222,7 @@ const MBA = () => {
             <div className="mb-6 inline-block">
               <img src={mbaIcon} alt="MBA" className="w-24 h-24 md:w-32 md:h-32 mx-auto" loading="lazy" decoding="async" />
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Master of Business Administration</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Management Studies</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto text-white/90 mb-2">
               {heroSlides[activeSlide].title}
             </p>
@@ -246,6 +246,53 @@ const MBA = () => {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Programs */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold">Programs Offered</h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+              Explore our undergraduate and postgraduate offerings under the Department of Management Studies.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Link to="/mba/about" className="block">
+              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer hover:border-primary">
+                <CardHeader>
+                  <CardTitle className="text-2xl flex items-center gap-2">
+                    <GraduationCap className="h-6 w-6 text-primary" />
+                    MBA (Master of Business Administration)
+                  </CardTitle>
+                  <CardDescription>
+                    Two-year postgraduate program focused on leadership, strategy, and specialization tracks.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Duration: 2 Years • Intake: 60 • AICTE Approved • SPPU Affiliated
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link to="/bba/about" className="block">
+              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer hover:border-primary">
+                <CardHeader>
+                  <CardTitle className="text-2xl flex items-center gap-2">
+                    <BookOpen className="h-6 w-6 text-primary" />
+                    B.B.A. (Bachelor of Business Administration)
+                  </CardTitle>
+                  <CardDescription>
+                    Three-year undergraduate program that builds strong management fundamentals and professional skills.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Duration: 3 Years • Intake: 60 • Career-ready curriculum • Pathway to MBA
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </div>
       </section>
 

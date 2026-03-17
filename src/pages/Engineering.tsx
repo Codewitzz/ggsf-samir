@@ -280,7 +280,7 @@ const Engineering = () => {
       {/* Highlights Section */}
       <section className="py-16 px-4 bg-muted/30 gsap-fade">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Highlights of GCOERC</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Highlights of GGSCOE</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               "Only Engineering College in Nashik having Industrialists and Entrepreneurs as pillars of Management",

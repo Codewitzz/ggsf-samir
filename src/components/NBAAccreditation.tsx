@@ -12,7 +12,7 @@ const NBAAccreditation = () => {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-              The Mechanical Engineering program at Guru Gobind Singh College of Engineering and Research Center
+              The Mechanical Engineering program at Guru Gobind Singh College of Engineering and Research Centre
               has been accredited by the National Board of Accreditation (NBA) for a period of three years, valid until 2028.
               This recognition underscores our commitment to outcome-based education, top-tier infrastructure,
               and strong industry-aligned curriculum.

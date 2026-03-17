@@ -6,7 +6,6 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import GallerySection from "@/components/GallerySection";
 import DownloadsSection from "@/components/DownloadsSection";
-import ContactForm from "@/components/ContactForm";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
 import ResearchHighlights from "@/components/ResearchHighlights";
@@ -22,8 +21,6 @@ import TPCell from "@/components/TPCell";
 import AnnouncementsBar from "@/components/AnnouncementsBar";
 import NAACAccreditation from "@/components/NAACAccreditation";
 import NBAAccreditation from "@/components/NBAAccreditation";
-import ChatbotInfo from "@/components/ChatbotInfo";
-import CampusInfrastructure from "@/components/CampusInfrastructure";
 import VisionMission from "@/components/VisionMission";
 import LeadersMessage from "@/components/LeadersMessage";
 
@@ -64,12 +61,6 @@ const Index = () => {
           <EnhancedFacilities />
         </div>
         <div className="gsap-fade">
-          <CampusInfrastructure />
-        </div>
-        <div className="gsap-fade">
-          <ChatbotInfo />
-        </div>
-        <div className="gsap-fade">
           <CampusCells />
         </div>
         <div className="gsap-fade">
@@ -101,9 +92,6 @@ const Index = () => {
         </div>
         <div className="gsap-fade">
           <FAQSection />
-        </div>
-        <div className="gsap-fade">
-          <ContactForm />
         </div>
         <div className="gsap-fade">
           <LocationMap />

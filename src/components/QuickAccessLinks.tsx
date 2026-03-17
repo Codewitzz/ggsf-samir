@@ -2,12 +2,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { FileText, GraduationCap, BookMarked, Users, IndianRupee } from "lucide-react";
 
-const links = [
+const links: Array<{ title: string; href: string; icon: typeof FileText; external?: boolean }> = [
   { title: "Fee Structure", href: "/fee-structure", icon: IndianRupee },
   { title: "Academic Calendar", href: "/downloads", icon: BookMarked },
   { title: "College Brochure", href: "/downloads", icon: FileText },
   { title: "Placement Cell", href: "/contact", icon: Users },
   { title: "Admissions Enquiry", href: "/contact", icon: GraduationCap },
+  {
+    title: "SPPU Engineering Syllabus",
+    href: "https://www.unipune.ac.in/university_files/syllabi.htm",
+    icon: BookMarked,
+    external: true,
+  },
 ];
 
 const QuickAccessLinks = () => {
@@ -25,9 +31,15 @@ const QuickAccessLinks = () => {
                     <IconComponent className="h-5 w-5 text-primary" />
                   </div>
                   <CardTitle className="text-lg">
-                    <Link to={link.href} className="hover:underline">
-                      {link.title}
-                    </Link>
+                    {link.external ? (
+                      <a href={link.href} target="_blank" rel="noreferrer" className="hover:underline">
+                        {link.title}
+                      </a>
+                    ) : (
+                      <Link to={link.href} className="hover:underline">
+                        {link.title}
+                      </Link>
+                    )}
                   </CardTitle>
                 </CardHeader>
                 <CardContent />

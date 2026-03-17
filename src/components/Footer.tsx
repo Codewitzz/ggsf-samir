@@ -167,7 +167,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <p className="text-primary-foreground/80">
-              © {new Date().getFullYear()} Guru Gobind Singh College of Engineering and Research Center. All rights reserved.
+              © {new Date().getFullYear()} Guru Gobind Singh College of Engineering and Research Centre. All rights reserved.
             </p>
             <div className="flex gap-6 text-xs text-primary-foreground/70">
               <Link to="/sitemap" className="hover:text-secondary transition-colors">Sitemap</Link>

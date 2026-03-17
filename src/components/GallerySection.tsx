@@ -8,18 +8,70 @@ import { Search } from "lucide-react";
 const GallerySection = () => {
   const galleryItems = useMemo(
     () => [
-      { id: 1, title: "Campus Overview", category: "Campus", color: "from-primary/90 to-primary-light/90" },
-      { id: 2, title: "Engineering Lab", category: "Facilities", color: "from-info/90 to-primary/90" },
-      { id: 3, title: "MBA Classroom", category: "Academics", color: "from-warning/90 to-secondary/90" },
-      { id: 4, title: "Library", category: "Facilities", color: "from-success/90 to-primary/90" },
-      { id: 5, title: "Sports Complex", category: "Campus", color: "from-secondary/90 to-warning/90" },
-      { id: 6, title: "Annual Fest", category: "Events", color: "from-primary-dark/90 to-info/90" },
-      { id: 7, title: "Engineering Workshop", category: "Academics", color: "from-warning/90 to-primary/90" },
-      { id: 8, title: "Auditorium", category: "Facilities", color: "from-primary/90 to-secondary/90" },
-      { id: 9, title: "Seminar Hall", category: "Events", color: "from-accent/70 to-info/80" },
-      { id: 10, title: "Green Campus", category: "Campus", color: "from-success/80 to-accent/80" },
-      { id: 11, title: "Innovation Corner", category: "Academics", color: "from-primary/80 to-accent/70" },
-      { id: 12, title: "Cultural Moments", category: "Events", color: "from-secondary/80 to-primary/70" },
+      {
+        id: 1,
+        title: "Campus Overview",
+        category: "Campus",
+        image:
+          "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-2 row-span-2",
+      },
+      {
+        id: 2,
+        title: "Engineering Labs",
+        category: "Facilities",
+        image:
+          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-1",
+      },
+      {
+        id: 3,
+        title: "Library",
+        category: "Facilities",
+        image:
+          "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-1",
+      },
+      {
+        id: 4,
+        title: "Workshops",
+        category: "Academics",
+        image:
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-2",
+      },
+      {
+        id: 5,
+        title: "Seminar & Events",
+        category: "Events",
+        image:
+          "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-1",
+      },
+      {
+        id: 6,
+        title: "Student Life",
+        category: "Campus",
+        image:
+          "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-1",
+      },
+      {
+        id: 7,
+        title: "Innovation Corner",
+        category: "Academics",
+        image:
+          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-2 row-span-1",
+      },
+      {
+        id: 8,
+        title: "Green Campus",
+        category: "Campus",
+        image:
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&h=1200&fit=crop&q=80",
+        span: "col-span-1 row-span-1",
+      },
     ],
     []
   );
@@ -88,39 +140,39 @@ const GallerySection = () => {
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[120px] sm:auto-rows-[140px] md:auto-rows-[160px] gap-3 sm:gap-4 md:gap-5 grid-flow-dense">
           {filteredItems.map((item) => (
             <Card
               key={item.id}
-              className="group overflow-hidden rounded-xl sm:rounded-2xl border-border bg-card/60 hover:bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+              className={cn(
+                "group relative overflow-hidden rounded-xl sm:rounded-2xl border-border bg-card/60 hover:bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer",
+                item.span
+              )}
             >
-              <div
-                className={cn(
-                  "relative aspect-[4/3] bg-gradient-to-br overflow-hidden",
-                  item.color
-                )}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/70 group-hover:via-black/30 transition-all duration-300" />
-                <div className="absolute inset-0 p-2 sm:p-3 md:p-4 flex flex-col justify-between">
-                  <div className="flex justify-end">
-                    <Badge
-                      variant="secondary"
-                      className="bg-white/20 text-white border-white/30 backdrop-blur-md shadow-lg group-hover:bg-white/30 transition-all text-xs"
-                    >
-                      {item.category}
-                    </Badge>
-                  </div>
-                  <div className="transform group-hover:translate-y-0 translate-y-1 transition-transform duration-300">
-                    <p className="text-white font-bold text-sm sm:text-base md:text-lg leading-snug drop-shadow-lg">
-                      {item.title}
-                    </p>
-                    <p className="text-white/90 text-xs mt-1 sm:mt-1.5 font-medium">
-                      Tap to view
-                    </p>
-                  </div>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent group-hover:from-black/80 transition-all duration-300" />
+              <div className="absolute inset-0 p-3 sm:p-4 flex flex-col justify-between">
+                <div className="flex justify-end">
+                  <Badge
+                    variant="secondary"
+                    className="bg-white/20 text-white border-white/30 backdrop-blur-md shadow-lg group-hover:bg-white/30 transition-all text-xs"
+                  >
+                    {item.category}
+                  </Badge>
                 </div>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20"></div>
+                <div className="transform group-hover:translate-y-0 translate-y-1 transition-transform duration-300">
+                  <p className="text-white font-bold text-sm sm:text-base md:text-lg leading-snug drop-shadow-lg">
+                    {item.title}
+                  </p>
+                  <p className="text-white/90 text-xs mt-1 sm:mt-1.5 font-medium">
+                    Tap to view
+                  </p>
                 </div>
               </div>
             </Card>

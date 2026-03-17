@@ -43,7 +43,7 @@ const LeadersMessage = () => {
               <div className="flex items-start gap-2 text-muted-foreground">
                 <Quote className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                 <p className="leading-relaxed italic">
-                  Welcome to Guru Gobind Singh College of Engineering and Research Center. 
+                  Welcome to Guru Gobind Singh College of Engineering and Research Centre. 
                   Our institution is committed to providing quality education and fostering 
                   innovation. We strive to create an environment where students can excel 
                   academically and develop into well-rounded professionals who contribute 

@@ -3,22 +3,22 @@ import { Quote } from "lucide-react";
 
 const alumniStories = [
   {
-    name: "Rahul Parakh",
-    role: "Senior Software Engineer, Amazon",
+    name: "Alumni (Provided)",
+    role: "Batch —",
     quote:
-      "The rigorous curriculum and mentorship at GGSF laid the foundation for my career. Industry projects prepared me for real-world challenges.",
+      "The college ecosystem, faculty support, and hands-on learning helped me grow in confidence and career readiness.",
   },
   {
-    name: "Falguni",
-    role: "Project Manager, L&T Construction",
+    name: "Alumni (Provided)",
+    role: "Batch —",
     quote:
-      "Hands-on lab sessions, field visits, and the supportive faculty ensured I was job-ready with strong technical skills.",
+      "Strong academics, practical labs, and mentorship prepared me for real-world engineering challenges.",
   },
   {
-    name: "Himalaya Mahajan",
-    role: "Entrepreneur, Mechatronics Solutions",
+    name: "Alumni (Provided)",
+    role: "Batch —",
     quote:
-      "Innovation labs and the incubation cell encouraged me to convert my ideas into a successful automation start-up.",
+      "Industry exposure, projects, and campus opportunities made my learning journey meaningful and future-focused.",
   },
 ];
 

@@ -8,10 +8,10 @@ import mbaIcon from "@/assets/mba-icon.png";
 const CollegeCards = () => {
   const colleges = [
     {
-      title: "MBA Programs",
+      title: "Management Studies",
       description: "Master of Business Administration - Develop leadership and strategic business skills",
       icon: mbaIcon,
-      link: "/mba/about",
+      link: "/engineering/departments/management-studies",
       color: "from-primary to-primary-light",
     },
     {
@@ -26,7 +26,7 @@ const CollegeCards = () => {
       description: "Master of Engineering - Advanced specialization and research-oriented postgraduate programs",
       icon: engineeringIcon,
       link: "/me/about",
-      color: "from-warning to-secondary",
+      color: "from-info to-primary",
     },
   ];
 

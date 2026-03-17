@@ -20,8 +20,338 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import MBA from "@/pages/MBA";
+import DepartmentImagesSection, { type DepartmentGalleryImage } from "@/components/DepartmentImagesSection";
 
 const SLIDE_DURATION = 5000;
+
+type MouTable = {
+  title?: string;
+  columns: string[];
+  rows: Array<Array<string | number>>;
+};
+
+const mouTablesByDept: Record<string, MouTable[]> = {
+  // Basic Engineering Science = first-year department page in this app
+  "first-year": [
+    {
+      columns: ["Sr. No.", "Region", "Diploma / Degree", "Institute Name", "DTE Code", "Description of MOU", "Date of MOU"],
+      rows: [
+        [1, "Nashik", "Degree", "with MathTech Thinking Foundation", "-", "Signed An MOU with MathTech Thinking Foundation", "10/7/2024"],
+        [2, "Nashik", "Degree", "Swapnapurti Foundation", "-", "Signed An MOU with Swapnapurti Foundation", "27/11/2024"],
+      ],
+    },
+  ],
+  civil: [
+    {
+      title: "Academic Year 2021-22",
+      columns: ["Sr. No.", "MoU Details", "Valid From", "Valid To"],
+      rows: [
+        [
+          1,
+          "MOU by & Between Vikhe Patil Engineering & Management Academy (Franchise partners with CADD CENTRE Training services Pvt. Ltd.) (Party A) & GCOERC, Nashik (Party B), (Life Time)",
+          "20-08-2017",
+          "Open Ended",
+        ],
+        [2, "Agreement between GCOERC, Nashik (Party A) & Chauhan Constructions, Nashik for the period of 3 years", "01-01-2018", "31-12-2021"],
+        [3, "Agreement between GCOERC, Nashik (Party A) & Rehoboth Construction, Nashik for the period of 3 years", "01-11-2018", "31-10-2021"],
+        [4, "Agreement between GCOERC, Nashik (Party A) & Alpha Construwells, Nashik for the period of 3 years", "01-11-2018", "31-10-2021"],
+        [5, "Agreement between GGSF, Nashik (Party A) & Akash Buildcon and Developers, Nashik for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [
+          6,
+          "Agreement between GGSF, Nashik (Party A) & Prashant Sancheti, Nashik (Consulting Engineer, Structural Consultant & Govt. Approved Valuer) for the period of 3 years",
+          "15-10-2020",
+          "14-10-2023",
+        ],
+        [7, "Agreement between GGSF, Nashik (Party A) & PraSad Infrastructure Developers, Pune for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [8, "Agreement between GGSF, Nashik (Party A) & LT Buildcon, Nashik for the period of 3 years", "31-12-2020", "30-12-2023"],
+        [9, "Agreement between GGSF, Nashik (Party A) & BP Sangle Constructions Pvt. Ltd., Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [10, "Agreement between GGSF, Nashik (Party A) & Sai Vatsal Structural Consultant, Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [11, "Agreement between GCOERC, Nashik (Party A) & RESILIENT India, Nashik for the period of 3 years", "01-10-2021", "30-09-2024"],
+        [12, "Agreement between GGSF, Nashik (Party A) & Abhinav Civil Infrastructures, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [13, "Agreement between GGSF, Nashik (Party A) & Leo Realtecc, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [14, "Agreement between GGSF, Nashik (Party A) & Cortex AI Invention, Nashik for the period life time", "08-02-2021", "Open Ended"],
+        [15, "Agreement between GGSF, Nashik (Party A) & WX consultants Pvt. Ltd., Nashik", "20-02-2018", "19-02-2026"],
+      ],
+    },
+    {
+      title: "Academic Year 2022-23",
+      columns: ["Sr. No.", "MoU Details", "Valid From", "Valid To"],
+      rows: [
+        [
+          1,
+          "MOU by & Between Vikhe Patil Engineering & Management Academy (Franchise partners with CADD CENTRE Training services Pvt. Ltd.) (Party A) & GCOERC, Nashik (Party B), (Life Time)",
+          "20-08-2017",
+          "Open Ended",
+        ],
+        [2, "Agreement between GGSF, Nashik (Party A) & Akash Buildcon and Developers, Nashik for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [
+          3,
+          "Agreement between GGSF, Nashik (Party A) & Prashant Sancheti, Nashik (Consulting Engineer, Structural Consultant & Govt. Approved Valuer) for the period of 3 years",
+          "15-10-2020",
+          "14-10-2023",
+        ],
+        [4, "Agreement between GGSF, Nashik (Party A) & PraSad Infrastructure Developers, Pune for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [5, "Agreement between GGSF, Nashik (Party A) & LT Buildcon, Nashik for the period of 3 years", "31-12-2020", "30-12-2023"],
+        [6, "Agreement between GGSF, Nashik (Party A) & BP Sangle Constructions Pvt. Ltd., Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [7, "Agreement between GGSF, Nashik (Party A) & Sai Vatsal Structural Consultant, Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [8, "Agreement between GCOERC, Nashik (Party A) & RESILIENT India, Nashik for the period of 3 years", "01-10-2021", "30-09-2024"],
+        [9, "Agreement between GGSF, Nashik (Party A) & Abhinav Civil Infrastructures, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [10, "Agreement between GGSF, Nashik (Party A) & Leo Realtecc, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [11, "Agreement between GGSF, Nashik (Party A) & Make Infracon, Nashik for the period from 09-02-2022 to life time", "09-02-2022", "Open Ended"],
+        [12, "Agreement between GGSF, Nashik (Party A) & Cortex AI Invention, Nashik for the period life time", "08-02-2021", "Open Ended"],
+        [13, "Agreement between GGSF, Nashik (Party A) & WX consultants Pvt. Ltd., Nashik", "20-02-2018", "19-02-2026"],
+      ],
+    },
+    {
+      title: "Academic Year 2023-24",
+      columns: ["Sr. No.", "MoU Details", "Valid From", "Valid To"],
+      rows: [
+        [
+          1,
+          "MOU By & Between Vikhe Patil Engineering & Management Academy (Franchise partners with CADD CENTRE Training services Pvt. Ltd.) (Party A) & GCOERC, Nashik (Party B), (Life Time)",
+          "20-08-2017",
+          "Open Ended",
+        ],
+        [2, "Agreement between GGSF, Nashik (Party A) & Akash Buildcon and Developers, Nashik for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [
+          3,
+          "Agreement between GGSF, Nashik (Party A) & Prashant Sancheti, Nashik (Consulting Engineer, Structural Consultant & Govt. Approved Valuer) for the period of 3 years",
+          "15-10-2020",
+          "14-10-2023",
+        ],
+        [4, "Agreement between GGSF, Nashik (Party A) & PraSad Infrastructure Developers, Pune for the period of 3 years", "15-10-2020", "14-10-2023"],
+        [5, "Agreement between GGSF, Nashik (Party A) & LT Buildcon, Nashik for the period of 3 years", "31-12-2020", "30-12-2023"],
+        [6, "Agreement between GGSF, Nashik (Party A) & BP Sangle Constructions Pvt. Ltd., Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [7, "Agreement between GGSF, Nashik (Party A) & Sai Vatsal Structural Consultant, Nashik for the period of 3 years", "17-03-2021", "16-03-2024"],
+        [8, "Agreement between GCOERC, Nashik (Party A) & RESILIENT India, Nashik for the period of 3 years", "01-10-2021", "30-09-2024"],
+        [9, "Agreement between GGSF, Nashik (Party A) & Abhinav Civil Infrastructures, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [10, "Agreement between GGSF, Nashik (Party A) & Leo Realtecc, Nashik for the period of 3 years", "15-01-2022", "14-01-2025"],
+        [11, "Agreement between GGSF, Nashik (Party A) & Make Infracon, Nashik for the period from 09-02-2022 to life time", "09-02-2022", "Open Ended"],
+        [12, "Agreement between GGSF, Nashik (Party A) & Invera Testing & Inspection Lab Pvt. Ltd., Nashik", "18-09-2023", "14-01-2025"],
+        [13, "Agreement between GGSF, Nashik (Party A) & Cortex AI Invention, Nashik for the period life time", "08-02-2021", "Open Ended"],
+        [14, "Agreement between GGSF, Nashik (Party A) & WX consultants Pvt. Ltd., Nashik", "20-02-2018", "19-02-2026"],
+      ],
+    },
+    {
+      title: "Academic Year 2024-25",
+      columns: ["Sr. No.", "MoU Details", "Valid From", "Valid To"],
+      rows: [
+        [1, "Agreement between GGSF, Nashik (Party A) & Abhinav Civil Infrastructures, Nashik for the period of 3 years", "16-01-2025", "15-01-2028"],
+        [2, "Agreement between GGSF, Nashik (Party A) & Sai Vatsal Structural Consultant, Nashik for the period of 5 years", "16-03-2024", "23-03-2029"],
+        [
+          3,
+          "MOU By & Between Vikhe Patil Engineering & Management Academy (Franchise partners with CADD CENTRE Training services Pvt. Ltd.) (Party A) & GCOERC, Nashik (Party B), (Life Time)",
+          "20-08-2017",
+          "Open Ended",
+        ],
+        [4, "Agreement between GGSF, Nashik (Party A) & BP Sangle Constructions Pvt. Ltd., Nashik for the period of 3 years", "17-03-2024", "16-03-2027"],
+        [5, "Agreement between GGSF, Nashik (Party A) & Prashant Sancheti, Nashik for the period of 6 years", "15-10-2020", "15-10-2026"],
+        [6, "Agreement between GGSF, Nashik (Party A) & Make Infracon, Nashik from 09-02-2022 to life time", "09-02-2022", "Open Ended"],
+        [7, "Agreement between GGSF, Nashik (Party A) & PraSad Infrastructure Developers, Pune for the period of 3 years", "19-10-2023", "18-10-2026"],
+        [8, "Agreement between GGSF, Nashik (Party A) & Invera Testing & Inspection Lab Pvt. Ltd., Nashik for life time", "18-09-2023", "Open Ended"],
+        [9, "Agreement between GGSF, Nashik (Party A) & Cortex AI Invention, Nashik for life time", "18-02-2021", "Open Ended"],
+        [10, "Agreement between GGSF, Nashik (Party A) & WX consultants Pvt. Ltd., Nashik", "20-02-2018", "19-02-2026"],
+        [11, "Agreement between GGSF, Nashik (Party A) & SNJB's College of Engineering Chandwad, Nashik for the period of 3 years", "01-07-2024", "30-06-2027"],
+        [12, "Agreement between GGSF, Nashik (Party A) & Golden Nexus LLP, Nashik for the period of 3 years", "30-05-2025", "29-05-2028"],
+        [13, "Agreement between GCOERC, Nashik (Party A) & Global Student for Sustainability, Nashik for the period of 2 years", "17-01-2025", "16-01-2026"],
+        [14, "Agreement between GCOERC, Nashik (Party A) & RESILIENT India, Nashik for the period of 3 years", "01-10-2024", "30-09-2027"],
+      ],
+    },
+    {
+      title: "Academic Year 2025-26",
+      columns: ["Sr. No.", "MoU Details", "Valid From", "Valid To"],
+      rows: [
+        [1, "Agreement between GGSF, Nashik (Party A) & Abhinav Civil Infrastructures, Nashik for the period of 3 years", "16-01-2025", "15-01-2028"],
+        [2, "Agreement between GGSF, Nashik (Party A) & Sai Vatsal Structural Consultant, Nashik for the period of 5 years", "16-03-2024", "23-03-2029"],
+        [
+          3,
+          "MOU By & Between Vikhe Patil Engineering & Management Academy (Franchise partners with CADD CENTRE Training services Pvt. Ltd.) (Party A) & GCOERC, Nashik (Party B), (Life Time)",
+          "20-08-2017",
+          "Open Ended",
+        ],
+        [4, "Agreement between GGSF, Nashik (Party A) & BP Sangle Constructions Pvt. Ltd., Nashik for the period of 3 years", "17-03-2024", "16-03-2027"],
+        [5, "Agreement between GGSF, Nashik (Party A) & Prashant Sancheti, Nashik for the period of 6 years", "15-10-2020", "15-10-2026"],
+        [6, "Agreement between GGSF, Nashik (Party A) & Make Infracon, Nashik from 09-02-2022 to life time", "09-02-2022", "Open Ended"],
+        [7, "Agreement between GGSF, Nashik (Party A) & PraSad Infrastructure Developers, Pune for the period of 3 years", "19-10-2023", "18-10-2026"],
+        [8, "Agreement between GGSF, Nashik (Party A) & Invera Testing & Inspection Lab Pvt. Ltd., Nashik for life time", "18-09-2023", "Open Ended"],
+        [9, "Agreement between GGSF, Nashik (Party A) & Cortex AI Invention, Nashik for life time", "18-02-2021", "Open Ended"],
+        [10, "Agreement between GGSF, Nashik (Party A) & WX consultants Pvt. Ltd., Nashik", "20-02-2018", "19-02-2026"],
+        [11, "Agreement between GGSF, Nashik (Party A) & SNJB's College of Engineering Chandwad, Nashik for the period of 3 years", "01-07-2024", "30-06-2027"],
+        [12, "Agreement between GGSF, Nashik (Party A) & Golden Nexus LLP, Nashik for the period of 3 years", "30-05-2025", "29-05-2028"],
+        [13, "Agreement between GCOERC, Nashik (Party A) & Global Student for Sustainability, Nashik for the period of 2 years", "17-01-2025", "16-01-2026"],
+        [14, "Agreement between GCOERC, Nashik (Party A) & RESILIENT India, Nashik for the period of 3 years", "01-10-2024", "30-09-2027"],
+      ],
+    },
+  ],
+  "automation-robotics": [
+    {
+      columns: ["Sr. No.", "Organisation", "Description", "Date / Validity"],
+      rows: [
+        [1, "Bosch", "Industry collaboration for automation/robotics training, workshops and student exposure", "—"],
+        [2, "Siemens", "Industry collaboration for automation/robotics training, workshops and student exposure", "—"],
+      ],
+    },
+  ],
+  "artificial-intelligence-data-science": [
+    {
+      columns: ["Sr. No.", "Organisation", "Description", "Date of MoU"],
+      rows: [
+        [
+          1,
+          "Eduskills Foundation",
+          "Under Eduskills Foundation training provided (Robotics, Cisco Networking, AWS Academy, Microchip, Cyber Security)",
+          "19/06/2020",
+        ],
+        [2, "QUANTUM LEARNINGS Centre of Excellence", "MoU for training students to prepare for placement and certification courses", "25/03/2021"],
+        [3, "Sumago Infotech", "Industrial Visit and Training", "16/08/2022"],
+        [4, "NP IT Solutions, Nashik", "MoU for training students to prepare for placement and certification courses", "15/09/2022"],
+        [5, "Cyber Sanskar, Nashik", "MoU for training students to prepare for placement and certification courses", "15/09/2022"],
+        [6, "Nector Studio", "Mobile App and Game Development: Expert Lecture / Workshop / Internship", "23/11/2022"],
+        [7, "Cognifront", "Industrial Visit and Training", "14/08/2022"],
+        [8, "Sumago Infotech", "Industrial Visit and Training", "16/08/2023"],
+        [9, "R3 System", "Industrial Visit and Training", "22/08/2023"],
+        [10, "Eagle Byte Solutions", "Industrial Visit and Training", "04/12/2023"],
+        [11, "Passenger Drone Research Pvt. Ltd.", "Industrial Visit and Training", "26/08/2024"],
+        [12, "Calibers Infotech.", "Industrial Visit and Training", "06/09/2024"],
+        [13, "Arrow Technologies, College Road, Nashik", "Industrial Visit and Training", "26/09/2025"],
+        [14, "White Rays Technologies, Nashik", "Industrial Visit and Training", "03/10/2025"],
+      ],
+    },
+  ],
+  electrical: [
+    {
+      title: "Academic Year 2024-25",
+      columns: ["Sr. No.", "Organisation", "Objectives of MoU", "Year of signing", "Duration"],
+      rows: [
+        [1, "Rotomatic Containers Pvt. Ltd", "Internship opportunities and job assistance, Industrial visit of students", "01/07/2021", "Open Ended"],
+        [2, "MACCIA", "Skill based training, technical education, innovation, entrepreneurship, research, problem solving for industries", "07/01/2021", "Open Ended"],
+        [3, "Fairdeal Electricals & Engineering Pvt. Ltd., Nashik", "Industrial visit of students, internship opportunities and job assistance", "12/08/2021", "Open Ended"],
+        [4, "Technosys Control Solutions", "Internship opportunities and job assistance, Industrial visit of students", "13/08/2021", "Open Ended"],
+        [5, "Electrofab Innovations (India) Pvt. Ltd", "Guest lecture/training/workshop, industrial visit, internship opportunities and job assistance", "01/09/2021", "Open Ended"],
+        [6, "Vibha Corporation", "Guest lecture/training/workshop, industrial visit, internship opportunities and job assistance", "15/09/2021", "Open Ended"],
+        [
+          7,
+          "Shree Ganesh Industrial Control, Nashik",
+          "Curriculum design, industrial training & visit, internship & placement, guest lectures, research & development, faculty development program",
+          "02/11/2023",
+          "Open Ended",
+        ],
+        [8, "enTra - Engineers Training Academy, Nashik", "Skill development programmes, industrial training, patent, guest lectures", "04/08/2022", "04/08/2025"],
+        [9, "AutoTech Nashik", "Internship & placement, skill development programmes, guest lectures, faculty development program", "03/07/2023", "03/07/2026"],
+        [10, "Gauss Electromagnetics, Nashik", "Industrial training, skill development programmes, guest lectures, faculty development program", "03/06/2024", "02/06/2027"],
+        [11, "Visionary Technologies, Nashik", "Internship & placement, skill development programmes, guest lectures, faculty development program", "04/06/2024", "03/06/2027"],
+      ],
+    },
+    {
+      title: "Academic Year 2025-26",
+      columns: ["Sr. No.", "Organisation", "Objectives of MoU", "Year of signing", "Duration"],
+      rows: [
+        [1, "Rotomatic Containers Pvt. Ltd", "Internship opportunities and job assistance, Industrial visit of students", "01/07/2021", "Open Ended"],
+        [2, "MACCIA", "Skill based training, technical education, innovation, entrepreneurship, research, problem solving for industries", "07/01/2021", "Open Ended"],
+        [3, "Fairdeal Electricals & Engineering Pvt. Ltd., Nashik", "Industrial visit of students, internship opportunities and job assistance", "12/08/2021", "Open Ended"],
+        [4, "Technosys Control Solutions", "Internship opportunities and job assistance, Industrial visit of students", "13/08/2021", "Open Ended"],
+        [5, "Electrofab Innovations (India) Pvt. Ltd", "Guest lecture/training/workshop, industrial visit, internship opportunities and job assistance", "01/09/2021", "Open Ended"],
+        [6, "Vibha Corporation", "Guest lecture/training/workshop, industrial visit, internship opportunities and job assistance", "15/09/2021", "Open Ended"],
+        [
+          7,
+          "Shree Ganesh Industrial Control, Nashik",
+          "Curriculum design, industrial training & visit, internship & placement, guest lectures, research & development, faculty development program",
+          "02/11/2023",
+          "Open Ended",
+        ],
+        [8, "AutoTech Nashik", "Internship & placement, skill development programmes, guest lectures, faculty development program", "03/07/2023", "03/07/2026"],
+        [9, "Gauss Electromagnetics, Nashik", "Industrial training, skill development programmes, guest lectures, faculty development program", "03/06/2024", "02/06/2027"],
+        [10, "Visionary Technologies, Nashik", "Internship & placement, skill development programmes, guest lectures, faculty development program", "04/06/2024", "03/06/2027"],
+      ],
+    },
+  ],
+  mechanical: [
+    {
+      columns: ["Sr. No.", "Partner / Organisation", "Description", "Date of MoU"],
+      rows: [
+        [1, "Right Tight Fastner, Nashik", "—", "01-01-2024"],
+        [2, "Bhoge Enterprises", "—", "02-09-2022"],
+        [3, "Samarth Krupa Instrulab", "—", "02-09-2022"],
+        [4, "Sansun Industries Pvt. Ltd", "—", "01-10-2021"],
+        [5, "Invensys Cad Solutions, Nashik", "—", "02-08-2021"],
+        [6, "Rashtriya Chemicals & Fertilizers Ltd.", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "16/03/2021"],
+        [7, "Galaxy Wheels, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "01/02/2021"],
+        [8, "EvolvingX Services (OPC) Private Limited, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "02/10/2020"],
+        [9, "CHARUSAT, CHANGA, GUJARAT", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "17/05/2020"],
+        [10, "Sushmi Engineering, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "01/02/2020"],
+        [11, "Right Tight Fastner, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "01/01/2020"],
+        [12, "Niraj Thermocols & Electricals Pvt. Ltd.", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "01/01/2020"],
+        [13, "Nashik Industries and Manufacturers Association", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop", "01/01/2020"],
+        [14, "Jadhav Casting, Ambad MIDC, Nashik", "—", "26/07/2019"],
+        [15, "Elite Auto Engineers, Nashik", "—", "01/07/2019"],
+        [16, "Million Minds Pvt. Ltd., Mumbai", "Open Ended", "28/02/2019"],
+        [17, "PSP-IP Pvt. Ltd., Nigadi, Pune", "—", "01/01/2019"],
+        [18, "Samsonite South Asia Pvt. Ltd., Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "05/12/2019"],
+        [19, "Nashik Engineering Cluster, MIDC Ambad, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop", "02/01/2018"],
+        [20, "Stalwart's Space Pvt. Ltd.", "Permanent", "27/11/2018"],
+        [21, "Amey Industries, MIDC Ambad, Nashik", "—", "02/01/2018"],
+        [22, "Sansun Industries, MIDC Ambad, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "02/01/2018"],
+        [23, "Arm Strong Machine Builders Pvt. Ltd., Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements", "01/05/2017"],
+        [24, "Caprihans India Ltd.", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements, Organizing technical events", "09/03/2017"],
+        [25, "Suyog Rubber Ind Pvt. Ltd., Satpur MIDC, Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements, Organizing technical events", "07/03/2018"],
+        [26, "Invensis CAD Solutions (iCAD), Nashik", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements, Organizing technical events, software training support", "07/03/2018"],
+        [27, "Nandi Foundation – Mahindra Pride Classroom", "Employability skilling program (CSR) for final year students", "01/08/2018"],
+        [28, "Right Tight Fastner", "Industrial Visit, Sponsorship for projects, Guest lecture/training/workshop, Exploring placements, Organizing technical events", "06/12/2018"],
+        [29, "GGSF-BOSCH Joint Certification Program", "Joint Training Program", "10/08/2016"],
+        [30, "CADD CENTRE Training Services Pvt. Ltd., Nashik", "—", "20/08/2017"],
+        [31, "Waldevi Hitech Nursery", "—", "23/05/2017"],
+        [32, "GGSF-SIEMENS Joint Certification Program", "Joint Training Program", "16/01/2017"],
+      ],
+    },
+  ],
+};
+
+function DepartmentMouTables({ deptKey }: { deptKey: string }) {
+  const tables = mouTablesByDept[deptKey];
+  if (!tables?.length) return null;
+
+  return (
+    <div className="space-y-8">
+      {tables.map((table, idx) => (
+        <div key={`${deptKey}-${idx}`} className="space-y-3">
+          {table.title ? <p className="text-sm font-semibold text-foreground">{table.title}</p> : null}
+          <div className="overflow-x-auto rounded-lg border border-border/70">
+            <table className="min-w-[900px] w-full border-collapse text-sm">
+              <thead>
+                <tr>
+                  {table.columns.map((col) => (
+                    <th
+                      key={col}
+                      className="bg-muted/50 px-4 py-3 text-left font-semibold text-foreground border-b border-border/70"
+                    >
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {table.rows.map((row, rIdx) => (
+                  <tr key={`${deptKey}-${idx}-r-${rIdx}`}>
+                    {row.map((cell, cIdx) => (
+                      <td
+                        key={`${deptKey}-${idx}-r-${rIdx}-c-${cIdx}`}
+                        className={`px-4 py-3 align-top border-b border-border/50 ${
+                          cIdx === 0 ? "text-foreground font-medium" : "text-muted-foreground"
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const EngineeringDepartment = () => {
   const { deptName } = useParams<{ deptName: string }>();
@@ -102,7 +432,7 @@ const EngineeringDepartment = () => {
         },
        
         {
-          name: "Prof. Sandeep G Shukla (HOD) ",
+          name: "Prof. Sandeep G Shukla  ",
           image: "/Faculty/sandip-shukla.jpg",
           qualifications: "M.Tech I.T. , PhD (Pursuing)",
           experience: "17+ years",
@@ -180,7 +510,7 @@ const EngineeringDepartment = () => {
         },
         {
           name: "Prof. Riya R Chinchwadkar",
-          image: "public/Faculty/riya-chinchwadkar.png",
+          image: "/Faculty/riya-chinchwadkar.png",
           qualifications: "M.E. Computer",
           experience: "8 Years",
           areaOfInterest: "Machin Learning",
@@ -220,13 +550,7 @@ const EngineeringDepartment = () => {
           experience: "9 years",
           areaOfInterest: "Cloud Computing",
         },
-        {
-          name: "Prof. Akshata V Dighe",
-          image: "/Faculty/akshata-dighe.jpeg",
-          qualifications: "M.Tech. COMPUTER",
-          experience: "12 years",
-          areaOfInterest: "Natural Language Processing",
-        },
+        
         {
           name: "Prof . Pradnya A Shirsath",
           image: "/Faculty/pradnya-shirsath.jpeg",
@@ -322,105 +646,105 @@ const EngineeringDepartment = () => {
       facultyMembers: [
         {
           name: "Prof. Dr C D Mohod (HOD)",
-          image: "public/Faculty/c-d-mohod.jpg",
+          image: "/Faculty/c-d-mohod.jpg",
           qualifications: "PhD, M.E (Production Engineering)",
           experience: "31 years",
           areaOfInterest: "Production",
         },
         {
           name: "Prof. Sandip S Patil",
-          image: "public/Faculty/sandip-patil.jpg",
+          image: "/Faculty/sandip-patil.jpg",
           qualifications: "M.E. Production, PhD (Pursuing)",
           experience: "17 years",
           areaOfInterest: "Production",
         },
         {
           name: "Dr. M S Patil",
-          image: "public/Faculty/m-s-patil.jpg",
+          image: "/Faculty/m-s-patil.jpg",
           qualifications: "PhD, M.Tech (Thermal and Fluids Engineering)",
           experience: "29 years",
           areaOfInterest: "Thermal & Fluids Engineering",
         },
         {
           name: "Prof. S H Kondo",
-          image: "public/Faculty/s-h-kondo.jpg",
+          image: "/Faculty/s-h-kondo.jpg",
           qualifications: "M.E (Design)",
           experience: "17 years",
           areaOfInterest: "Design",
         },
         {
           name: "Dr. V B Sarode",
-          image: "public/Faculty/v-b-sarode.jpg",
+          image: "/Faculty/v-b-sarode.jpg",
           qualifications: "PhD, M.E (Design)",
           experience: "25 years",
           areaOfInterest: "Design",
         },
         {
           name: "Prof. V J Dhore",
-          image: "public/Faculty/v-j-dhore.jpg",
+          image: "/Faculty/v-j-dhore.jpg",
           qualifications: "M.E (CAAD), PhD (Pursuing)",
           experience: "16 years",
           areaOfInterest: "CAAD, Mechanical Design, Engineering Metallurgy",
         },
         {
           name: "Prof. K V Dhande",
-          image: "public/Faculty/k-v-dhande.jpg",
+          image: "/Faculty/k-v-dhande.jpg",
           qualifications: "M.E.(Design), PhD (Pursuing)",
           experience: "15 years",
           areaOfInterest: "Design",
         },
         {
           name: "Prof. D D Patil",
-          image: "public/Faculty/d-d-patil.jpg",
+          image: "/Faculty/d-d-patil.jpg",
           qualifications: "M.E (Production Technology & Management)",
           experience: "18 years",
           areaOfInterest: "Production Technology, Manufacturing Processes & 3D Modelling",
         },
         {
           name: "Prof. R S Khandare",
-          image: "public/Faculty/r-s-khandare.jpg",
+          image: "/Faculty/r-s-khandare.jpg",
           qualifications: "M.E (Design)",
           experience: "16 years",
           areaOfInterest: "Design",
         },
         {
           name: "Prof. D P Chavan",
-          image: "public/Faculty/d-p-chavan.jpg",
+          image: "/Faculty/d-p-chavan.jpg",
           qualifications: "M.E (Design)",
           experience: "16 years",
           areaOfInterest: "Design",
         },
         {
           name: "Prof. V S Gawali",
-          image: "public/Faculty/v-s-gawali.jpg",
+          image: "/Faculty/v-s-gawali.jpg",
           qualifications: "M.E (CAD/CAM), PhD (Pursuing)",
           experience: "14 years",
           areaOfInterest: "CAD/CAM",
         },
         {
           name: "Prof. Parag Desale",
-          image: "public/Faculty/parag-desale.jpg",
+          image: "/Faculty/parag-desale.jpg",
           qualifications: "M.E. (Heat Power)",
           experience: "16 years",
           areaOfInterest: "Thermal Engineering",
         },
         {
           name: "Prof . Kiran Rajendra Sonawane",
-          image: "public/Faculty/kiran-sonawane.jpg",
+          image: "/Faculty/kiran-sonawane.jpg",
           qualifications: "M.E. (Heat Power)",
           experience: "16 Years",
           areaOfInterest: "Thermal Engineering",
         },
         {
           name: "Prof. S V Shinde",
-          image: "public/Faculty/s-v-shinde.jpg",
+          image: "/Faculty/s-v-shinde.jpg",
           qualifications: "M.E. (Heat Power), PhD (Pursuing)",
           experience: "10 years",
           areaOfInterest: "Heat Power Engineering",
         },
         {
           name: " Prof . Ankita Kailas Patil",
-          image: "public/Faculty/ankita-patil.jpg",
+          image: "/Faculty/ankita-patil.jpg",
           qualifications: "M. E. (Design)",
           experience: "10 Years",
           areaOfInterest: "Design",
@@ -434,35 +758,35 @@ const EngineeringDepartment = () => {
         },
         {
           name: "Prof. G D Gadilohar",
-          image: "public/Faculty/g-d-gadilohar.jpg",
+          image: "/Faculty/g-d-gadilohar.jpg",
           qualifications: "I.T.I.(Carpentry), NCTVT",
           experience: "19 years",
           areaOfInterest: "Carpentry",
         },
         {
           name: "Prof . S M Kele",
-          image: "public/Faculty/s-m-kele.jpg",
+          image: "/Faculty/s-m-kele.jpg",
           qualifications: "I.T.I.(Turner), NCTVT",
           experience: "13 years",
           areaOfInterest: "Turner",
         },
         {
           name: "Prof. B T Khairnar",
-          image: "public/Faculty/b-t-khairnar.jpg",
+          image: "/Faculty/b-t-khairnar.jpg",
           qualifications: "I.T.I.(Welder), NCTVT",
           experience: "11 years",
           areaOfInterest: "Welding",
         },
         {
           name: "Prof . V P Apsingkar",
-          image: "public/Faculty/v-p-apsingkar.jpg",
+          image: "/Faculty/v-p-apsingkar.jpg",
           qualifications: "D.M.E.",
           experience: "02 years",
           areaOfInterest: "Engg. Drawing",
         },
         {
           name: "Prof . R G Dixit",
-          image: "public/Faculty/r-g-dixit.jpg",
+          image: "/Faculty/r-g-dixit.jpg",
           qualifications: "1st Class in Boiler Proficiency",
           experience: "31 years",
           areaOfInterest: "Technical Work regarding Boiler, Engine.",
@@ -503,98 +827,98 @@ const EngineeringDepartment = () => {
       facultyMembers: [
         {
           name: "Dr. V M Natraj (HOD)",
-          image: "public/faculty/v-m-natraj.jpg",
+          image: "/Faculty/v-m-natraj.jpg",
           qualifications: "PhD (Env Mgmt), MTech (Hydraulics)",
           experience: "35 years",
           areaOfInterest: "Hydraulics",
         },
         {
           name: "Dr. Vishvanath N Kanthe",
-          image: "public/faculty/vn-kanthe.jpg",
+          image: "/Faculty/vn-kanthe.jpg",
           qualifications: "Ph.D (Structural Engineering), MTech (Structural Engineering)",
           experience: "12 years",
           areaOfInterest: "Concrete Technology",
         },
         {
           name: "Prof. P A Padalkar",
-          image: "public/faculty/pa-padalkar.jpg",
+          image: "/Faculty/pa-padalkar.jpg",
           qualifications: "M.E. (Geotechnical Engineering)",
           experience: "14 years",
           areaOfInterest: "Geotechnical Engineering",
         },
         {
           name: "Prof. A G Chaudhari",
-          image: "public/faculty/a-g-chaudhari.jpg",
+          image: "/Faculty/a-g-chaudhari.jpg",
           qualifications: "M.E.(Structure), PhD.(Structure)(Pursuing)",
           experience: "25 years",
           areaOfInterest: "Structure",
         },
         {
           name: "Prof. Chetan G Joshi",
-          image: "public/faculty/chetan-g-joshi.jpg",
+          image: "/Faculty/chetan-g-joshi.jpg",
           qualifications: "M.Tech.( Transportation Engg & Management)",
           experience: "11 years",
           areaOfInterest: "Transportation Engg.& Management",
         },
         {
           name: "Dr. T A Kulkarni",
-          image: "public/faculty/t-a-kulkarni.jpg",
+          image: "/Faculty/t-a-kulkarni.jpg",
           qualifications: "PhD ,M.E. (Geotechnical Engineering)",
           experience: "10 years",
           areaOfInterest: "Geotechnical Engineering",
         },
         {
           name: "Prof. P B Shinde",
-          image: "public/faculty/p-b-shinde.jpg",
+          image: "/Faculty/p-b-shinde.jpg",
           qualifications: "M.E.(Structure),PhD Pursuing",
           experience: "10 years",
           areaOfInterest: "Structure & Water Resource",
         },
         {
           name: "Prof. V S Bhalerao",
-          image: "public/faculty/v-s-bhalerao.jpg",
+          image: "/Faculty/v-s-bhalerao.jpg",
           qualifications: "M.E.(Structure), PhD Pursuing",
           experience: "11 years 9 Months",
           areaOfInterest: "Structures",
         },
         {
           name: "Prof. V V Pawar",
-          image: "public/faculty/v-v-pawar.jpg",
+          image: "/Faculty/v-v-pawar.jpg",
           qualifications: "M.E. Structure",
           experience: "6 years",
           areaOfInterest: "Structure",
         },
         {
           name: "Prof. D S Desale",
-          image: "public/faculty/d-s-desale.jpg",
+          image: "/Faculty/d-s-desale.jpg",
           qualifications: "M.E.(Structure)",
           experience: "12 years",
           areaOfInterest: "Structure",
         },
         {
           name: "Prof. R K Paikarao",
-          image: "public/faculty/r-k-paikarao.jpg",
+          image: "/Faculty/r-k-paikarao.jpg",
           qualifications: "M.E. (Structure)",
           experience: "4 years",
           areaOfInterest: "Structure",
         },
         {
           name: "Prof. Kamlesh P Bhagat",
-          image: "public/faculty/kamlesh-p-bhagat.jpg",
+          image: "/Faculty/kamlesh-p-bhagat.jpg",
           qualifications: "M.E.(Construction and Management )",
           experience: "6.5 Years",
           areaOfInterest: "Construction Management & Estimation and Valuation",
         },
         {
           name: "Prof. Pavan K Jadhav",
-          image: "public/faculty/pavan-k-jadhav.jpg",
+          image: "/Faculty/pavan-k-jadhav.jpg",
           qualifications: "Civil Diploma",
           experience: "3 year industry, 1 year college",
           areaOfInterest: "civil",
         },
         {
           name: "Prof. Radheshyam I Patil",
-          image: "public/faculty/radheshyam-i-patil.jpg",
+          image: "/Faculty/radheshyam-i-patil.jpg",
           qualifications: "D.C.E ,BE (Pursing)",
           experience: "Industrial 02 & Educational 03 Yrs",
           areaOfInterest: "Construction Technology Construction Management 2 D Modelling",
@@ -625,56 +949,56 @@ const EngineeringDepartment = () => {
       facultyMembers: [
         {
           name: "Dr. Rahul Agrawal (HOD)",
-          image: "public/faculty/rahul-agrawal.jpg",
+          image: "/Faculty/rahul-agrawal.jpg",
           qualifications: "PhD (Power System Optimization)",
           experience: "24 years",
           areaOfInterest: "Power System Optimization, Power Quality",
         },
         {
           name: "Dr. Sunil M More",
-          image: "public/faculty/sunil-m-more.jpg",
+          image: "/Faculty/sunil-m-more.jpg",
           qualifications: "PhD",
           experience: "16 years",
           areaOfInterest: "Power System",
         },
         {
           name: "Prof. B G Dhabhade",
-          image: "public/faculty/b-g-dhabhade.jpg",
+          image: "/Faculty/b-g-dhabhade.jpg",
           qualifications: "M.E.(Electrical Machine & Drives)",
           experience: "13.6 years",
           areaOfInterest: "Electrical Machine & Drives",
         },
         {
           name: "Prof. Swapnil N Jadhav",
-          image: "public/faculty/swapnil-n-jadhav.png",
+          image: "/Faculty/swapnil-n-jadhav.png",
           qualifications: "M.E. (Embedded Systems), PhD (Pursuing)",
           experience: "16 years",
           areaOfInterest: "IOT, Embedded systems",
         },
         {
           name: "Prof. Nilima J Bhamare",
-          image: "public/faculty/nilima-j-bhamare.jpg",
+          image: "/Faculty/nilima-j-bhamare.jpg",
           qualifications: "ME Power System",
           experience: "6.1 Years",
           areaOfInterest: "Power System Basic Electrical",
         },
         {
           name: "Prof. Rutika S More",
-          image: "public/faculty/rutika-s-more.jpg",
+          image: "/Faculty/rutika-s-more.jpg",
           qualifications: "M.Tech Power System",
           experience: "4 Years",
           areaOfInterest: "Power System PLC & SCADA Renewable Energy",
         },
         {
           name: "Prof. Vishakha Ananda Chavan",
-          image: "public/faculty/vishakha-ananda-chavan.jpg",
+          image: "/Faculty/vishakha-ananda-chavan.jpg",
           qualifications: "M. E( Power Electronics and drives)",
           experience: "11 Years",
           areaOfInterest: "Power System, HVDC and FACTS, Power Electronics",
         },
         {
           name: "Prof. Sonali P Gosavi",
-          image: "public/faculty/sonali-p-gosavi.jpg",
+          image: "/Faculty/sonali-p-gosavi.jpg",
           qualifications: "M.E (Electrical Power System)",
           experience: "3.3 years",
           areaOfInterest: "Power System",
@@ -1182,6 +1506,98 @@ const EngineeringDepartment = () => {
 
   const dept = departmentData[deptName || ""];
 
+  const departmentGallery: DepartmentGalleryImage[] = useMemo(() => {
+    const key = deptName || "";
+
+    const base = [
+      {
+        title: "Advanced Laboratories",
+        image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
+      },
+      {
+        title: "Project & Innovation Space",
+        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
+      },
+      {
+        title: "Student Activity Zone",
+        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+      },
+    ];
+
+    if (!key) return base;
+
+    if (key.includes("computer") || key.includes("information-technology")) {
+      return [
+        {
+          title: "Programming Lab",
+          image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+        },
+        {
+          title: "Cloud & Systems",
+          image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
+        },
+        ...base.slice(1),
+      ];
+    }
+
+    if (key.includes("civil")) {
+      return [
+        {
+          title: "Surveying & Field Work",
+          image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=80",
+        },
+        {
+          title: "Structural Lab",
+          image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+        },
+        ...base.slice(1),
+      ];
+    }
+
+    if (key.includes("mechanical") || key.includes("automation") || key.includes("robotics")) {
+      return [
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/H-T-lab.png",
+        },
+        {
+          title: "Automation & Controls",
+          image: "public/Dept-imgs/mechical/lab2.png",        },
+        ...base.slice(1),
+      ];
+    }
+
+    if (key.includes("electrical")) {
+      return [
+        {
+          title: "Electrical Machines Lab",
+          image: "https://images.unsplash.com/photo-1581091870632-1db7d05fa36e?auto=format&fit=crop&w=1200&q=80",
+        },
+        {
+          title: "Power Systems",
+          image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80",
+        },
+        ...base.slice(1),
+      ];
+    }
+
+    if (key.includes("artificial-intelligence") || key.includes("data-science")) {
+      return [
+        {
+          title: "AI & Data Lab",
+          image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
+        },
+        {
+          title: "Deep Learning Studio",
+          image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=80",
+        },
+        ...base.slice(1),
+      ];
+    }
+
+    return base;
+  }, [deptName]);
+
   const heroSlides = useMemo(
     () => [
       {
@@ -1233,6 +1649,14 @@ const EngineeringDepartment = () => {
       .join("")
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const normalizePublicImagePath = (image?: string) => {
+    if (!image) return undefined;
+    if (/^https?:\/\//i.test(image)) return image;
+    const trimmed = image.trim().replace(/^public\//i, "/");
+    if (trimmed.startsWith("/")) return trimmed;
+    return `/${trimmed}`;
   };
 
   if (!dept) {
@@ -1360,7 +1784,7 @@ const EngineeringDepartment = () => {
                       <div className="relative">
                         <Avatar className="h-32 w-32 ring-4 ring-info/20 bg-background shadow-lg group-hover:ring-info/50 group-hover:scale-105 transition-all duration-500">
                           <AvatarImage 
-                            src={member.image || "/placeholder.svg"} 
+                            src={normalizePublicImagePath(member.image) || "/placeholder.svg"} 
                             alt={member.name}
                             className="object-cover"
                           />
@@ -1417,6 +1841,12 @@ const EngineeringDepartment = () => {
           </div>
         </div>
       </section>
+
+      <DepartmentImagesSection
+        title={`${dept.name} — Images`}
+        subtitle="Facilities, labs and student activities"
+        images={departmentGallery}
+      />
 
       {/* Career Opportunities */}
       <section className="py-16 px-4 gsap-fade">
@@ -1576,11 +2006,14 @@ const EngineeringDepartment = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                    {(dept.mouPartners || ["MoU partners will be updated."]).map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ul>
+                  <DepartmentMouTables deptKey={deptName || ""} />
+                  {!mouTablesByDept[deptName || ""] ? (
+                    <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                      {(dept.mouPartners || ["MoU partners will be updated."]).map((p, i) => (
+                        <li key={i}>{p}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </CardContent>
               </Card>
             </TabsContent>

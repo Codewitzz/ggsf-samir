@@ -94,9 +94,9 @@ const Departments = () => {
           />
         </div>
         <div className="relative z-10 bg-black/60 py-20 px-4">
-        <div className="absolute inset-y-0 right-0 w-1/2 opacity-40 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.2),_transparent_60%)]" />
-        </div>
+          <div className="absolute inset-y-0 right-0 w-1/2 opacity-40 pointer-events-none">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.2),_transparent_60%)]" />
+          </div>
           <div className="container mx-auto">
             <p className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/90">
               <span className="h-2 w-2 rounded-full bg-secondary" />
@@ -120,6 +120,7 @@ const Departments = () => {
               </Button>
             </div>
           </div>
+        </div>
       </section>
 
       {/* Stats */}
@@ -146,6 +147,23 @@ const Departments = () => {
               </Card>
             );
           })}
+        </div>
+      </section>
+
+      {/* MoU CTA */}
+      <section className="py-10 px-4 gsap-fade">
+        <div className="container mx-auto">
+          <Card className="border border-border/80 bg-card/70 backdrop-blur">
+            <CardHeader>
+              <CardTitle>Department-wise MoUs</CardTitle>
+              <CardDescription>View MoU information in table format (department wise).</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                <Link to="/mou">View MoUs</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

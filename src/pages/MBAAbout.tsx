@@ -22,6 +22,7 @@ import {
 import { Link } from "react-router-dom";
 import mbaIcon from "@/assets/mba-icon.png";
 import { cn } from "@/lib/utils";
+import DepartmentImagesSection from "@/components/DepartmentImagesSection";
 
 const SLIDE_DURATION = 5000;
 
@@ -290,6 +291,25 @@ const MBAAbout = () => {
           </div>
         </div>
       </section>
+
+      <DepartmentImagesSection
+        title="MBA — Images"
+        subtitle="A quick glimpse of classroom learning, teamwork and professional development"
+        images={[
+          {
+            title: "Case Discussions",
+            image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+          },
+          {
+            title: "Teamwork & Presentations",
+            image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+          },
+          {
+            title: "Industry Interaction",
+            image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80",
+          },
+        ]}
+      />
 
       {/* Quick Links */}
       <section className="py-16 px-4">

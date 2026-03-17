@@ -24,7 +24,6 @@ const AnnouncementsBar = () => {
     <div className="w-full bg-background border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center gap-2 py-2 overflow-hidden">
-          <Megaphone className="h-4 w-4 text-primary flex-shrink-0" />
           <div className="relative w-full">
             <div
               className="flex gap-3 animate-[scroll_30s_linear_infinite]"

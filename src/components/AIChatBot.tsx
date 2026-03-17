@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, useMemo } from "react";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { MessageCircle, X, Send, Loader2, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
@@ -72,7 +72,8 @@ const qaKnowledgeBase: QAItem[] = [
   },
   {
     question: "Are scholarships available?",
-    answer: "Yes, scholarships and fee concessions are available for eligible students. Apply online on Maharashtra State Scholarship portal and submit required documents to the college scholarship coordinator.",
+    answer:
+      "Yes, scholarships and fee concessions are available for eligible students. Apply online on Maharashtra State Scholarship portal (MahaDBT) and submit required documents to the college scholarship coordinator.\n\nMahaDBT link: https://mahadbt.maharashtra.gov.in/",
     keywords: ["scholarship", "scholarships", "fee", "concession"]
   },
   {
@@ -217,7 +218,8 @@ const qaKnowledgeBase: QAItem[] = [
   },
   {
     question: "How can I apply for scholarship online?",
-    answer: "Apply online on Maharashtra State Scholarship portal and submit required documents to the college scholarship coordinator.",
+    answer:
+      "Apply online on Maharashtra State Scholarship portal (MahaDBT) and submit required documents to the college scholarship coordinator.\n\nMahaDBT link: https://mahadbt.maharashtra.gov.in/",
     keywords: ["scholarship", "apply", "online", "maharashtra"]
   },
   {
@@ -334,16 +336,27 @@ const AIChatBot = () => {
     }
   }, [GEMINI_API_KEY]);
   const [isOpen, setIsOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm GCOERC-Bot, your AI assistant for Guru Gobind Singh College of Engineering and Research Center. I can help answer your questions about courses, admissions, facilities, placements, and more. How can I assist you today?",
+      content:
+        "Hi! I'm Edi.\nI can help with admissions, programs, facilities, placements, scholarships and more. How can I help you today?",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const hasSeen = window.localStorage.getItem("edi_intro_seen");
+      setShowIntro(!hasSeen);
+    } catch {
+      setShowIntro(true);
+    }
+  }, []);
 
   // Auto-scroll to bottom when messages or loading state changes
   useEffect(() => {
@@ -422,7 +435,7 @@ const AIChatBot = () => {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-      const systemPrompt = `You are GCOERC-Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Center (GCOERC). 
+      const systemPrompt = `You are COERC Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Centre (GCOERC). 
       Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. 
       Be concise, friendly, and informative. Use the following knowledge base to answer questions accurately:
 
@@ -534,7 +547,7 @@ const AIChatBot = () => {
       - Back papers: Can appear in next available exam cycle if failed in a subject
 
       SCHOLARSHIPS:
-      - Apply online on Maharashtra State Scholarship portal
+      - Apply online on Maharashtra State Scholarship portal (MahaDBT): https://mahadbt.maharashtra.gov.in/
       - Required documents: Aadhaar, caste/income certificate, academic marksheets, admission proof, fee receipts, bank details
       - Submit required documents to college scholarship coordinator
 
@@ -613,26 +626,86 @@ const AIChatBot = () => {
     <>
       {/* Floating Chat Button */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 h-14 w-14 rounded-full shadow-lg z-50 bg-primary hover:bg-primary/90"
-          size="icon"
-        >
-          <MessageCircle className="h-6 w-6" />
-        </Button>
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+          {showIntro && (
+            <button
+              type="button"
+              onClick={() => {
+                setShowIntro(false);
+                try {
+                  window.localStorage.setItem("edi_intro_seen", "1");
+                } catch {
+                  // ignore
+                }
+              }}
+              className="relative rounded-full bg-white text-foreground shadow-xl ring-1 ring-black/10 px-4 py-2 text-sm font-semibold hover:shadow-2xl transition-shadow"
+              aria-label="Dismiss intro"
+            >
+              Hi! I&apos;m GCOERC
+              <span className="absolute right-6 -bottom-2 h-4 w-4 rotate-45 bg-white ring-1 ring-black/10" />
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsOpen(true);
+              setShowIntro(false);
+              try {
+                window.localStorage.setItem("edi_intro_seen", "1");
+              } catch {
+                // ignore
+              }
+            }}
+            className="group relative h-16 w-16 rounded-full bg-gradient-to-br from-primary via-primary-dark to-slate-900 shadow-2xl ring-1 ring-white/20 hover:shadow-[0_20px_60px_rgba(2,6,23,0.45)] transition-all duration-300 hover:-translate-y-0.5"
+            aria-label="Open chat"
+          >
+            <span className="absolute -inset-0.5 rounded-full bg-gradient-to-br from-secondary/60 via-white/10 to-secondary/40 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
+            <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_40%_30%,rgba(255,255,255,0.25),transparent_55%)]" />
+            <span className="absolute inset-2 rounded-full bg-gradient-to-br from-slate-950/60 to-slate-900/90 grid place-items-center">
+              <span className="relative grid h-10 w-10 place-items-center rounded-full  shadow-inner ring-1 ring-black/10">
+                <img
+                  src="/chatbot-logo.png"
+                  alt="GCOERC"
+                  className="h-10 w-10 rounded-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                />
+              </span>
+            </span>
+            <span className="absolute -top-1 -right-1 grid h-6 w-6 place-items-center rounded-full bg-white text-slate-900 shadow-lg ring-1 ring-black/10">
+              <Sparkles className="h-3.5 w-3.5" />
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col overflow-hidden border border-border bg-card shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-card/90 rounded-2xl w-[calc(100vw-2rem)] max-w-[360px] h-[70vh] max-h-[640px] min-h-[420px]">
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col overflow-hidden border border-border bg-card shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-card/90 rounded-2xl w-[calc(100vw-3rem)] max-w-[380px] h-[70vh] max-h-[640px] min-h-[420px]">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-primary via-primary/95 to-primary-dark text-primary-foreground shadow-md">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/20 ring-2 ring-white/30 shadow-lg">
-                <MessageCircle className="h-5 w-5" />
+              <div className="relative grid h-10 w-10 place-items-center rounded-xl bg-white/20 ring-2 ring-white/30 shadow-lg overflow-hidden">
+                <img
+                  src="/chatbot-logo.png"
+                  alt="GCOERC"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                />
+                <MessageCircle className="absolute h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <h3 className="font-bold leading-tight truncate text-base">GCOERC-Bot</h3>
+                <h3 className="font-bold leading-tight truncate text-base">Edi</h3>
                 <p className="text-xs text-primary-foreground/90 truncate font-medium">AI Assistant • Always Online</p>
               </div>
             </div>
@@ -725,7 +798,7 @@ const AIChatBot = () => {
 
                           try {
                             const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-                            const systemPrompt = `You are GCOERC-Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Center (GCOERC). Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. Be concise, friendly, and informative.`;
+                            const systemPrompt = `You are COERC Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Centre (GCOERC). Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. Be concise, friendly, and informative.`;
                             const chat = model.startChat({
                               history: updatedHistory.slice(1).map((msg) => ({
                                 role: msg.role === "assistant" ? "model" : "user",

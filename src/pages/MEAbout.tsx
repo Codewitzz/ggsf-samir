@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router-dom";
 import engineeringIcon from "@/assets/engineering-icon.png";
 import { cn } from "@/lib/utils";
+import DepartmentImagesSection from "@/components/DepartmentImagesSection";
 
 const SLIDE_DURATION = 5000;
 
@@ -153,7 +154,22 @@ const MEAbout = () => {
       .slice(0, 2);
   };
 
-  const facultyMembers = [
+  const normalizePublicImagePath = (image?: string) => {
+    if (!image) return undefined;
+    if (/^https?:\/\//i.test(image)) return image;
+    const trimmed = image.trim().replace(/^public\//i, "/");
+    if (trimmed.startsWith("/")) return trimmed;
+    return `/${trimmed}`;
+  };
+
+  const facultyMembers = [ 
+    {
+    name: "Dr . Nita M. Thakare (HOD) ",
+    image: "/Faculty/Nita-thakare.jpg",
+    qualifications: "PhD (CSE)",
+    experience: "29+ years",
+    areaOfInterest: "  Data Structures , OOP, Machine Learning",
+  },
     {
       name: "Dr. Umakant D Butkar",
       designation: "Head of Department",
@@ -382,6 +398,25 @@ const MEAbout = () => {
         </div>
       </section>
 
+      <DepartmentImagesSection
+        title="M.E. — Images"
+        subtitle="A quick glimpse of research, labs and industry collaboration"
+        images={[
+          {
+            title: "Research & Innovation",
+            image: "https://images.unsplash.com/photo-1532619675605-1ede6c7edf47?auto=format&fit=crop&w=1200&q=80",
+          },
+          {
+            title: "Advanced Laboratories",
+            image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
+          },
+          {
+            title: "Mentorship & Seminars",
+            image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+          },
+        ]}
+      />
+
       {/* Program Strengths & Research Domains */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
@@ -513,7 +548,7 @@ const MEAbout = () => {
                     <div className="relative">
                       <Avatar className="h-32 w-32 ring-4 ring-warning/20 bg-background shadow-lg group-hover:ring-warning/50 group-hover:scale-105 transition-all duration-500">
                         <AvatarImage 
-                          src={undefined} 
+                          src={normalizePublicImagePath(member.image) || "/placeholder.svg"} 
                           alt={member.name}
                           className="object-cover"
                         />

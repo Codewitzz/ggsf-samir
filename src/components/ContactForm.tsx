@@ -51,8 +51,8 @@ const ContactForm = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Email Us</h3>
                     <p className="text-muted-foreground text-sm mb-1">General Inquiries</p>
-                    <a href="mailto:info@ggsf.edu.in" className="text-primary hover:underline">
-                      info@ggsf.edu.in
+                    <a href="mailto:gcoerc.nashik@ggsf.edu.in" className="text-primary hover:underline break-all">
+                      gcoerc.nashik@ggsf.edu.in
                     </a>
                   </div>
                 </div>
@@ -69,7 +69,7 @@ const ContactForm = () => {
                     <h3 className="font-semibold text-lg mb-2">Call Us</h3>
                     <p className="text-muted-foreground text-sm mb-1">Phone Support</p>
                     <a href="tel:+917768004581" className="text-primary hover:underline">
-                      +91-7768004581
+                      +91-7768004581/82
                     </a>
                   </div>
                 </div>

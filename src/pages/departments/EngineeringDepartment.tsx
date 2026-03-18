@@ -1755,6 +1755,111 @@ const EngineeringDepartment = () => {
         </div>
       </section>
 
+  {/* Program Details + Tabs */}
+ 
+      <section className=" mt-o px-4 gsap-fade">
+        <div className="container mx-auto ml-10  ">
+          <Tabs defaultValue="about">
+            <TabsList className="mb-3 w-full gap-20">
+              <TabsTrigger value="about">About</TabsTrigger>
+              <TabsTrigger value="vision">Vision & Mission</TabsTrigger>
+              <TabsTrigger value="achievements">Achievements</TabsTrigger>
+              <TabsTrigger value="publications">Publications</TabsTrigger>
+              <TabsTrigger value="mou">MoU</TabsTrigger>
+            </TabsList>
+            <TabsContent value="about">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <BookMarked className="h-5 w-5 text-info" />
+                    About Department
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{dept.description}</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="vision">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Target className="h-5 w-5 text-info" />
+                    Vision & Mission
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {dept.vision ? <p className="text-foreground font-medium">Vision: {dept.vision}</p> : null}
+                  {dept.mission ? (
+                    <div>
+                      <p className="font-medium mb-2">Mission</p>
+                      <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                        {dept.mission.map((m, i) => (
+                          <li key={i}>{m}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="achievements">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Medal className="h-5 w-5 text-info" />
+                                       </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                    {(dept.achievements || ["Recent achievements will be updated."]).map((a, i) => (
+                      <li key={i}>{a}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="publications">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <BookOpen className="h-5 w-5 text-info" />
+                    Publications
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                    {(dept.publications || ["Department publications will be listed here."]).map((p, i) => (
+                      <li key={i}>{p}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="mou">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Rocket className="h-5 w-5 text-info" />
+                    Memorandum of Understanding (MoU)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <DepartmentMouTables deptKey={deptName || ""} />
+                  {!mouTablesByDept[deptName || ""] ? (
+                    <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+                      {(dept.mouPartners || ["MoU partners will be updated."]).map((p, i) => (
+                        <li key={i}>{p}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
       {/* Faculty Members */}
       {dept.facultyMembers && dept.facultyMembers.length > 0 && (
         <section className="py-16 px-4 bg-muted/30 gsap-fade">
@@ -1919,105 +2024,7 @@ const EngineeringDepartment = () => {
             </CardContent>
           </Card>
 
-          <Tabs defaultValue="about">
-            <TabsList className="mb-6">
-              <TabsTrigger value="about">About</TabsTrigger>
-              <TabsTrigger value="vision">Vision & Mission</TabsTrigger>
-              <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              <TabsTrigger value="publications">Publications</TabsTrigger>
-              <TabsTrigger value="mou">MoU</TabsTrigger>
-            </TabsList>
-            <TabsContent value="about">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <BookMarked className="h-5 w-5 text-info" />
-                    About Department
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{dept.description}</p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="vision">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Target className="h-5 w-5 text-info" />
-                    Vision & Mission
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {dept.vision ? <p className="text-foreground font-medium">Vision: {dept.vision}</p> : null}
-                  {dept.mission ? (
-                    <div>
-                      <p className="font-medium mb-2">Mission</p>
-                      <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                        {dept.mission.map((m, i) => (
-                          <li key={i}>{m}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="achievements">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Medal className="h-5 w-5 text-info" />
-                    Achievements
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                    {(dept.achievements || ["Recent achievements will be updated."]).map((a, i) => (
-                      <li key={i}>{a}</li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="publications">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-info" />
-                    Publications
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                    {(dept.publications || ["Department publications will be listed here."]).map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="mou">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Rocket className="h-5 w-5 text-info" />
-                    Memorandum of Understanding (MoU)
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <DepartmentMouTables deptKey={deptName || ""} />
-                  {!mouTablesByDept[deptName || ""] ? (
-                    <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                      {(dept.mouPartners || ["MoU partners will be updated."]).map((p, i) => (
-                        <li key={i}>{p}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+         
         </div>
       </section>
 

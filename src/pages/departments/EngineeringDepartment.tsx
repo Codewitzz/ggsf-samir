@@ -1434,7 +1434,7 @@ const EngineeringDepartment = () => {
       facultyMembers: [
         {
           name: "Prof. Rida Shaikh (HoD)",
-          image: undefined,
+          image: "public/Faculty/sonali-panchawatkar.jpg",
           qualifications: "MMM, Ph.D (Pursuing)",
           experience: "15 years",
           areaOfInterest: "Management Studies",
@@ -1511,16 +1511,20 @@ const EngineeringDepartment = () => {
 
     const base = [
       {
-        title: "Advanced Laboratories",
-        image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
+        title: "",
+        image: "public/Dept-imgs/Basic-sci/b-lab1.png",
       },
       {
-        title: "Project & Innovation Space",
-        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
+        title: "",
+        image: "public/Dept-imgs/Basic-sci/b-lab2.png",
       },
       {
-        title: "Student Activity Zone",
-        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+        title: "",
+        image: "public/Dept-imgs/Basic-sci/b-lab3.png",
+      },
+      {
+        title: "",
+        image: "public/Dept-imgs/Basic-sci/b-lab4.png",
       },
     ];
 
@@ -1529,69 +1533,178 @@ const EngineeringDepartment = () => {
     if (key.includes("computer") || key.includes("information-technology")) {
       return [
         {
-          title: "Programming Lab",
-          image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab1.jpg",
         },
         {
-          title: "Cloud & Systems",
-          image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab2.png",
         },
-        ...base.slice(1),
+        {
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab3.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab4.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab5.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Coputer/c-lab6.png",
+        },
       ];
     }
 
     if (key.includes("civil")) {
       return [
         {
-          title: "Surveying & Field Work",
-          image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab1.jpg",
         },
         {
-          title: "Structural Lab",
-          image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab4.jpg",
         },
-        ...base.slice(1),
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab3.jpg",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab2.jpg",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab5.jpg",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab6.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab7.jpg",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Civil/ci-lab8.jpg",
+        },
       ];
     }
-
-    if (key.includes("mechanical") || key.includes("automation") || key.includes("robotics")) {
+    if (key.includes("automation")) {
+      return [
+        {
+          title: "",
+          image: "public/Dept-imgs/Robotics/r-lab1.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/Robotics/r-lab2.png",
+        },
+       
+      ];
+    }
+    
+    if (key.includes("mechanical") ) {
       return [
         {
           title: "",
           image: "public/Dept-imgs/mechical/H-T-lab.png",
         },
         {
-          title: "Automation & Controls",
+          title: "",
           image: "public/Dept-imgs/mechical/lab2.png",        },
-        ...base.slice(1),
+       
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/m-lab3.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/m-lab4.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/m-lab5.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/m-lab6.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/mechical/m-lab7.png",
+        },
       ];
     }
 
     if (key.includes("electrical")) {
       return [
         {
-          title: "Electrical Machines Lab",
-          image: "https://images.unsplash.com/photo-1581091870632-1db7d05fa36e?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab1.png",
         },
         {
-          title: "Power Systems",
-          image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab2.png",
         },
-        ...base.slice(1),
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab3.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab4.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab5.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab6.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab7.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/electrical/e-lab8.png",
+        },
       ];
     }
 
     if (key.includes("artificial-intelligence") || key.includes("data-science")) {
       return [
         {
-          title: "AI & Data Lab",
-          image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab1.jpg",
         },
         {
-          title: "Deep Learning Studio",
-          image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=80",
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab2.png",
         },
-        ...base.slice(1),
+        {
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab3.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab4.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab5.png",
+        },
+        {
+          title: "",
+          image: "public/Dept-imgs/AIDS/ai-lab6.jpg",
+        },
       ];
     }
 
@@ -1757,10 +1870,10 @@ const EngineeringDepartment = () => {
 
   {/* Program Details + Tabs */}
  
-      <section className=" mt-o px-4 gsap-fade">
-        <div className="container mx-auto ml-10  ">
+      <section className=" mt-o ml-10 px-4 gsap-fade">
+        <div className="container mx-auto ml-10 max-w-6xl ">
           <Tabs defaultValue="about">
-            <TabsList className="mb-3 w-full gap-20">
+            <TabsList className="mb-3 w-auto  max-w-6xl">
               <TabsTrigger value="about">About</TabsTrigger>
               <TabsTrigger value="vision">Vision & Mission</TabsTrigger>
               <TabsTrigger value="achievements">Achievements</TabsTrigger>
@@ -1770,7 +1883,7 @@ const EngineeringDepartment = () => {
             <TabsContent value="about">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
+                  <CardTitle className="text-xl  flex items-center gap-2">
                     <BookMarked className="h-5 w-5 text-info" />
                     About Department
                   </CardTitle>
@@ -1860,6 +1973,83 @@ const EngineeringDepartment = () => {
         </div>
       </section>
 
+      
+
+      {/* Laboratories */}
+      <section className="py-16 px-4 bg-muted/30 gsap-fade">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12">Laboratories & Facilities</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {dept.labs.map((lab, index) => (
+              <Card key={index} className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6 text-center">
+                  <p className="font-medium text-foreground">{lab}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DepartmentImagesSection
+        title={`${dept.name} — Images`}
+        subtitle="Facilities, labs and student activities"
+        images={departmentGallery}
+      />
+
+      {/* Career Opportunities */}
+      <section className="py-16 px-4 gsap-fade">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
+            <Briefcase className="h-8 w-8 text-info" />
+            Career Opportunities
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {dept.career.map((career, index) => (
+              <Card key={index} className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6 text-center">
+                  <p className="font-medium text-foreground">{career}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
+
+      {/* Program Details + Tabs */}
+      <section className="py-16 px-4 gsap-fade">
+        <div className="container mx-auto max-w-4xl">
+          <Card className="mb-10">
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <GraduationCap className="h-6 w-6 text-info" />
+                Program Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Duration</h3>
+                <p className="text-muted-foreground">4 Years (8 Semesters)</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Degree Awarded</h3>
+                <p className="text-muted-foreground">Bachelor of Engineering (B.E.) in {dept.name}</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Eligibility</h3>
+                <p className="text-muted-foreground">
+                  10+2 with Physics, Chemistry, and Mathematics. Valid JEE Main or state entrance exam scores required.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+         
+        </div>
+      </section>
+
       {/* Faculty Members */}
       {dept.facultyMembers && dept.facultyMembers.length > 0 && (
         <section className="py-16 px-4 bg-muted/30 gsap-fade">
@@ -1931,48 +2121,7 @@ const EngineeringDepartment = () => {
         </section>
       )}
 
-      {/* Laboratories */}
-      <section className="py-16 px-4 bg-muted/30 gsap-fade">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Laboratories & Facilities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {dept.labs.map((lab, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <p className="font-medium text-foreground">{lab}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <DepartmentImagesSection
-        title={`${dept.name} — Images`}
-        subtitle="Facilities, labs and student activities"
-        images={departmentGallery}
-      />
-
-      {/* Career Opportunities */}
-      <section className="py-16 px-4 gsap-fade">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-            <Briefcase className="h-8 w-8 text-info" />
-            Career Opportunities
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {dept.career.map((career, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <p className="font-medium text-foreground">{career}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Key Highlights */}
+{/* Key Highlights */}
       <section className="py-16 px-4 bg-muted/30 gsap-fade">
         <div className="container mx-auto max-w-4xl">
           <Card>
@@ -1995,39 +2144,6 @@ const EngineeringDepartment = () => {
           </Card>
         </div>
       </section>
-
-      {/* Program Details + Tabs */}
-      <section className="py-16 px-4 gsap-fade">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="mb-10">
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-2">
-                <GraduationCap className="h-6 w-6 text-info" />
-                Program Details
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Duration</h3>
-                <p className="text-muted-foreground">4 Years (8 Semesters)</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Degree Awarded</h3>
-                <p className="text-muted-foreground">Bachelor of Engineering (B.E.) in {dept.name}</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Eligibility</h3>
-                <p className="text-muted-foreground">
-                  10+2 with Physics, Chemistry, and Mathematics. Valid JEE Main or state entrance exam scores required.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-         
-        </div>
-      </section>
-
       <Footer />
     </div>
   );

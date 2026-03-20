@@ -148,6 +148,7 @@ const MBA = () => {
   const facultyMembers = [
     {
       name: "Prof. Rida Shaikh (HoD)",
+      image :"public/Faculty/sonali-panchawatkar.jpg",
       designation: "Head of Department",
       qualifications: "MMM, Ph.D (Pursuing)",
       experience: "15 years",

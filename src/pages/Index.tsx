@@ -34,6 +34,9 @@ const Index = () => {
           <Hero />
         </div>
         <div className="gsap-fade">
+          <NoticesAnnouncements />
+        </div>
+        <div className="gsap-fade">
           <CollegeCards />
         </div>
         <div className="gsap-fade">
@@ -47,9 +50,6 @@ const Index = () => {
         </div>
         <div className="gsap-fade">
           <NBAAccreditation />
-        </div>
-        <div className="gsap-fade">
-          <NoticesAnnouncements />
         </div>
         <div className="gsap-fade">
           <ResearchHighlights />

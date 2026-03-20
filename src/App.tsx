@@ -58,6 +58,7 @@ const Alumni = lazy(() => import("./pages/Alumni"));
 const Library = lazy(() => import("./pages/Library"));
 const CanteenCafeteria = lazy(() => import("./pages/CanteenCafeteria"));
 const MoU = lazy(() => import("./pages/MoU"));
+const AdminNotices = lazy(() => import("./pages/AdminNotices"));
 
 const queryClient = new QueryClient();
 
@@ -188,6 +189,9 @@ const App = () => {
               <Route path="/notices/scholarship-2025" element={<Placeholder />} />
               <Route path="/notices/re-evaluation" element={<Placeholder />} />
               <Route path="/notices/lab-manuals" element={<Placeholder />} />
+
+              {/* Admin Routes */}
+              <Route path="/admin/notices" element={<AdminNotices />} />
 
               {/* Achievements Routes */}
               <Route path="/achievements" element={<Placeholder />} />

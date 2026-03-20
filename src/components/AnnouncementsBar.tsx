@@ -1,24 +1,13 @@
 import { Link } from "react-router-dom";
-import { Megaphone } from "lucide-react";
-import { useMemo } from "react";
-
-type Announcement = {
-  label: string;
-  href?: string;
-  accent?: "primary" | "secondary" | "info" | "warning" | "success";
-};
+import { useAdminNotices } from "@/hooks/useAdminNotices";
 
 const AnnouncementsBar = () => {
-  const announcements: Announcement[] = useMemo(
-    () => [
-      { label: "Admissions Open 2025-26", href: "/admissions", accent: "primary" },
-      { label: "MBA Admissions – Apply Now", href: "/mba/admissions", accent: "secondary" },
-      { label: "Engineering Admissions – Apply Now", href: "/engineering/admissions", accent: "info" },
-      { label: "ME Admissions – Apply Now", href: "/me/admissions", accent: "warning" },
-      { label: "Beware of fake websites – apply only via official site", href: "/faq", accent: "success" },
-    ],
-    []
-  );
+  const { items } = useAdminNotices();
+
+  const announcements = items
+    .filter((i) => i.kind === "announcement" && i.enabledOnHomepage)
+    .slice()
+    .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0));
 
   return (
     <div className="w-full bg-background border-b border-border">
@@ -42,19 +31,30 @@ const AnnouncementsBar = () => {
                     : a.accent === "success"
                     ? "bg-success text-success-foreground"
                     : "bg-primary text-primary-foreground";
+
                 const content = (
-                  <span
-                    className={`text-xs md:text-sm px-3 py-1 rounded-full ${badgeColor} inline-block`}
-                  >
-                    {a.label}
+                  <span className={`text-xs md:text-sm px-3 py-1 rounded-full ${badgeColor} inline-block`}>
+                    {a.title}
                   </span>
                 );
-                return a.href ? (
-                  <Link key={i} to={a.href} className="hover:opacity-90 transition-opacity">
+
+                if (!a.linkUrl) return <span key={i}>{content}</span>;
+
+                const isExternal = !a.linkUrl.startsWith("/");
+                return isExternal ? (
+                  <a
+                    key={i}
+                    href={a.linkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:opacity-90 transition-opacity"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <Link key={i} to={a.linkUrl} className="hover:opacity-90 transition-opacity">
                     {content}
                   </Link>
-                ) : (
-                  <span key={i}>{content}</span>
                 );
               })}
             </div>

@@ -238,6 +238,11 @@ const Header = () => {
             Mechanical Engineering Program is Accredited by NBA
           </div>
           <div className="hidden md:block">
+            <Link to="/admin/notices" className="hover:bg-blue-900 font-medium bg-sky-500  rounded-lg p-1 pr-3 pl-3 transition-colors">
+              Admin Login
+            </Link>
+          </div>
+          <div className="hidden md:block">
             <Link to="/contact" className="hover:bg-yellow-900 font-medium bg-yellow-600  rounded-full p-1 pr-3 pl-3 transition-colors">
               Apply Now
             </Link>
@@ -303,7 +308,7 @@ const Header = () => {
                   <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-full max-w-[800px] p-5 bg-gradient-to-br from-white to-gray-50">
-                      <div className="grid grid-cols-4 gap-5">
+                      <div className=" grid gap-5  ">
                         {/* Engineering */}
                         <div className="group col-span-2 bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                           <Link to="/engineering/about">

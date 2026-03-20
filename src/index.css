@@ -131,3 +131,24 @@ html {
   }
 }
 
+/* Floating effect for the chatbot logo */
+@keyframes chatbotFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.chatbot-logo-float {
+  animation: chatbotFloat 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-logo-float {
+    animation: none;
+  }
+}
+

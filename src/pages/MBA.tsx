@@ -148,43 +148,49 @@ const MBA = () => {
   const facultyMembers = [
     {
       name: "Prof. Rida Shaikh (HoD)",
-      image :"public/Faculty/sonali-panchawatkar.jpg",
+      image: "/Faculty/sonali-panchawatkar.jpg",
       designation: "Head of Department",
       qualifications: "MMM, Ph.D (Pursuing)",
       experience: "15 years",
     },
     {
       name: "Prof. Amogh Kshirsagar",
+      image: "/Faculty/apurva-bhavsar.jpg",
       designation: "Professor",
       qualifications: "M.A. Psychology, Master of Personnel Management",
       experience: "20 years",
     },
     {
       name: "Prof. Aditi Kulkarni",
+      image: "/Faculty/t-a-kulkarni.jpg",
       designation: "Professor",
       qualifications: "MBA (Finance), MBA (HR- Additional Spl.), M.Com, GDC&A, DTL, Ph.D (Pursuing)",
       experience: "9 years",
     },
     {
       name: "Prof. Radhika Gaikwad",
+      image: "/Faculty/gauri-puranik.jpeg",
       designation: "Professor",
       qualifications: "MBA (HR)",
       experience: "5 years",
     },
     {
       name: "Prof. Satbir Singh Hundal",
+      image: "/Faculty/s-h-kondo.jpg",
       designation: "Professor",
       qualifications: "MBA (HR), BE (IT)",
       experience: "9 years",
     },
     {
       name: "Prof. Nivedita Pawar",
+      image: "/Faculty/v-v-pawar.jpg",
       designation: "Professor",
       qualifications: "BTech Biotechnology, MBA (Finance)",
       experience: "4 years",
     },
     {
       name: "Prof. Rachana Badode",
+      image: "/Faculty/b-g-dhabhade.jpg",
       designation: "Professor",
       qualifications: "B.E. Computer",
       experience: "—",
@@ -408,7 +414,7 @@ const MBA = () => {
                     <div className="relative">
                       <Avatar className="h-32 w-32 ring-4 ring-primary/20 bg-background shadow-lg group-hover:ring-primary/50 group-hover:scale-105 transition-all duration-500">
                         <AvatarImage 
-                          src={undefined} 
+                          src={member.image}
                           alt={member.name}
                           className="object-cover"
                         />

@@ -662,12 +662,12 @@ const AIChatBot = () => {
           >
             <span className="absolute -inset-0.5 rounded-full bg-gradient-to-br from-secondary/60 via-white/10 to-secondary/40 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
             <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_40%_30%,rgba(255,255,255,0.25),transparent_55%)]" />
-            <span className="absolute inset-2 rounded-full bg-gradient-to-br from-slate-950/60 to-slate-900/90 grid place-items-center">
+            <span className="absolute inset-2 rounded-full bg-gradient-to-br from-slate-950/60  grid place-items-center">
               <span className="relative grid h-10 w-10 place-items-center rounded-full  shadow-inner ring-1 ring-black/10">
                 <img
                   src="/chatbot-logo.png"
                   alt="GCOERC"
-                  className="h-10 w-10 rounded-full object-cover"
+                    className="h-10 w-10 rounded-full object-cover chatbot-logo-float"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -694,7 +694,7 @@ const AIChatBot = () => {
                 <img
                   src="/chatbot-logo.png"
                   alt="GCOERC"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover chatbot-logo-float"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -702,7 +702,6 @@ const AIChatBot = () => {
                     target.style.display = "none";
                   }}
                 />
-                <MessageCircle className="absolute h-5 w-5" />
               </div>
               <div className="min-w-0">
                 <h3 className="font-bold leading-tight truncate text-base">Edi</h3>

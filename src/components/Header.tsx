@@ -302,7 +302,7 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[800px] p-5 bg-gradient-to-br from-white to-gray-50">
+                    <div className="w-full max-w-[800px] p-5 bg-gradient-to-br from-white to-gray-50">
                       <div className="grid grid-cols-4 gap-5">
                         {/* Engineering */}
                         <div className="group col-span-2 bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">

@@ -11,6 +11,8 @@ export type AdminNoticeItem = {
   text?: string;
   linkUrl?: string;
   imageDataUrl?: string; // Stored as base64 (local/dev friendly).
+  pdfDataUrl?: string; // Optional PDF attachment stored as base64.
+  pdfFileName?: string;
   accent?: AdminNoticeAccent; // Mainly for announcements bar.
   enabledOnHomepage: boolean;
   createdAt: number;
@@ -38,6 +40,7 @@ const DEFAULT_SETTINGS: AdminNoticesSettings = {
 const STORAGE_GUARD = {
   // Base64 for images can grow quickly. This is a safety guard to avoid blowing up localStorage.
   maxImageDataUrlChars: 2_000_000,
+  maxPdfDataUrlChars: 4_000_000,
 };
 
 function now() {
@@ -169,6 +172,17 @@ export function validateAndNormalizeImageDataUrl(imageDataUrl?: string): string 
     throw new Error("Invalid image data.");
   }
   return imageDataUrl;
+}
+
+export function validateAndNormalizePdfDataUrl(pdfDataUrl?: string): string | undefined {
+  if (!pdfDataUrl) return undefined;
+  if (pdfDataUrl.length > STORAGE_GUARD.maxPdfDataUrlChars) {
+    throw new Error("PDF is too large for browser storage. Please upload a smaller PDF file.");
+  }
+  if (!pdfDataUrl.startsWith("data:application/pdf")) {
+    throw new Error("Invalid PDF data.");
+  }
+  return pdfDataUrl;
 }
 
 export function createAdminNoticeItemInput(input: Omit<AdminNoticeItem, "id" | "createdAt" | "updatedAt">): AdminNoticeItem {

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CalendarDays, AlertCircle } from "lucide-react";
+import { CalendarDays, AlertCircle, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAdminNotices } from "@/hooks/useAdminNotices";
 import { isAdminSessionActive } from "@/lib/notices/adminNoticesStore";
@@ -65,7 +65,14 @@ const NoticesAnnouncements = () => {
                 </CardHeader>
                 <CardContent>
                   {notice.text && <p className="text-sm text-muted-foreground mb-4">{notice.text}</p>}
-                  {notice.linkUrl ? (
+                  {notice.pdfDataUrl ? (
+                    <Button asChild size="sm" variant="outline" className="mt-2 border-primary/20 hover:border-primary/40">
+                      <a href={notice.pdfDataUrl} target="_blank" rel="noopener noreferrer">
+                        <FileText className="h-4 w-4 mr-2" />
+                        View PDF
+                      </a>
+                    </Button>
+                  ) : notice.linkUrl ? (
                     isExternalLink ? (
                       <Button asChild size="sm" variant="outline" className="mt-2 border-primary/20 hover:border-primary/40">
                         <a href={notice.linkUrl} target="_blank" rel="noopener noreferrer">

@@ -27,8 +27,9 @@ import {
   setAdminNoticesSettings,
   upsertAdminNoticeItem,
   validateAndNormalizeImageDataUrl,
+  validateAndNormalizePdfDataUrl,
 } from "@/lib/notices/adminNoticesStore";
-import { AlertCircle, KeyRound, LogOut, ShieldCheck, Plus, Trash2 } from "lucide-react";
+import { AlertCircle, ExternalLink, Eye, FileText, KeyRound, LogOut, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function readFileAsDataUrl(file: File): Promise<string> {
@@ -38,6 +39,10 @@ function readFileAsDataUrl(file: File): Promise<string> {
     reader.onerror = () => reject(new Error("Failed to read the image file."));
     reader.readAsDataURL(file);
   });
+}
+
+function isPdfFile(file: File) {
+  return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 }
 
 const ADMIN_HINT =
@@ -64,6 +69,9 @@ const AdminNotices = () => {
   const [imageDataUrl, setImageDataUrl] = useState<string | undefined>(undefined);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | undefined>(undefined);
   const [imageError, setImageError] = useState<string | null>(null);
+  const [pdfDataUrl, setPdfDataUrl] = useState<string | undefined>(undefined);
+  const [pdfFileName, setPdfFileName] = useState<string | undefined>(undefined);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   const deleteTarget = useMemo(() => items.find((i) => i.id === deleteTargetId) ?? null, [items, deleteTargetId]);
 
@@ -79,6 +87,9 @@ const AdminNotices = () => {
     setImageDataUrl(undefined);
     setImagePreviewUrl(undefined);
     setImageError(null);
+    setPdfDataUrl(undefined);
+    setPdfFileName(undefined);
+    setPdfError(null);
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -121,6 +132,7 @@ const AdminNotices = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setImageError(null);
+    setPdfError(null);
 
     if (!title.trim()) {
       toast({ title: "Missing title", description: "Please enter a title.", variant: "destructive" });
@@ -135,6 +147,8 @@ const AdminNotices = () => {
       text: text.trim() ? text.trim() : undefined,
       linkUrl: linkUrl.trim() ? linkUrl.trim() : undefined,
       imageDataUrl,
+      pdfDataUrl,
+      pdfFileName,
       accent: kind === "announcement" ? accent : undefined,
       enabledOnHomepage,
     } satisfies Omit<AdminNoticeItem, "id" | "createdAt" | "updatedAt">;
@@ -147,6 +161,28 @@ const AdminNotices = () => {
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to save item.";
       toast({ title: "Could not save", description: message, variant: "destructive" });
+    }
+  };
+
+  const handlePickPdf = async (file: File | null) => {
+    setPdfError(null);
+    setPdfDataUrl(undefined);
+    setPdfFileName(undefined);
+
+    if (!file) return;
+    if (!isPdfFile(file)) {
+      setPdfError("Please choose a valid PDF file.");
+      return;
+    }
+
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      const normalized = validateAndNormalizePdfDataUrl(dataUrl);
+      setPdfDataUrl(normalized);
+      setPdfFileName(file.name);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Invalid PDF file.";
+      setPdfError(message);
     }
   };
 
@@ -166,30 +202,36 @@ const AdminNotices = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="relative min-h-screen bg-background">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background opacity-80" />
+      <div className="relative min-h-screen overflow-hidden bg-background">
+        <div className="pointer-events-none absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488866022504-f2584929ca5f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-950/80 via-fuchsia-900/45 to-indigo-900/80" />
+        <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-secondary/30 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
         <div className="relative z-10">
           <Header />
-          <main className="py-16 px-4">
-            <div className="container mx-auto max-w-2xl">
-              <Card className="border-primary/20 shadow-lg shadow-primary/5">
+          <main className="py-10 md:py-16 px-4">
+            <div className="container mx-auto max-w-3xl">
+              <Card className="border-white/30 bg-white/15 backdrop-blur-md shadow-2xl shadow-black/20 text-white transition-transform duration-300 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary/20 via-muted/20 to-transparent border border-primary/20 flex items-center justify-center">
-                    <ShieldCheck className="h-6 w-6 text-primary" />
+                  <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/30 flex items-center justify-center shadow-lg shadow-black/20">
+                    <ShieldCheck className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <CardTitle className="text-2xl">Staff Login</CardTitle>
-                    <CardDescription>Manage notice/announcement templates, text and images.</CardDescription>
+                    <CardTitle className="text-2xl flex items-center gap-2">
+                      Admin Login
+                      <Sparkles className="h-5 w-5 text-secondary" />
+                    </CardTitle>
+                    <CardDescription className="text-white/80">Manage notice and announcement content.</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="mb-6 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-muted/20 to-transparent p-4 text-sm text-muted-foreground">
+                <div className="mb-6 rounded-2xl border border-white/20 bg-white/10 p-4 text-sm text-white/85">
                   <div className="flex items-start gap-3">
                     <AlertCircle className="h-5 w-5 mt-0.5 text-muted-foreground" />
                     <div className="space-y-1">
-                      <p className="font-medium text-foreground/90">Admin notice editor</p>
+                      <p className="font-medium text-white">Admin notice editor</p>
                       <p>
                         {ADMIN_HINT}
                         <br />
@@ -207,7 +249,7 @@ const AdminNotices = () => {
                       onChange={(e) => setUsername(e.target.value)}
                       autoComplete="username"
                       placeholder="e.g. admin"
-                      className="bg-background/70 border-primary/20 focus-visible:ring-primary/30"
+                      className="bg-white/15 border-white/30 text-white placeholder:text-white/70 focus-visible:ring-white/30"
                     />
                   </div>
                   <div className="space-y-2">
@@ -218,7 +260,7 @@ const AdminNotices = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       autoComplete="current-password"
                       placeholder="Enter password"
-                      className="bg-background/70 border-primary/20 focus-visible:ring-primary/30"
+                      className="bg-white/15 border-white/30 text-white placeholder:text-white/70 focus-visible:ring-white/30"
                     />
                   </div>
 
@@ -229,14 +271,11 @@ const AdminNotices = () => {
                     </div>
                   )}
 
-                  <Button
-                    type="submit"
-                    className="w-full shadow-sm shadow-primary/20 hover:shadow-md transition-all rounded-xl"
-                  >
+                  <Button type="submit" className="w-full bg-white text-black hover:bg-white/90 shadow-sm hover:shadow-white/20 transition-all rounded-full">
                     Log in
                   </Button>
 
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-white/85">
                     Tip: If you disabled the homepage “Staff Login” widget, open this page directly at{" "}
                     <Link className="underline" to="/admin/notices">
                       /admin/notices
@@ -257,14 +296,33 @@ const AdminNotices = () => {
   return (
     <div className="relative min-h-screen bg-background">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background opacity-80" />
+      <div className="pointer-events-none absolute -left-16 top-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 top-48 h-80 w-80 rounded-full bg-secondary/20 blur-3xl" />
       <div className="relative z-10">
         <Header />
         <main className="py-16 px-4">
           <div className="container mx-auto max-w-6xl space-y-6">
             <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold">Admin: Notices & Announcements</h1>
+              <h1 className="text-3xl font-bold flex items-center gap-2">
+                Admin: Notices & Announcements
+                <Sparkles className="h-5 w-5 text-primary" />
+              </h1>
               <p className="text-muted-foreground mt-1 text-sm">{ADMIN_HINT}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button asChild variant="outline" size="sm" className="gap-2">
+                  <Link to="/" target="_blank" rel="noreferrer">
+                    <Eye className="h-4 w-4" />
+                    Preview Homepage
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="sm" className="gap-2">
+                  <Link to="/admin/notices">
+                    <ExternalLink className="h-4 w-4" />
+                    Refresh Panel
+                  </Link>
+                </Button>
+              </div>
             </div>
             <Button
               variant="outline"
@@ -277,7 +335,7 @@ const AdminNotices = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="transition-all hover:-translate-y-0.5 hover:shadow-lg">
+              <Card className="border-primary/10 transition-all hover:-translate-y-0.5 hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Homepage Widget</CardTitle>
                 <CardDescription>Control whether visitors can access staff login from the homepage.</CardDescription>
@@ -299,7 +357,7 @@ const AdminNotices = () => {
               </CardContent>
             </Card>
 
-              <Card className="transition-all hover:-translate-y-0.5 hover:shadow-lg">
+              <Card className="border-primary/10 transition-all hover:-translate-y-0.5 hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Add / Publish</CardTitle>
                 <CardDescription>Create a new notice or announcement item.</CardDescription>
@@ -412,6 +470,30 @@ const AdminNotices = () => {
                     )}
                   </div>
 
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">PDF File (optional)</label>
+                    <Input type="file" accept="application/pdf,.pdf" onChange={(e) => handlePickPdf(e.target.files?.[0] ?? null)} />
+                    {pdfError && <div className="text-sm text-destructive">{pdfError}</div>}
+                    {pdfDataUrl && (
+                      <div className="rounded-md border border-border/60 bg-muted/20 p-3 text-sm flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <FileText className="h-4 w-4 shrink-0" />
+                          <span className="truncate">{pdfFileName ?? "Attached PDF"}</span>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          onClick={() => {
+                            setPdfDataUrl(undefined);
+                            setPdfFileName(undefined);
+                          }}
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+
                   <div className="flex items-center gap-3">
                     <Checkbox
                       checked={enabledOnHomepage}
@@ -423,16 +505,27 @@ const AdminNotices = () => {
                     </label>
                   </div>
 
-                  <Button type="submit" className="w-full flex items-center justify-center gap-2">
-                    <Plus className="h-4 w-4" />
-                    Save
-                  </Button>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Button type="submit" className="w-full flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all">
+                      <Plus className="h-4 w-4" />
+                      Save & Publish
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full flex items-center justify-center gap-2"
+                      onClick={resetForm}
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      Reset Form
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
             </div>
 
-            <Card className="transition-all hover:shadow-lg">
+            <Card className="border-primary/10 transition-all hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Published Items</CardTitle>
                 <CardDescription>Delete unwanted items or toggle visibility.</CardDescription>
@@ -484,13 +577,25 @@ const AdminNotices = () => {
                           </div>
                         </div>
 
-                        {item.imageDataUrl && (
-                          <div className="flex items-center gap-4">
-                            <img
-                              src={item.imageDataUrl}
-                              alt={`${item.title} image`}
-                              className="h-20 w-20 rounded-md border border-border/60 object-cover"
-                            />
+                        {(item.imageDataUrl || item.pdfDataUrl || item.linkUrl) && (
+                          <div className="flex flex-wrap items-center gap-4">
+                            {item.imageDataUrl && (
+                              <img
+                                src={item.imageDataUrl}
+                                alt={`${item.title} image`}
+                                className="h-20 w-20 rounded-md border border-border/60 object-cover"
+                              />
+                            )}
+                            {item.pdfDataUrl && (
+                              <a
+                                href={item.pdfDataUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs rounded-md border border-border/60 px-2 py-1 hover:bg-muted"
+                              >
+                                PDF: {item.pdfFileName ?? "Open file"}
+                              </a>
+                            )}
                             {item.linkUrl && <div className="text-xs text-muted-foreground break-all">Link: {item.linkUrl}</div>}
                           </div>
                         )}

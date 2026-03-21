@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";

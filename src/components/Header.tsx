@@ -4,12 +4,10 @@ import { Menu, X, Search, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   DropdownMenu,
@@ -216,7 +214,7 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className=" top-0 z-50">
       {/* Top Info Bar */}
       <div className="bg-primary text-primary-foreground py-2 px-4">
         <div className="container mx-auto flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-sm">
@@ -252,10 +250,10 @@ const Header = () => {
 
       {/* Main Navigation */}
       <header
-        className={`border-b border-border
+        className={`   border-b border-border
     transition-[background,backdrop-filter,box-shadow] 
     duration-700 ease-in-out ${
-          isScrolled ? "bg-primary text-white  backdrop-blur-md shadow-lg" : "bg-background"
+          isScrolled ? "bg-primary text-white   backdrop-blur-md shadow-lg" : "bg-background"
         } border-b border-border`}
       >
         <div className="container mx-auto px-4">
@@ -305,99 +303,98 @@ const Header = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={triggerClassName}>Departments</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-full max-w-[800px] p-5 bg-gradient-to-br from-white to-gray-50">
-                      <div className=" grid gap-5  ">
-                        {/* Engineering */}
-                        <div className="group col-span-2 bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                          <Link to="/engineering/about">
-                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
-                              <span className="w-1 h-5 bg-primary rounded-full"></span>
-                              Engineering
-                            </h4>
-                          </Link>
-                          <ul className="space-y-1.5 mb-3">
-                            {engineeringMenuItems.map((item) => (
-                              <li key={item.title}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    to={item.href}
-                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
-                                  >
-                                    {item.title}
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
-                          <h5 className="mt-3 mb-2 text-[10px] font-bold text-gray-600 uppercase tracking-wide border-t pt-2">Engineering Departments</h5>
-                          <ul className="grid grid-cols-2 gap-1.5">
-                            {engineeringDepartments.map((item) => (
-                              <li key={item.title}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    to={item.href}
-                                    className="block select-none rounded-md p-1.5 text-[11px] font-medium leading-tight no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary"
-                                  >
-                                    {item.title}
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button type="button" className={triggerClassName}>
+                        Departments
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="start"
+                      sideOffset={10}
+                      className="z-[80] w-[760px] max-w-[calc(100vw-2rem)] rounded-2xl border border-primary/15 bg-background/95 p-0 shadow-2xl backdrop-blur-md"
+                    >
+                      <div className="flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 via-secondary/10 to-primary/5 px-5 py-4">
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">Explore Departments & Programs</p>
+                          <p className="text-xs text-muted-foreground">Navigate engineering, management, and postgraduate offerings</p>
                         </div>
+                        <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
+                          {engineeringDepartments.length + engineeringMenuItems.length + mbaMenuItems.length + bbaMenuItems.length + meMenuItems.length} Links
+                        </span>
+                      </div>
 
-                        {/* MBA */}
-                        <div className="group bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                          <Link to="/engineering/departments/management-studies">
-                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
-                              <span className="w-1 h-5 bg-primary rounded-full"></span>
-                              Management Studies
-                            </h4>
-                          </Link>
-                          <ul className="space-y-1.5">
-                            {[...mbaMenuItems, ...bbaMenuItems].map((item) => (
-                              <li key={item.title}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    to={item.href}
-                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
-                                  >
-                                    {item.title}
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                      <div className="grid gap-4 p-4 lg:grid-cols-3">
+                        <div className="rounded-xl border border-primary/10 bg-muted/20 p-2 lg:col-span-1">
+                          <div className="px-2 pb-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">Engineering</div>
+                          {engineeringMenuItems.map((item) => (
+                            <DropdownMenuItem
+                              key={item.title}
+                              className="cursor-pointer rounded-lg px-2.5 py-2 text-sm transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                              onSelect={(e) => {
+                                e.preventDefault();
+                                navigate(item.href);
+                              }}
+                            >
+                              {item.title}
+                            </DropdownMenuItem>
+                          ))}
 
-                        {/* ME */}
-                        <div className="group bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                          <Link to="/me/about">
-                            <h4 className="mb-3 text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-2">
-                              <span className="w-1 h-5 bg-primary rounded-full"></span>
-                              M.E.
-                            </h4>
-                          </Link>
-                          <ul className="space-y-1.5">
+                          <div className="mt-2 border-t border-primary/10 pt-2">
+                            <div className="px-2 pb-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">M.E.</div>
                             {meMenuItems.map((item) => (
-                              <li key={item.title}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    to={item.href}
-                                    className="block select-none rounded-md p-1.5 text-xs font-medium leading-relaxed no-underline outline-none transition-all hover:bg-primary/10 hover:text-primary hover:pl-2.5"
-                                  >
-                                    {item.title}
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
+                              <DropdownMenuItem
+                                key={item.title}
+                                className="cursor-pointer rounded-lg px-2.5 py-2 text-sm transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                                onSelect={(e) => {
+                                  e.preventDefault();
+                                  navigate(item.href);
+                                }}
+                              >
+                                {item.title}
+                              </DropdownMenuItem>
                             ))}
-                          </ul>
+                          </div>
+                        </div>
+
+                        <div className="rounded-xl border border-primary/10 bg-muted/20 p-2 lg:col-span-1">
+                          <div className="px-2 pb-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">Management Studies</div>
+                          {[...mbaMenuItems, ...bbaMenuItems].map((item) => (
+                            <DropdownMenuItem
+                              key={item.title}
+                              className="cursor-pointer rounded-lg px-2.5 py-2 text-sm transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                              onSelect={(e) => {
+                                e.preventDefault();
+                                navigate(item.href);
+                              }}
+                            >
+                              {item.title}
+                            </DropdownMenuItem>
+                          ))}
+                        </div>
+
+                        <div className="rounded-xl border border-primary/10 bg-muted/20 p-2 lg:col-span-1">
+                          <div className="px-2 pb-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">
+                            Engineering Departments
+                          </div>
+                          <div className="max-h-[320px] space-y-1 overflow-y-auto pr-1">
+                            {engineeringDepartments.map((item) => (
+                              <DropdownMenuItem
+                                key={item.title}
+                                className="cursor-pointer rounded-lg px-2.5 py-2 text-sm transition-colors hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+                                onSelect={(e) => {
+                                  e.preventDefault();
+                                  navigate(item.href);
+                                }}
+                              >
+                                {item.title}
+                              </DropdownMenuItem>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </NavigationMenuContent>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>

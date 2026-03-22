@@ -626,7 +626,7 @@ const AIChatBot = () => {
     <>
       {/* Floating Chat Button */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+        <div className="fixed z-50 flex flex-col items-end gap-3 bottom-[max(1rem,env(safe-area-inset-bottom,0px))] right-[max(1rem,env(safe-area-inset-right,0px))] sm:bottom-6 sm:right-6">
           {showIntro && (
             <button
               type="button"
@@ -686,7 +686,7 @@ const AIChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col overflow-hidden border border-border bg-card shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-card/90 rounded-2xl w-[calc(100vw-3rem)] max-w-[380px] h-[70vh] max-h-[640px] min-h-[420px]">
+        <div className="fixed z-50 flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-card/90 left-3 right-3 bottom-[max(1rem,env(safe-area-inset-bottom,0px))] h-[min(70vh,640px)] max-h-[min(85svh,640px)] min-h-[280px] sm:left-auto sm:right-[max(1.5rem,env(safe-area-inset-right,0px))] sm:bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] sm:w-[calc(100vw-3rem)] sm:max-w-[380px]">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-primary via-primary/95 to-primary-dark text-primary-foreground shadow-md">
             <div className="flex items-center gap-3 min-w-0">

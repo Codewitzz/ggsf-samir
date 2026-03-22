@@ -12,8 +12,8 @@ const AnnouncementsBar = () => {
   return (
     <div className="w-full bg-background border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center gap-2 py-2 overflow-hidden">
-          <div className="relative w-full">
+        <div className="flex items-center gap-2 py-2 overflow-hidden min-w-0">
+          <div className="relative min-w-0 flex-1">
             <div
               className="flex gap-3 animate-[scroll_30s_linear_infinite]"
               style={{
@@ -61,7 +61,7 @@ const AnnouncementsBar = () => {
           </div>
           <Link
             to="/contact"
-            className="ml-auto hidden md:inline-flex text-xs md:text-sm px-3 py-1 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            className="ml-auto shrink-0 inline-flex text-xs sm:text-sm px-2.5 py-1 sm:px-3 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             Apply Now
           </Link>

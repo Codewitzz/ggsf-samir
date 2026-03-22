@@ -214,14 +214,17 @@ const Header = () => {
   );
 
   return (
-    <div className=" top-0 z-50">
+    <div className="sticky top-0 z-50">
       {/* Top Info Bar */}
-      <div className="bg-primary text-primary-foreground py-2 px-4">
+      <div className="bg-primary text-primary-foreground py-2 px-3 sm:px-4">
         <div className="container mx-auto flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-sm">
-          <div className="flex flex-wrap gap-x-6 gap-y-1">
-            <a href="mailto:gcoerc.nashik@ggsf.edu.in" className="flex items-center gap-2 hover:text-secondary transition-colors">
-              <Mail className="h-4 w-4" />
-              gcoerc.nashik@ggsf.edu.in
+          <div className="flex flex-wrap gap-x-4 gap-y-1 min-w-0">
+            <a
+              href="mailto:gcoerc.nashik@ggsf.edu.in"
+              className="flex items-center gap-2 hover:text-secondary transition-colors min-w-0 break-all sm:break-normal"
+            >
+              <Mail className="h-4 w-4 shrink-0" />
+              <span className="min-w-0">gcoerc.nashik@ggsf.edu.in</span>
             </a>
             <a href="tel:0553237276" className="hidden sm:flex items-center gap-2 hover:text-secondary transition-colors">
               <Phone className="h-4 w-4" />
@@ -256,15 +259,15 @@ const Header = () => {
           isScrolled ? "bg-primary text-white   backdrop-blur-md shadow-lg" : "bg-background"
         } border-b border-border`}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="flex items-center justify-between gap-2 min-h-[4.5rem] py-2 sm:min-h-0 sm:h-20 sm:py-0">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <div className="flex-shrink-0">
                 <img
                   src="/naac-logo.png"
                   alt="NAAC"
-                  className="h-20 w-auto object-contain"
+                  className="h-14 w-auto sm:h-16 md:h-20 object-contain"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -277,7 +280,7 @@ const Header = () => {
                 <img
                   src="/ggsf-logo.jpg"
                   alt=" Guru Gobind Singh College of Engineering and Research Centre"
-                  className="h-20 w-auto object-contain"
+                  className="h-14 w-auto sm:h-16 md:h-20 object-contain"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -655,6 +658,23 @@ const Header = () => {
               <Link to="/contact" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Contact
               </Link>
+
+              <div className="flex flex-col gap-2 pt-2 border-t border-border">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center rounded-full bg-yellow-600 px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-yellow-700 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Apply Now
+                </Link>
+                <Link
+                  to="/admin/notices"
+                  className="inline-flex items-center justify-center rounded-lg bg-sky-500 px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-sky-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Admin Login
+                </Link>
+              </div>
             </div>
           </div>
         )}

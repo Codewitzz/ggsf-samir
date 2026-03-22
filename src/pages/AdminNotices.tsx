@@ -203,7 +203,7 @@ const AdminNotices = () => {
   if (!isLoggedIn) {
     return (
       <div className="relative min-h-screen overflow-hidden bg-background">
-        <div className="pointer-events-none absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488866022504-f2584929ca5f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center" />
+        <div className="pointer-events-none absolute inset-0 bg-[url('#')] bg-cover bg-center" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-950/80 via-fuchsia-900/45 to-indigo-900/80" />
         <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-secondary/30 blur-3xl" />
         <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
@@ -300,11 +300,11 @@ const AdminNotices = () => {
       <div className="pointer-events-none absolute -right-16 top-48 h-80 w-80 rounded-full bg-secondary/20 blur-3xl" />
       <div className="relative z-10">
         <Header />
-        <main className="py-16 px-4">
+        <main className="py-8 sm:py-12 md:py-16 px-3 sm:px-4">
           <div className="container mx-auto max-w-6xl space-y-6">
-            <div className="flex items-start justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold flex items-center gap-2">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-bold flex flex-wrap items-center gap-2">
                 Admin: Notices & Announcements
                 <Sparkles className="h-5 w-5 text-primary" />
               </h1>
@@ -327,7 +327,7 @@ const AdminNotices = () => {
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="flex items-center gap-2 border-primary/20 shadow-sm hover:shadow-md transition-all"
+              className="flex w-full shrink-0 items-center justify-center gap-2 border-primary/20 shadow-sm hover:shadow-md transition-all sm:w-auto"
             >
               <LogOut className="h-4 w-4" />
               Logout
@@ -543,8 +543,8 @@ const AdminNotices = () => {
                           key={item.id}
                           className="flex flex-col gap-3 border border-border/60 rounded-lg p-4 bg-muted/20 transition-all hover:-translate-y-0.5 hover:bg-muted/30 hover:border-primary/20"
                         >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="space-y-1">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="space-y-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="text-sm font-semibold">{item.title}</span>
                               <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
@@ -555,7 +555,7 @@ const AdminNotices = () => {
                             {item.text && <p className="text-sm text-muted-foreground max-w-[70ch]">{item.text}</p>}
                           </div>
 
-                          <div className="flex items-center gap-3">
+                          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3 shrink-0">
                             <div className="flex items-center gap-2">
                               <Checkbox
                                 checked={item.enabledOnHomepage}
@@ -569,7 +569,7 @@ const AdminNotices = () => {
                             <Button
                               variant="destructive"
                               onClick={() => setDeleteTargetId(item.id)}
-                              className="flex items-center gap-2 shadow-sm hover:shadow-md transition-all"
+                              className="flex w-full items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all sm:w-auto"
                             >
                               <Trash2 className="h-4 w-4" />
                               Delete

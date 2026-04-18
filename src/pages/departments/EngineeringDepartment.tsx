@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 import MBA from "@/pages/MBA";
 import DepartmentImagesSection, { type DepartmentGalleryImage } from "@/components/DepartmentImagesSection";
 
@@ -1768,8 +1769,8 @@ const EngineeringDepartment = () => {
     if (!image) return undefined;
     if (/^https?:\/\//i.test(image)) return image;
     const trimmed = image.trim().replace(/^public\//i, "/");
-    if (trimmed.startsWith("/")) return trimmed;
-    return `/${trimmed}`;
+    const normalized = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return getAdminImageUrl(normalized, normalized);
   };
 
   if (!dept) {
@@ -1803,7 +1804,13 @@ const EngineeringDepartment = () => {
           >
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-                <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
+                <img
+                  src={getAdminImageUrl(`engineering_department_${slide.id}`, slide.image)}
+                  data-admin-slot={`engineering_department_${slide.id}`}
+                  alt={slide.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/35 to-black/20" />
               </div>
             ))}

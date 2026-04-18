@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import engineeringIcon from "@/assets/engineering-icon.png";
 import { cn } from "@/lib/utils";
 import DepartmentImagesSection from "@/components/DepartmentImagesSection";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const SLIDE_DURATION = 5000;
 
@@ -158,8 +159,8 @@ const MEAbout = () => {
     if (!image) return undefined;
     if (/^https?:\/\//i.test(image)) return image;
     const trimmed = image.trim().replace(/^public\//i, "/");
-    if (trimmed.startsWith("/")) return trimmed;
-    return `/${trimmed}`;
+    const normalized = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return getAdminImageUrl(normalized, normalized);
   };
 
   const facultyMembers = [ 
@@ -219,7 +220,13 @@ const MEAbout = () => {
           >
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-                <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
+                <img
+                  src={getAdminImageUrl(`me_about_${slide.id}`, slide.image)}
+                  data-admin-slot={`me_about_${slide.id}`}
+                  alt={slide.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/35 to-black/20" />
               </div>
             ))}

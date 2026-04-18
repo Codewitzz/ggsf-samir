@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <rect x="72" y="72" width="1056" height="486" rx="36" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.10)" />
+  <rect x="104" y="120" width="10" height="390" rx="5" fill="url(#accent)"/>
+
+  <g fill="#ffffff" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+    <text x="152" y="220" font-size="28" opacity="0.9" letter-spacing="1.2">GGSF</text>
+    <text x="152" y="290" font-size="54" font-weight="800">College Foundation</text>
+    <text x="152" y="350" font-size="30" opacity="0.9">MBA & Engineering Programs</text>
+
+    <text x="152" y="430" font-size="24" opacity="0.78">
+      Excellence in education, world-class facilities, experienced faculty, and placements.
+    </text>
+    <text x="152" y="500" font-size="20" opacity="0.70">Replace this file with your logo-based 1200×630 image for WhatsApp.</text>
+  </g>
+</svg>

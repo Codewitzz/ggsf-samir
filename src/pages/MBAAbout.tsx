@@ -22,6 +22,7 @@ import {
 import { Link } from "react-router-dom";
 import mbaIcon from "@/assets/mba-icon.png";
 import { cn } from "@/lib/utils";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 import DepartmentImagesSection from "@/components/DepartmentImagesSection";
 
 const SLIDE_DURATION = 5000;
@@ -86,7 +87,13 @@ const MBAAbout = () => {
           >
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-                <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
+                <img
+                  src={getAdminImageUrl(`mba_about_${slide.id}`, slide.image)}
+                  data-admin-slot={`mba_about_${slide.id}`}
+                  alt={slide.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
               </div>
             ))}

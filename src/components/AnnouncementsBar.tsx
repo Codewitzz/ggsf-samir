@@ -59,12 +59,6 @@ const AnnouncementsBar = () => {
               })}
             </div>
           </div>
-          <Link
-            to="/contact"
-            className="ml-auto shrink-0 inline-flex text-xs sm:text-sm px-2.5 py-1 sm:px-3 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity whitespace-nowrap"
-          >
-            Apply Now
-          </Link>
         </div>
       </div>
       <style>

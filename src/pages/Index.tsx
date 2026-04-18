@@ -4,7 +4,6 @@ import CollegeCards from "@/components/CollegeCards";
 import EventsCalendar from "@/components/EventsCalendar";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
-import GallerySection from "@/components/GallerySection";
 import DownloadsSection from "@/components/DownloadsSection";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
@@ -17,7 +16,6 @@ import EnrollmentStatistics from "@/components/EnrollmentStatistics";
 import EnhancedFacilities from "@/components/EnhancedFacilities";
 import QuickAccessLinks from "@/components/QuickAccessLinks";
 import PublicDisclosure from "@/components/PublicDisclosure";
-import TPCell from "@/components/TPCell";
 import AnnouncementsBar from "@/components/AnnouncementsBar";
 import NAACAccreditation from "@/components/NAACAccreditation";
 import NBAAccreditation from "@/components/NBAAccreditation";
@@ -64,9 +62,6 @@ const Index = () => {
           <CampusCells />
         </div>
         <div className="gsap-fade">
-          <TPCell />
-        </div>
-        <div className="gsap-fade">
           <AlumniSection />
         </div>
         <div className="gsap-fade">
@@ -74,9 +69,6 @@ const Index = () => {
         </div>
         <div className="gsap-fade">
           <EventsCalendar />
-        </div>
-        <div className="gsap-fade">
-          <GallerySection />
         </div>
         <div className="gsap-fade">
           <TestimonialsSection />

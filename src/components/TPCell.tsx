@@ -3,8 +3,8 @@ import { Briefcase, Phone, Mail, Globe } from "lucide-react";
 
 const TPCell = () => {
   return (
-    <section className="py-16 px-4 bg-primary text-primary-foreground">
-      <div className="container mx-auto max-w-5xl">
+    <section className=" bg-primary text-primary-foreground">
+      <div className="container  max-w-5xl">
         <Card className="bg-primary text-primary-foreground border-primary-foreground/20">
           <CardHeader>
             <CardTitle className="text-3xl flex items-center gap-3">

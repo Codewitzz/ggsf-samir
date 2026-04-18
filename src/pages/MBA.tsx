@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router-dom";
 import mbaIcon from "@/assets/mba-icon.png";
 import { cn } from "@/lib/utils";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const SLIDE_DURATION = 5000;
 
@@ -214,7 +215,13 @@ const MBA = () => {
           >
             {heroSlides.map((slide) => (
               <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-                <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" loading="lazy" />
+                <img
+                  src={getAdminImageUrl(`mba_slide_${slide.id}`, slide.image)}
+                  data-admin-slot={`mba_slide_${slide.id}`}
+                  alt={slide.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
               </div>
             ))}
@@ -414,7 +421,7 @@ const MBA = () => {
                     <div className="relative">
                       <Avatar className="h-32 w-32 ring-4 ring-primary/20 bg-background shadow-lg group-hover:ring-primary/50 group-hover:scale-105 transition-all duration-500">
                         <AvatarImage 
-                          src={member.image}
+                          src={member.image ? getAdminImageUrl(member.image) : "/placeholder.svg"}
                           alt={member.name}
                           className="object-cover"
                         />

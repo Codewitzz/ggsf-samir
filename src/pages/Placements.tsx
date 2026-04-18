@@ -1,13 +1,61 @@
+import { useRef } from "react";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
+import TPCell from "@/components/TPCell";
 import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Briefcase, Mail, Phone, Users, TrendingUp, Building2 } from "lucide-react";
+import { Award, Briefcase, Mail, Phone, Users, TrendingUp, Building2, type LucideIcon } from "lucide-react";
+import { useCountUp, useInViewOnce } from "@/hooks/useCountUpAnimation";
 import { Cell, Pie, PieChart } from "recharts";
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
+
+/** Parses placement hero stats so the numeric part can animate (e.g. 300+, 85%+, ₹15 LPA). */
+function parsePlacementStat(value: string): { target: number; format: (n: number) => string } | null {
+  const plainPlus = value.match(/^(\d+)\+$/);
+  if (plainPlus) return { target: Number(plainPlus[1]), format: (n) => `${n}+` };
+
+  const pctPlus = value.match(/^(\d+)%\+$/);
+  if (pctPlus) return { target: Number(pctPlus[1]), format: (n) => `${n}%+` };
+
+  const lpa = value.match(/^₹\s*(\d+)\s*LPA$/i);
+  if (lpa) return { target: Number(lpa[1]), format: (n) => `₹${n} LPA` };
+
+  return null;
+}
+
+function PlacementStatCard({
+  stat,
+  animate,
+}: {
+  stat: { icon: LucideIcon; label: string; value: string };
+  animate: boolean;
+}) {
+  const parsed = parsePlacementStat(stat.value);
+  const Icon = stat.icon;
+  const display = useCountUp(parsed?.target ?? 0, animate && parsed != null);
+  const text =
+    parsed != null ? parsed.format(display) : stat.value;
+
+  return (
+    <Card className="text-center">
+      <CardHeader>
+        <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+          <Icon className="h-8 w-8 text-primary" />
+        </div>
+        <CardTitle className="text-3xl font-bold text-primary tabular-nums">{text}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription className="text-base">{stat.label}</CardDescription>
+      </CardContent>
+    </Card>
+  );
+}
 
 const Placements = () => {
+  const statsSectionRef = useRef<HTMLDivElement>(null);
+  const statsVisible = useInViewOnce(statsSectionRef, 0.2);
   const sliderImages = [
     "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=900&fit=crop&q=80",
     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=900&fit=crop&q=80",
@@ -158,7 +206,9 @@ const Placements = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <Breadcrumbs />
-      
+
+    
+
       {/* Hero Section with Image Slider */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -178,26 +228,13 @@ const Placements = () => {
         </div>
       </section>
 
-      {/* Statistics */}
+      {/* Statistics — count up from zero when the section enters the viewport */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <Card key={index} className="text-center">
-                  <CardHeader>
-                    <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle className="text-3xl font-bold text-primary">{stat.value}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">{stat.label}</CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          <div ref={statsSectionRef} className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            {stats.map((stat, index) => (
+              <PlacementStatCard key={index} stat={stat} animate={statsVisible} />
+            ))}
           </div>
         </div>
       </section>
@@ -226,76 +263,8 @@ const Placements = () => {
           </div>
         </div>
       </section>
-
-      {/* Placement Process */}
-      <section className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Placement Process</h2>
-            <p className="text-muted-foreground">
-              A structured approach to ensure successful placements for all students
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {placementProcess.map((item, index) => (
-              <Card key={index} className="relative">
-                <CardHeader>
-                  <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
-                    {item.step}
-                  </div>
-                  <CardTitle className="text-xl mt-4">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Training & Placement Partners */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-2">
-                <Briefcase className="h-6 w-6" />
-                Training & Placement Partners
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                {trainingPlacementPartners.map((partner) => (
-                  <div
-                    key={partner.name}
-                    className="p-4 border border-border rounded-lg hover:bg-muted transition-colors flex flex-col items-center gap-3"
-                  >
-                    <div
-                      className=" flex items-center justify-center  overflow-hidden"
-                      title={`${partner.name} logo`}
-                    >
-                      <img
-                        src={partner.logoUrl}
-                        alt={`${partner.name} logo`}
-                        className="h-full w-full object-contain"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).style.display = "none";
-                        }}
-                      />
-                    </div>
-                    <p className="font-medium text-center">{partner.name}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Academic Year Wise Placement */}
+       
+             {/* Academic Year Wise Placement */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <Card>
@@ -364,6 +333,36 @@ const Placements = () => {
         </div>
       </section>
 
+      {/* Placement Process */}
+      <section className="py-16 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Placement Process</h2>
+            <p className="text-muted-foreground">
+              A structured approach to ensure successful placements for all students
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {placementProcess.map((item, index) => (
+              <Card key={index} className="relative">
+                <CardHeader>
+                  <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
+                    {item.step}
+                  </div>
+                  <CardTitle className="text-xl mt-4">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
       {/* Training & Placement Officer */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
@@ -377,7 +376,7 @@ const Placements = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                 <div className="md:col-span-1">
                   <img
-                    src="/Faculty/sarode-vijay.jpg"
+                    src={getAdminImageUrl("/Faculty/sarode-vijay.jpg")}
                     alt="Training and Placement staff details"
                     className="w-full h-auto rounded-lg border border-border/60"
                     loading="lazy"
@@ -436,6 +435,7 @@ const Placements = () => {
           </Card>
         </div>
       </section>
+            <TPCell />
 
       {/* Staff Details */}
       <section className="py-16 px-4 bg-muted/30">
@@ -468,6 +468,47 @@ const Placements = () => {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      
+      {/* Training & Placement Partners */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <Briefcase className="h-6 w-6" />
+                Training & Placement Partners
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                {trainingPlacementPartners.map((partner) => (
+                  <div
+                    key={partner.name}
+                    className="p-4 border border-border rounded-lg hover:bg-muted transition-colors flex flex-col items-center gap-3"
+                  >
+                    <div
+                      className=" flex items-center justify-center  overflow-hidden"
+                      title={`${partner.name} logo`}
+                    >
+                      <img
+                        src={partner.logoUrl}
+                        alt={`${partner.name} logo`}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                    </div>
+                    <p className="font-medium text-center">{partner.name}</p>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>

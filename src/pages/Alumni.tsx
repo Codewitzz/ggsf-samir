@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
@@ -5,9 +6,46 @@ import ImageSlider from "@/components/ImageSlider";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Users, GraduationCap, Network, Award, Quote, Mail, Phone, Linkedin } from "lucide-react";
+import { Users, GraduationCap, Network, Award, Quote, Mail, Phone, UserPlus, PenSquare, Images, type LucideIcon } from "lucide-react";
+import { useCountUp, useInViewOnce } from "@/hooks/useCountUpAnimation";
+
+function parseStatDisplay(value: string): { num: number; suffix: string } {
+  const m = value.match(/^(\d+)(.*)$/);
+  if (m) return { num: Number(m[1]), suffix: m[2] };
+  return { num: 0, suffix: value };
+}
+
+function AlumniStatCard({
+  stat,
+  animate,
+}: {
+  stat: { icon: LucideIcon; label: string; value: string };
+  animate: boolean;
+}) {
+  const { num, suffix } = parseStatDisplay(stat.value);
+  const Icon = stat.icon;
+  const display = useCountUp(num, animate);
+  return (
+    <Card className="text-center">
+      <CardHeader>
+        <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+          <Icon className="h-8 w-8 text-primary" />
+        </div>
+        <CardTitle className="text-3xl font-bold text-primary tabular-nums">
+          {display}
+          {suffix}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription className="text-base">{stat.label}</CardDescription>
+      </CardContent>
+    </Card>
+  );
+}
 
 const Alumni = () => {
+  const statsSectionRef = useRef<HTMLDivElement>(null);
+  const statsVisible = useInViewOnce(statsSectionRef, 0.2);
   const sliderImages = [
     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80",
@@ -101,26 +139,13 @@ const Alumni = () => {
         </div>
       </section>
 
-      {/* Statistics */}
+      {/* Statistics — numbers count up from zero when the section enters the viewport */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <Card key={index} className="text-center">
-                  <CardHeader>
-                    <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle className="text-3xl font-bold text-primary">{stat.value}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">{stat.label}</CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          <div ref={statsSectionRef} className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            {stats.map((stat, index) => (
+              <AlumniStatCard key={index} stat={stat} animate={statsVisible} />
+            ))}
           </div>
         </div>
       </section>
@@ -278,30 +303,45 @@ const Alumni = () => {
                 Join our alumni network and stay connected with your alma mater
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <h3 className="font-semibold mb-3">Contact Alumni Association</h3>
-                <div className="space-y-2 text-muted-foreground">
-                  <p className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
-                    alumni@ggsf.edu.in
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    +91-253-237-3547
-                  </p>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold mb-3">Contact Alumni Association</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p className="flex items-center gap-2">
+                      <Mail className="h-4 w-4" />
+                      alumni@ggsf.edu.in
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Phone className="h-4 w-4" />
+                      +91-253-237-3547
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild className="flex-1">
-                  <Link to="/alumni/register">Register as Alumni</Link>
-                </Button>
-                <Button asChild variant="outline" className="flex-1">
-                  <Link to="/alumni/stories">Share Your Story</Link>
-                </Button>
-                <Button asChild variant="outline" className="flex-1">
-                  <Link to="/alumni/gallery">View Gallery</Link>
-                </Button>
+
+                <div>
+                  <h3 className="font-semibold mb-3">Get Involved Options</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Button asChild className="justify-start gap-2 sm:col-span-2">
+                      <Link to="/alumni/register">
+                        <UserPlus className="h-4 w-4" />
+                        Register as Alumni
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" className="justify-start gap-2">
+                      <Link to="/alumni/stories">
+                        <PenSquare className="h-4 w-4" />
+                        Share Your Story
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" className="justify-start gap-2">
+                      <Link to="/alumni/gallery">
+                        <Images className="h-4 w-4" />
+                        View Gallery
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>

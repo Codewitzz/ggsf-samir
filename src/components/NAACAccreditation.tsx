@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Award } from "lucide-react";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const NAACAccreditation = () => {
   return (
@@ -8,7 +9,7 @@ const NAACAccreditation = () => {
         <Card className="border-dashed border-primary/40 bg-gradient-to-br from-primary/5 to-primary/10">
           <CardHeader className="flex items-center gap-3">
             <img
-              src="/naac-logo.png"
+              src={getAdminImageUrl("/naac-logo.png")}
               alt="NAAC"
               className=" w-auto object-contain mt-0 mb-0"
               loading="lazy"

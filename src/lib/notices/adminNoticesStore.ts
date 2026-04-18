@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase/client";
+
 export type AdminNoticeKind = "notice" | "announcement";
 export type AdminNoticeTemplate = "card" | "imageCard" | "bar";
 export type AdminNoticeAccent = "primary" | "secondary" | "info" | "warning" | "success";
@@ -25,6 +27,15 @@ export type AdminNoticesSettings = {
 
 type AdminSession = {
   expiresAt: number;
+  username?: string;
+  isMainAdmin?: boolean;
+};
+
+export type AdminAccountRecord = {
+  username: string;
+  isMainAdmin: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 const STORAGE_KEYS = {
@@ -79,22 +90,87 @@ export function isAdminSessionActive(): boolean {
   return session.expiresAt > now();
 }
 
-export function adminSignIn(username: string, password: string): { ok: true } | { ok: false; reason: string } {
+export function getAdminSessionInfo(): { username?: string; isMainAdmin: boolean } | null {
+  const storage = getStorage();
+  if (!storage) return null;
+  const session = safeJsonParse<AdminSession>(storage.getItem(STORAGE_KEYS.session));
+  if (!session || !session.expiresAt || session.expiresAt <= now()) return null;
+  return {
+    username: session.username,
+    isMainAdmin: Boolean(session.isMainAdmin),
+  };
+}
+
+function normalizeUsername(value: string): string {
+  return value.trim().toLowerCase();
+}
+
+async function hashPassword(password: string): Promise<string> {
+  if (typeof window === "undefined" || !window.crypto?.subtle) return password;
+  const bytes = new TextEncoder().encode(password);
+  const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+type DbAdminAccountRow = {
+  username: string;
+  password_hash: string;
+  is_main_admin: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+async function signInWithSupabase(
+  username: string,
+  password: string,
+): Promise<{ ok: true; isMainAdmin: boolean } | { ok: false; reason: string }> {
+  if (!supabase) return { ok: false, reason: "Supabase not configured." };
+  const normalizedUsername = normalizeUsername(username);
+  const passwordHash = await hashPassword(password);
+  const { data, error } = await supabase
+    .from("site_admin_accounts")
+    .select("username,password_hash,is_main_admin")
+    .eq("username", normalizedUsername)
+    .maybeSingle<DbAdminAccountRow>();
+  if (error) return { ok: false, reason: "Could not verify admin credentials." };
+  if (!data) return { ok: false, reason: "Invalid username or password." };
+  if (data.password_hash !== passwordHash) return { ok: false, reason: "Invalid username or password." };
+  return { ok: true, isMainAdmin: Boolean(data.is_main_admin) };
+}
+
+export async function adminSignIn(username: string, password: string): Promise<{ ok: true } | { ok: false; reason: string }> {
   const expectedUsername = import.meta.env.VITE_ADMIN_USERNAME ?? "admin";
   const expectedPassword = import.meta.env.VITE_ADMIN_PASSWORD ?? "admin";
+  const normalizedUsername = normalizeUsername(username);
 
   if (!expectedUsername || !expectedPassword) return { ok: false, reason: "Admin credentials not configured." };
-
-  if (username !== expectedUsername || password !== expectedPassword) {
-    return { ok: false, reason: "Invalid username or password." };
-  }
 
   const storage = getStorage();
   if (!storage) return { ok: false, reason: "Storage unavailable." };
 
+  let isMainAdmin = false;
+  let valid = false;
+
+  // Main admin via env credentials always remains a fallback.
+  if (username === expectedUsername && password === expectedPassword) {
+    valid = true;
+    isMainAdmin = true;
+  } else {
+    const supaResult = await signInWithSupabase(username, password);
+    if (!supaResult.ok) return supaResult;
+    valid = true;
+    isMainAdmin = supaResult.isMainAdmin;
+  }
+
+  if (!valid) return { ok: false, reason: "Invalid username or password." };
+
   const session: AdminSession = {
     // 8 hours session (client-side only).
     expiresAt: now() + 8 * 60 * 60 * 1000,
+    username: normalizedUsername,
+    isMainAdmin,
   };
 
   storage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
@@ -105,6 +181,83 @@ export function adminSignOut() {
   const storage = getStorage();
   if (!storage) return;
   storage.removeItem(STORAGE_KEYS.session);
+}
+
+export async function getAllAdminAccounts(): Promise<AdminAccountRecord[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("site_admin_accounts")
+    .select("username,is_main_admin,created_at,updated_at")
+    .order("username", { ascending: true });
+  if (error || !data) return [];
+  return data.map((row) => ({
+    username: row.username,
+    isMainAdmin: Boolean(row.is_main_admin),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }));
+}
+
+export async function createAdminAccount(
+  username: string,
+  password: string,
+  createdBy?: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (!supabase) return { ok: false, reason: "Supabase is not configured." };
+  const normalizedUsername = normalizeUsername(username);
+  if (!normalizedUsername) return { ok: false, reason: "Username is required." };
+  if (password.trim().length < 6) return { ok: false, reason: "Password must be at least 6 characters." };
+  const passwordHash = await hashPassword(password);
+  const { error } = await supabase.from("site_admin_accounts").insert({
+    username: normalizedUsername,
+    password_hash: passwordHash,
+    is_main_admin: false,
+    created_by: createdBy?.trim() || null,
+  });
+  if (error) {
+    if (String(error.message).toLowerCase().includes("duplicate")) {
+      return { ok: false, reason: "This admin username already exists." };
+    }
+    return { ok: false, reason: "Could not create admin account in Supabase." };
+  }
+  return { ok: true };
+}
+
+export async function changeAdminAccountPassword(
+  username: string,
+  newPassword: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (!supabase) return { ok: false, reason: "Supabase is not configured." };
+  const normalizedUsername = normalizeUsername(username);
+  if (!normalizedUsername) return { ok: false, reason: "Username is required." };
+  if (newPassword.trim().length < 6) return { ok: false, reason: "Password must be at least 6 characters." };
+  const passwordHash = await hashPassword(newPassword);
+  const { error } = await supabase
+    .from("site_admin_accounts")
+    .update({
+      password_hash: passwordHash,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("username", normalizedUsername);
+  if (error) return { ok: false, reason: "Could not update admin password." };
+  return { ok: true };
+}
+
+export async function deleteAdminAccount(username: string): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (!supabase) return { ok: false, reason: "Supabase is not configured." };
+  const normalizedUsername = normalizeUsername(username);
+  if (!normalizedUsername) return { ok: false, reason: "Username is required." };
+  const { data, error } = await supabase
+    .from("site_admin_accounts")
+    .select("username,is_main_admin")
+    .eq("username", normalizedUsername)
+    .maybeSingle<{ username: string; is_main_admin: boolean }>();
+  if (error) return { ok: false, reason: "Could not verify admin user." };
+  if (!data) return { ok: false, reason: "Admin user not found." };
+  if (data.is_main_admin) return { ok: false, reason: "Main admin cannot be deleted." };
+  const { error: deleteError } = await supabase.from("site_admin_accounts").delete().eq("username", normalizedUsername);
+  if (deleteError) return { ok: false, reason: "Could not delete admin user." };
+  return { ok: true };
 }
 
 function readItemsFromStorage(): AdminNoticeItem[] {
@@ -142,6 +295,16 @@ export function getAdminNoticesItems(): AdminNoticeItem[] {
 
 export function setAdminNoticesItems(items: AdminNoticeItem[]) {
   writeItemsToStorage(items);
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("ggsf_admin_notices_changed"));
+}
+
+/** Replace notices + settings in one shot (e.g. remote sync). Does not seed defaults. */
+export function replaceAdminNoticesState(items: AdminNoticeItem[], settings: AdminNoticesSettings) {
+  writeItemsToStorage(items);
+  const storage = getStorage();
+  if (storage) {
+    storage.setItem(STORAGE_KEYS.settings, JSON.stringify({ ...DEFAULT_SETTINGS, ...settings }));
+  }
   if (typeof window !== "undefined") window.dispatchEvent(new Event("ggsf_admin_notices_changed"));
 }
 

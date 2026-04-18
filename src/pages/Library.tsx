@@ -5,6 +5,7 @@ import { Book, Users, Clock, BookOpen, Award, Globe, ChevronLeft, ChevronRight }
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const Library = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -327,7 +328,7 @@ const Library = () => {
                     <div className="relative">
                       <Avatar className="h-32 w-32 ring-4 ring-primary/20 bg-background shadow-lg group-hover:ring-primary/50 group-hover:scale-105 transition-all duration-500">
                         <AvatarImage 
-                          src={member.image} 
+                          src={member.image ? getAdminImageUrl(member.image) : "/placeholder.svg"}
                           alt={member.name}
                           className="object-cover"
                         />

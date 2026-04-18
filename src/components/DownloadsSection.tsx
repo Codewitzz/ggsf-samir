@@ -1,64 +1,66 @@
+import { useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, BookOpen, GraduationCap } from "lucide-react";
+import { Download, type LucideIcon } from "lucide-react";
+import { useAdminDownloads } from "@/hooks/useAdminDownloads";
+import type { AdminDownloadItem, DefaultDownloadOverride } from "@/lib/downloads/adminDownloadsStore";
+import { BUILTIN_DOWNLOADS } from "@/lib/downloads/defaultDownloads";
+import { DOWNLOAD_ICONS } from "@/lib/downloads/downloadIcons";
+
+type DownloadRow = {
+  key: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  size: string;
+  format: string;
+  category: string;
+  url: string;
+  fileName?: string;
+};
+
+function adminItemToRow(item: AdminDownloadItem): DownloadRow {
+  const IconComponent = DOWNLOAD_ICONS[item.iconKey];
+  const url = item.externalUrl ?? item.fileDataUrl ?? "#";
+  return {
+    key: item.id,
+    title: item.title,
+    description: item.description,
+    icon: IconComponent,
+    size: item.size,
+    format: item.format,
+    category: item.category,
+    url,
+    fileName: item.fileName,
+  };
+}
+
+function builtinToRow(
+  builtin: (typeof BUILTIN_DOWNLOADS)[number],
+  o: DefaultDownloadOverride | undefined
+): DownloadRow {
+  const iconKey = o?.iconKey ?? builtin.iconKey;
+  return {
+    key: builtin.key,
+    title: o?.title ?? builtin.title,
+    description: o?.description ?? builtin.description,
+    icon: DOWNLOAD_ICONS[iconKey],
+    size: o?.size ?? builtin.size,
+    format: o?.format ?? builtin.format,
+    category: o?.category ?? builtin.category,
+    url: o?.externalUrl ?? o?.fileDataUrl ?? builtin.url,
+    fileName: o?.fileName ?? builtin.fileName,
+  };
+}
 
 const DownloadsSection = () => {
-  const downloads = [
-    {
-      title: "MBA Prospectus 2025",
-      description: "Complete information about MBA programs, curriculum, and admission process",
-      icon: GraduationCap,
-      size: "2.4 MB",
-      format: "PDF",
-      category: "MBA",
-      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-    },
-    {
-      title: "Engineering Course Syllabus",
-      description: "Detailed syllabus for all engineering branches and specializations",
-      icon: BookOpen,
-      size: "3.1 MB",
-      format: "PDF",
-      category: "Engineering",
-      url: "https://www.africau.edu/images/default/sample.pdf",
-    },
-    {
-      title: "Campus Facilities Brochure",
-      description: "Information about campus facilities, infrastructure, and amenities",
-      icon: FileText,
-      size: "1.8 MB",
-      format: "PDF",
-      category: "Campus",
-      url: "https://file-examples.com/storage/fe7d08cfa1f4f185c4b5e0a/2017/10/file-sample_150kB.pdf",
-    },
-    {
-      title: "College Calendar 2024-25",
-      description: "Academic calendar with important dates, holidays, and events",
-      icon: FileText,
-      size: "890 KB",
-      format: "PDF",
-      category: "General",
-      url: "https://file-examples.com/storage/fe7d08cfa1f4f185c4b5e0a/2017/10/file-sample_150kB.pdf",
-    },
-    {
-      title: "Placement Statistics Report",
-      description: "Annual placement report with company details and package information",
-      icon: FileText,
-      size: "1.2 MB",
-      format: "PDF",
-      category: "Placements",
-      url: "https://www.clickdimensions.com/links/TestPDFfile.pdf",
-    },
-    {
-      title: "Infrastructure & Facilities",
-      description: "Detailed guide about campus facilities, labs, and infrastructure",
-      icon: BookOpen,
-      size: "5.6 MB",
-      format: "PDF",
-      category: "General",
-      url: "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf",
-    },
-  ];
+  const { items: adminItems, defaultOverrides } = useAdminDownloads();
+
+  const rows = useMemo(() => {
+    const custom = adminItems.map(adminItemToRow);
+    const builtins = BUILTIN_DOWNLOADS.map((b) => builtinToRow(b, defaultOverrides[b.key]));
+    return [...custom, ...builtins];
+  }, [adminItems, defaultOverrides]);
 
   return (
     <section className="py-16 px-4 bg-muted/30">
@@ -71,18 +73,16 @@ const DownloadsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {downloads.map((item, index) => {
+          {rows.map((item) => {
             const IconComponent = item.icon;
             return (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+              <Card key={item.key} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-3 bg-primary rounded-lg">
                       <IconComponent className="h-8 w-8 text-white " />
                     </div>
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
-                      {item.category}
-                    </span>
+                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">{item.category}</span>
                   </div>
                   <CardTitle className="text-lg">{item.title}</CardTitle>
                   <CardDescription>{item.description}</CardDescription>
@@ -93,8 +93,17 @@ const DownloadsSection = () => {
                       <span className="text-sm text-muted-foreground block">Size: {item.size}</span>
                       <span className="text-xs text-muted-foreground">{item.format}</span>
                     </div>
-                    <Button size="sm" className="gap-2 bg-secondary text-secondary-foreground hover:bg-secondary/90" asChild>
-                      <a href={item.url} target="_blank" rel="noopener noreferrer" download>
+                    <Button
+                      size="sm"
+                      className="gap-2 bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                      asChild
+                    >
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download={item.fileName}
+                      >
                         <Download className="h-4 w-4 " />
                         Download
                       </a>

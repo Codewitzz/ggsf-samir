@@ -4,8 +4,21 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+/** Set `VITE_GEMINI_API_KEY` in `.env.local` (recommended). Fallback allows the app to run without env setup. Restrict this key in Google AI Studio (HTTP referrers). */
+const GEMINI_API_KEY =
+  (typeof import.meta.env.VITE_GEMINI_API_KEY === "string" && import.meta.env.VITE_GEMINI_API_KEY.trim()) ||
+  "AIzaSyCjRt8WxQl-kfKpXKT7v7n5eFDn3-C8ZM8";
+
+/** Order matters: 2.0-flash often hits free-tier quota (429); 2.5-flash / flash-latest usually still work for the same key. */
+const GEMINI_MODELS = [
+  "gemini-2.5-flash",
+  "gemini-flash-latest",
+  "gemini-2.0-flash-lite",
+  "gemini-2.0-flash-001",
+  "gemini-2.0-flash",
+] as const;
 
 interface Message {
   role: "user" | "assistant";
@@ -325,6 +338,58 @@ const findAnswerFromKB = (query: string): string | null => {
   return null;
 };
 
+type GeminiResponseLike = {
+  text: () => string;
+  candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+};
+
+function extractGeminiText(response: GeminiResponseLike): string {
+  const parts = response.candidates?.[0]?.content?.parts;
+  if (parts?.length) {
+    const joined = parts
+      .map((p) => (typeof p.text === "string" ? p.text : ""))
+      .join("")
+      .trim();
+    if (joined) return joined;
+  }
+  try {
+    const t = response.text();
+    return typeof t === "string" ? t.trim() : "";
+  } catch {
+    return "";
+  }
+}
+
+async function sendGeminiReply(
+  genAI: GoogleGenerativeAI,
+  systemPrompt: string,
+  priorMessages: Message[],
+  userText: string,
+): Promise<string> {
+  const prior = priorMessages.slice(1).map((msg) => ({
+    role: (msg.role === "assistant" ? "model" : "user") as "user" | "model",
+    parts: [{ text: msg.content }],
+  }));
+  const contents = [...prior, { role: "user" as const, parts: [{ text: userText }] }];
+
+  let lastError: unknown;
+  for (const modelName of GEMINI_MODELS) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: modelName,
+        systemInstruction: systemPrompt,
+      });
+      const result = await model.generateContent({ contents });
+      const text = extractGeminiText(result.response as GeminiResponseLike);
+      if (text) return text;
+    } catch (e) {
+      lastError = e;
+      console.warn(`[GCOERC Chat] Model ${modelName} failed:`, e);
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("Gemini request failed");
+}
+
 const AIChatBot = () => {
   const genAI = useMemo(() => {
     if (!GEMINI_API_KEY) return null;
@@ -341,7 +406,7 @@ const AIChatBot = () => {
     {
       role: "assistant",
       content:
-        "Hi! I'm Edi.\nI can help with admissions, programs, facilities, placements, scholarships and more. How can I help you today?",
+        "Hi! I'm GCOERC Assistant.\nI can help with admissions, programs, facilities, placements, scholarships and more. How can I help you today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -433,8 +498,6 @@ const AIChatBot = () => {
     setIsLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-
       const systemPrompt = `You are COERC Bot, a helpful AI assistant for Guru Gobind Singh College of Engineering and Research Centre (GCOERC). 
       Answer student questions about admissions, programs, courses, facilities, events, and general inquiries. 
       Be concise, friendly, and informative. Use the following knowledge base to answer questions accurately:
@@ -575,24 +638,18 @@ const AIChatBot = () => {
 
       If you don't know something specific about the college, acknowledge it politely and suggest contacting the college directly.`;
 
-      const chat = model.startChat({
-        history: updatedHistory.slice(1).map((msg) => ({
-          role: msg.role === "assistant" ? "model" : "user",
-          parts: [{ text: msg.content }],
-        })),
-      });
-
-      const result = await chat.sendMessage(`${systemPrompt}\n\nStudent question: ${trimmed}`);
-      const response = await result.response;
-      const text = response.text();
+      const text = await sendGeminiReply(genAI, systemPrompt, messages, trimmed);
 
       setMessages((prev) => [...prev, { role: "assistant", content: text }]);
     } catch (error) {
       console.error("Error calling Gemini API:", error);
-      
+      const errMsg = error instanceof Error ? error.message : String(error);
+      const quotaHit =
+        /429|quota|RESOURCE_EXHAUSTED|exceeded your current quota|rate limit/i.test(errMsg);
+
       // Try fallback knowledge base on API error
       const fallbackAnswer = findAnswerFromKB(trimmed);
-      
+
       if (fallbackAnswer) {
         setMessages((prev) => [
           ...prev,
@@ -602,11 +659,14 @@ const AIChatBot = () => {
           },
         ]);
       } else {
+        const quotaNote = quotaHit
+          ? "\n\n(Gemini quota or rate limit reached for this API key. Open https://aistudio.google.com/ → check usage / billing, or try again later. This site tries gemini-2.5-flash before older models.)\n"
+          : "";
         setMessages((prev) => [
           ...prev,
           {
             role: "assistant",
-            content: "I apologize, but I'm having trouble connecting to the AI service right now. However, you can still contact us directly:\n\n• Phone: +91-0253-2372766 / +91-0253-2372666 / +91-7768004581 / +91-7768004582\n• Email: gcoerc.nashik@ggsf.edu.in\n• Website: https://engg.ggsf.edu.in/\n\nPlease try again later or visit our contact page for immediate assistance.",
+            content: `I apologize, but I'm having trouble connecting to the AI service right now.${quotaNote}\nYou can still contact us directly:\n\n• Phone: +91-0253-2372766 / +91-0253-2372666 / +91-7768004581 / +91-7768004582\n• Email: gcoerc.nashik@ggsf.edu.in\n• Website: https://engg.ggsf.edu.in/\n\nPlease try again later or visit our contact page for immediate assistance.`,
           },
         ]);
       }
@@ -665,7 +725,7 @@ const AIChatBot = () => {
             <span className="absolute inset-2 rounded-full bg-gradient-to-br from-slate-950/60  grid place-items-center">
               <span className="relative grid h-10 w-10 place-items-center rounded-full  shadow-inner ring-1 ring-black/10">
                 <img
-                  src="/chatbot-logo.png"
+                  src={getAdminImageUrl("/chatbot-logo.png")}
                   alt="GCOERC"
                     className="h-10 w-10 rounded-full object-cover chatbot-logo-float"
                   loading="lazy"
@@ -692,7 +752,7 @@ const AIChatBot = () => {
             <div className="flex items-center gap-3 min-w-0">
               <div className="relative grid h-10 w-10 place-items-center rounded-xl bg-white/20 ring-2 ring-white/30 shadow-lg overflow-hidden">
                 <img
-                  src="/chatbot-logo.png"
+                  src={getAdminImageUrl("/chatbot-logo.png")}
                   alt="GCOERC"
                   className="h-full w-full object-cover chatbot-logo-float"
                   loading="lazy"
@@ -704,7 +764,7 @@ const AIChatBot = () => {
                 />
               </div>
               <div className="min-w-0">
-                <h3 className="font-bold leading-tight truncate text-base">Edi</h3>
+                <h3 className="font-bold leading-tight truncate text-base">GCOERC </h3>
                 <p className="text-xs text-primary-foreground/90 truncate font-medium">AI Assistant • Always Online</p>
               </div>
             </div>

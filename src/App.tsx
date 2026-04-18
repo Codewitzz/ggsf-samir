@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import PageLoader from "@/components/PageLoader";
 import AIChatBot from "@/components/AIChatBot";
+import AdminInlineImageEditor from "@/components/AdminInlineImageEditor";
 import { useGsapAnimations } from "./hooks/useGsapAnimations";
+import { initDirectDbSync } from "@/lib/db/directDbSync";
 
 const Index = lazy(() => import("./pages/Index"));
 const About = lazy(() => import("./pages/About"));
@@ -59,11 +61,28 @@ const Library = lazy(() => import("./pages/Library"));
 const CanteenCafeteria = lazy(() => import("./pages/CanteenCafeteria"));
 const MoU = lazy(() => import("./pages/MoU"));
 const AdminNotices = lazy(() => import("./pages/AdminNotices"));
+const AdminCreateAccount = lazy(() => import("./pages/AdminCreateAccount"));
+const AdminDownloads = lazy(() => import("./pages/AdminDownloads"));
+const AdminGallery = lazy(() => import("./pages/AdminGallery"));
+const AdminImages = lazy(() => import("./pages/AdminImages"));
+const AdminAlumni = lazy(() => import("./pages/AdminAlumni"));
+const StudentCorner = lazy(() => import("./pages/StudentCorner"));
 
 const queryClient = new QueryClient();
 
 const App = () => {
   useGsapAnimations();
+  const [, forceAdminImagesUpdate] = useState(0);
+
+  useEffect(() => {
+    void initDirectDbSync();
+  }, []);
+
+  useEffect(() => {
+    const onChanged = () => forceAdminImagesUpdate((x) => x + 1);
+    window.addEventListener("ggsf_admin_images_changed", onChanged);
+    return () => window.removeEventListener("ggsf_admin_images_changed", onChanged);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -88,6 +107,7 @@ const App = () => {
               <Route path="/placements" element={<Placements />} />
               <Route path="/alumni" element={<Alumni />} />
               <Route path="/campus" element={<Campus />} />
+              <Route path="/student-corner" element={<StudentCorner />} />
               <Route path="/campus/canteen-cafeteria" element={<CanteenCafeteria />} />
               <Route path="/library" element={<Library />} />
               <Route path="/mou" element={<MoU />} />
@@ -192,6 +212,11 @@ const App = () => {
 
               {/* Admin Routes */}
               <Route path="/admin/notices" element={<AdminNotices />} />
+              <Route path="/admin/notices/signup" element={<AdminCreateAccount />} />
+              <Route path="/admin/downloads" element={<AdminDownloads />} />
+              <Route path="/admin/gallery" element={<AdminGallery />} />
+              <Route path="/admin/images" element={<AdminImages />} />
+              <Route path="/admin/alumni" element={<AdminAlumni />} />
 
               {/* Achievements Routes */}
               <Route path="/achievements" element={<Placeholder />} />
@@ -203,9 +228,9 @@ const App = () => {
               <Route path="/placement/stories" element={<Placeholder />} />
 
               {/* Alumni Routes */}
-              <Route path="/alumni/register" element={<Placeholder />} />
-              <Route path="/alumni/stories" element={<Placeholder />} />
-              <Route path="/alumni/gallery" element={<Placeholder />} />
+              <Route path="/alumni/register" element={<AdminAlumni />} />
+              <Route path="/alumni/stories" element={<AdminAlumni />} />
+              <Route path="/alumni/gallery" element={<Gallery />} />
 
               {/* Placeholder routes for future content */}
               <Route path="/research/:topic" element={<Placeholder />} />
@@ -219,6 +244,7 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <AdminInlineImageEditor />
           <AIChatBot />
         </HashRouter>
       </TooltipProvider>

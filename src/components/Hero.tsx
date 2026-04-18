@@ -2,21 +2,31 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-campus.jpg";
 import { cn } from "@/lib/utils";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const SLIDE_DURATION = 6000;
+
+/** Default hero backgrounds from on-campus assets (`public/Campus-Imgs/`). */
+const CAMPUS_SLIDE_IMAGES = [
+  "/Campus-Imgs/ggsf.png",
+  "/Campus-Imgs/ggsf1.png",
+  "/Campus-Imgs/ggsf.png",
+  "/Campus-Imgs/ggsf1.png",
+  "/Campus-Imgs/ggsf.png",
+] as const;
 
 const Hero = () => {
   const heroSlides = useMemo(
     () => [
       {
         id: "engineering",
+        imageKey: "hero_slide_engineering",
         title: "Engineering excellence that builds futures",
         description:
           "Discover interdisciplinary programs, AI-powered labs, and industry mentors that transform ideas into impact.",
         badge: "Admissions 2025 Open",
-        image: heroImage,
+        image: CAMPUS_SLIDE_IMAGES[0],
         stats: [
           { label: "Industry partners", value: "160+" },
           { label: "Innovation labs", value: "18" },
@@ -24,11 +34,12 @@ const Hero = () => {
       },
       {
         id: "innovation",
+        imageKey: "hero_slide_innovation",
         title: "Innovation & entrepreneurship in every stream",
         description:
           "From MBA labs to Engineering campus workshops, every learner gets access to start-up studios, hackathons, and co-create spaces.",
         badge: "Start-up Studio",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop&q=80",
+        image: CAMPUS_SLIDE_IMAGES[1],
         stats: [
           { label: "Student ventures", value: "45" },
           { label: "Incubated ideas", value: "120+" },
@@ -36,11 +47,12 @@ const Hero = () => {
       },
       {
         id: "campus-life",
+        imageKey: "hero_slide_campus-life",
         title: "A campus that inspires learning for life",
         description:
           "Experience lush grounds, digital classrooms, and vibrant student clubs that nurture leadership and community.",
         badge: "360° Campus Tour",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&h=900&fit=crop&q=80",
+        image: CAMPUS_SLIDE_IMAGES[2],
         stats: [
           { label: "Student clubs", value: "32" },
           { label: "Scholarships", value: "₹2 Cr" },
@@ -48,11 +60,12 @@ const Hero = () => {
       },
       {
         id: "global-connect",
+        imageKey: "hero_slide_global-connect",
         title: "Global partnerships that open doors worldwide",
         description:
           "Benefit from international MoUs, semester abroad programs, and dual certifications curated with leading universities.",
         badge: "Global Immersion 2025",
-        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&h=900&fit=crop&q=80",
+        image: CAMPUS_SLIDE_IMAGES[3],
         stats: [
           { label: "International MoUs", value: "25" },
           { label: "Exchange seats", value: "140+" },
@@ -60,11 +73,12 @@ const Hero = () => {
       },
       {
         id: "research",
+        imageKey: "hero_slide_research",
         title: "Research culture powering patents and prototypes",
         description:
           "Join multidisciplinary labs focused on EV, green energy, AI, and med-tech with seed funding and patent mentorship.",
         badge: "Innovation Grants",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=900&fit=crop&q=80",
+        image: CAMPUS_SLIDE_IMAGES[4],
         stats: [
           { label: "Patents filed", value: "60+" },
           { label: "Funded projects", value: "₹5 Cr" },
@@ -100,7 +114,13 @@ const Hero = () => {
         >
           {heroSlides.map((slide) => (
             <div key={slide.id} className="relative h-full w-full flex-shrink-0">
-              <img src={slide.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+              <img
+                src={getAdminImageUrl(slide.imageKey, slide.image)}
+                data-admin-slot={slide.imageKey}
+                alt=""
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/20" />
             </div>
           ))}
@@ -153,7 +173,13 @@ const Hero = () => {
               index === activeSlide ? "border-secondary shadow-xl scale-105" : "border-white/30 opacity-70 hover:opacity-100",
             )}
           >
-            <img src={slide.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <img
+              src={getAdminImageUrl(slide.imageKey, slide.image)}
+              data-admin-slot={slide.imageKey}
+              alt=""
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
             <span className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
         ))}

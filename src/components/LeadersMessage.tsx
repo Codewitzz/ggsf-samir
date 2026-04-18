@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Quote } from "lucide-react";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const LeadersMessage = () => {
   return (
@@ -19,7 +20,7 @@ const LeadersMessage = () => {
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-shrink-0">
                   <img
-                    src="/Faculty/president.jpg"
+                    src={getAdminImageUrl("/Faculty/president.jpg")}
                     alt="S. BALBIR SINGH CHHABRA - President"
                     className="w-32 h-32 rounded-lg object-cover border-2 border-primary/20"
                     onError={(e) => {
@@ -59,7 +60,7 @@ const LeadersMessage = () => {
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-shrink-0">
                   <img
-                    src="/Faculty/secretary.jpg"
+                    src={getAdminImageUrl("/Faculty/secretary.jpg")}
                     alt="S. KULJEET SINGH BIRDI - Secretary"
                     className="w-32 h-32 rounded-lg object-cover border-2 border-primary/20"
                     onError={(e) => {

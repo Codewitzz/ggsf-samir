@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,13 +23,31 @@ import {
   adminSignOut,
   createAdminNoticeItemInput,
   deleteAdminNoticeItem,
+  getAdminSessionInfo,
   isAdminSessionActive,
   setAdminNoticesSettings,
   upsertAdminNoticeItem,
   validateAndNormalizeImageDataUrl,
   validateAndNormalizePdfDataUrl,
 } from "@/lib/notices/adminNoticesStore";
-import { AlertCircle, ExternalLink, Eye, FileText, KeyRound, LogOut, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  BadgeCheck,
+  Download,
+  ExternalLink,
+  Eye,
+  FileText,
+  ImageIcon,
+  KeyRound,
+  LogOut,
+  Plus,
+  RefreshCw,
+  ShieldCheck,
+  Sparkles,
+  Trash2,
+  UserPlus,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 function readFileAsDataUrl(file: File): Promise<string> {
@@ -45,8 +63,7 @@ function isPdfFile(file: File) {
   return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 }
 
-const ADMIN_HINT =
-  "This admin panel is client-side only (local browser storage). For real security, add a server/API auth layer.";
+const ADMIN_HINT = "Admin changes are saved in browser + synced to Supabase when configured.";
 
 const AdminNotices = () => {
   const { settings, items } = useAdminNotices();
@@ -75,6 +92,19 @@ const AdminNotices = () => {
 
   const deleteTarget = useMemo(() => items.find((i) => i.id === deleteTargetId) ?? null, [items, deleteTargetId]);
 
+  useEffect(() => {
+    const clearCredentials = () => {
+      setUsername("");
+      setPassword("");
+      setLoginError(null);
+    };
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) clearCredentials();
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   const resetForm = () => {
     setKind("notice");
     setTemplate("card");
@@ -92,13 +122,16 @@ const AdminNotices = () => {
     setPdfError(null);
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError(null);
 
-    const result = adminSignIn(username.trim(), password);
+    const result = await adminSignIn(username.trim(), password);
     if (result.ok) {
       setIsLoggedIn(true);
+      setUsername("");
+      setPassword("");
+      setLoginError(null);
       toast({ title: "Logged in", description: "You can now manage notices and announcements." });
     } else {
       setLoginError((result as { ok: false; reason: string }).reason);
@@ -200,89 +233,113 @@ const AdminNotices = () => {
     });
   };
 
+  const vibrantPrimaryButtonClass =
+    "border border-blue-700 bg-blue-700 text-white shadow-sm transition-colors duration-200 hover:bg-blue-600";
+
+  const vibrantOutlineButtonClass =
+    "border-slate-600 bg-slate-800 text-slate-100 shadow-sm transition-colors duration-200 hover:bg-slate-700";
+
+  const vibrantSuccessButtonClass =
+    "border border-emerald-700 bg-emerald-700 text-white shadow-sm transition-colors duration-200 hover:bg-emerald-600";
+
+  const vibrantDangerButtonClass =
+    "border border-rose-700 bg-rose-700 text-white shadow-sm transition-colors duration-200 hover:bg-rose-600";
+
   if (!isLoggedIn) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-background">
+      <div className="relative min-h-screen overflow-hidden bg-[#09081a]">
         <div className="pointer-events-none absolute inset-0 bg-[url('#')] bg-cover bg-center" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-950/80 via-fuchsia-900/45 to-indigo-900/80" />
-        <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-secondary/30 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#1a1744]/90 via-[#4a145f]/55 to-[#112561]/90" />
+        <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-fuchsia-500/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="relative z-10">
           <Header />
-          <main className="py-10 md:py-16 px-4">
-            <div className="container mx-auto max-w-3xl">
-              <Card className="border-white/30 bg-white/15 backdrop-blur-md shadow-2xl shadow-black/20 text-white transition-transform duration-300 hover:-translate-y-1">
+          <main className="px-4 py-10 md:py-16">
+            <div className="container mx-auto max-w-5xl">
+              <Card className="border-violet-200/30 bg-slate-950/65 text-slate-100 shadow-2xl shadow-indigo-950/50 backdrop-blur-xl">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-white/10 border border-white/30 flex items-center justify-center shadow-lg shadow-black/20">
-                    <ShieldCheck className="h-6 w-6 text-white" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-violet-200/30 bg-violet-300/20 shadow-lg shadow-violet-900/35">
+                      <ShieldCheck className="h-6 w-6 text-violet-100" />
                   </div>
                   <div className="flex-1">
-                    <CardTitle className="text-2xl flex items-center gap-2">
-                      Admin Login
-                      <Sparkles className="h-5 w-5 text-secondary" />
+                    <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
+                      Staff/Admin Login
+                      <Sparkles className="h-5 w-5 text-fuchsia-300" />
                     </CardTitle>
-                    <CardDescription className="text-white/80">Manage notice and announcement content.</CardDescription>
+                    <CardDescription className="text-slate-300/90">Secure access to the notices management dashboard.</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="mb-6 rounded-2xl border border-white/20 bg-white/10 p-4 text-sm text-white/85">
+                <div className="mb-6 rounded-2xl border border-slate-200/10 bg-slate-900/70 p-4 text-sm text-slate-200">
                   <div className="flex items-start gap-3">
-                    <AlertCircle className="h-5 w-5 mt-0.5 text-muted-foreground" />
+                    <AlertCircle className="mt-0.5 h-5 w-5 text-violet-300" />
                     <div className="space-y-1">
-                      <p className="font-medium text-white">Admin notice editor</p>
+                      <p className="font-medium text-slate-100">Admin notice editor</p>
                       <p>
                         {ADMIN_HINT}
                         <br />
-                        Username/Password are read from `VITE_ADMIN_USERNAME` and `VITE_ADMIN_PASSWORD` (fallbacks: `admin` / `admin`).
+                        Only staff can log in here. Students are not allowed.
                       </p>
                     </div>
                   </div>
                 </div>
-
-                <form className="space-y-4" onSubmit={handleLogin}>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Username</label>
-                    <Input
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      autoComplete="username"
-                      placeholder="e.g. admin"
-                      className="bg-white/15 border-white/30 text-white placeholder:text-white/70 focus-visible:ring-white/30"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Password</label>
-                    <Input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      autoComplete="current-password"
-                      placeholder="Enter password"
-                      className="bg-white/15 border-white/30 text-white placeholder:text-white/70 focus-visible:ring-white/30"
-                    />
-                  </div>
-
-                  {loginError && (
-                    <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive animate-pulse flex items-start gap-2">
-                      <KeyRound className="h-4 w-4 mt-0.5" />
-                      {loginError}
+                <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+                  <form className="space-y-4 rounded-2xl border border-violet-200/15 bg-gradient-to-br from-slate-900/85 via-[#1a1d3a]/75 to-slate-950/90 p-5" onSubmit={handleLogin} autoComplete="off">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-slate-200">Username</label>
+                      <Input
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        autoComplete="off"
+                        placeholder="Enter admin username"
+                        className="h-11 border-violet-300/20 bg-slate-950/85 text-slate-100 placeholder:text-slate-400 focus-visible:ring-fuchsia-400/70"
+                      />
                     </div>
-                  )}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-slate-200">Password</label>
+                      <Input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password"
+                        placeholder="Enter password"
+                        className="h-11 border-violet-300/20 bg-slate-950/85 text-slate-100 placeholder:text-slate-400 focus-visible:ring-fuchsia-400/70"
+                      />
+                    </div>
 
-                  <Button type="submit" className="w-full bg-white text-black hover:bg-white/90 shadow-sm hover:shadow-white/20 transition-all rounded-full">
-                    Log in
-                  </Button>
+                    {loginError && (
+                      <div className="flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                        <KeyRound className="mt-0.5 h-4 w-4" />
+                        {loginError}
+                      </div>
+                    )}
 
-                  <div className="text-xs text-white/85">
-                    Tip: If you disabled the homepage “Staff Login” widget, open this page directly at{" "}
-                    <Link className="underline" to="/admin/notices">
-                      /admin/notices
-                    </Link>
-                    .
+                    <Button type="submit" className={`h-11 w-full rounded-xl ${vibrantPrimaryButtonClass}`}>
+                      Sign in to Admin Panel
+                    </Button>
+                    <div className="rounded-xl border border-cyan-300/35 bg-cyan-500/10 px-3 py-2 text-xs text-cyan-100">
+                      Account creation is available after staff/admin login.
+                    </div>
+                  </form>
+
+                  <div className="space-y-4 rounded-2xl border border-slate-100/10 bg-slate-900/70 p-5 text-sm text-slate-200">
+                    <div className="rounded-xl border border-cyan-300/35 bg-cyan-500/10 p-3 text-cyan-100">
+                      <div className="flex items-start gap-2">
+                        <BadgeCheck className="mt-0.5 h-4 w-4" />
+                        <p>Only staff and admin accounts can access this panel. Student login is disabled.</p>
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-slate-200/10 bg-slate-950/50 p-3 text-slate-300">
+                      Tip: If the homepage widget is hidden, open this page directly at{" "}
+                      <Link className="underline decoration-slate-400 hover:text-white" to="/admin/notices">
+                        /admin/notices
+                      </Link>
+                      .
+                    </div>
                   </div>
-                </form>
+                </div>
               </CardContent>
               </Card>
             </div>
@@ -310,24 +367,41 @@ const AdminNotices = () => {
               </h1>
               <p className="text-muted-foreground mt-1 text-sm">{ADMIN_HINT}</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Button asChild variant="outline" size="sm" className="gap-2">
+                <Button asChild size="sm" className={`gap-2 text-black ${vibrantOutlineButtonClass}`}>
                   <Link to="/" target="_blank" rel="noreferrer">
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 color-red text-color" />
                     Preview Homepage
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="sm" className="gap-2">
+                <Button asChild size="sm" className={`gap-2 ${vibrantOutlineButtonClass}`}>
                   <Link to="/admin/notices">
                     <ExternalLink className="h-4 w-4" />
                     Refresh Panel
                   </Link>
                 </Button>
+                <Button asChild size="sm" className={`gap-2 ${vibrantOutlineButtonClass}`}>
+                  <Link to="/admin/downloads">
+                    <Download className="h-4 w-4" />
+                    Downloads admin
+                  </Link>
+                </Button>
+                <Button asChild size="sm" className={`gap-2 ${vibrantOutlineButtonClass}`}>
+                  <Link to="/admin/gallery">
+                    <ImageIcon className="h-4 w-4" />
+                    Gallery admin
+                  </Link>
+                </Button>
+                <Button asChild size="sm" className={`gap-2 ${vibrantPrimaryButtonClass}`}>
+                  <Link to="/admin/notices/signup">
+                    <UserPlus className="h-4 w-4" />
+                    Create Account
+                  </Link>
+                </Button>
               </div>
             </div>
             <Button
-              variant="outline"
               onClick={handleLogout}
-              className="flex w-full shrink-0 items-center justify-center gap-2 border-primary/20 shadow-sm hover:shadow-md transition-all sm:w-auto"
+              className="flex w-full shrink-0 items-center justify-center gap-2 border border-slate-600 bg-slate-800 text-slate-100 shadow-sm transition-colors duration-200 hover:bg-slate-700 sm:w-auto"
             >
               <LogOut className="h-4 w-4" />
               Logout
@@ -335,7 +409,7 @@ const AdminNotices = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="border-primary/10 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+              <Card className="border-primary/10 bg-gradient-to-br from-background via-background to-primary/5 transition-all hover:-translate-y-0.5 hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Homepage Widget</CardTitle>
                 <CardDescription>Control whether visitors can access staff login from the homepage.</CardDescription>
@@ -357,7 +431,7 @@ const AdminNotices = () => {
               </CardContent>
             </Card>
 
-              <Card className="border-primary/10 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+              <Card className="border-primary/10 bg-gradient-to-br from-background via-background to-secondary/10 transition-all hover:-translate-y-0.5 hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Add / Publish</CardTitle>
                 <CardDescription>Create a new notice or announcement item.</CardDescription>
@@ -506,14 +580,13 @@ const AdminNotices = () => {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Button type="submit" className="w-full flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all">
+                    <Button type="submit" className={`w-full flex items-center justify-center gap-2 ${vibrantSuccessButtonClass}`}>
                       <Plus className="h-4 w-4" />
                       Save & Publish
                     </Button>
                     <Button
                       type="button"
-                      variant="outline"
-                      className="w-full flex items-center justify-center gap-2"
+                      className={`w-full flex items-center justify-center gap-2 ${vibrantOutlineButtonClass}`}
                       onClick={resetForm}
                     >
                       <RefreshCw className="h-4 w-4" />
@@ -525,7 +598,7 @@ const AdminNotices = () => {
             </Card>
             </div>
 
-            <Card className="border-primary/10 transition-all hover:shadow-lg">
+            <Card className="border-primary/10 bg-gradient-to-br from-background via-background to-muted/40 transition-all hover:shadow-lg">
               <CardHeader>
                 <CardTitle>Published Items</CardTitle>
                 <CardDescription>Delete unwanted items or toggle visibility.</CardDescription>
@@ -534,20 +607,20 @@ const AdminNotices = () => {
                 {items.length === 0 ? (
                   <div className="text-muted-foreground text-sm">No items found.</div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {items
                       .slice()
                       .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
                       .map((item) => (
                         <div
                           key={item.id}
-                          className="flex flex-col gap-3 border border-border/60 rounded-lg p-4 bg-muted/20 transition-all hover:-translate-y-0.5 hover:bg-muted/30 hover:border-primary/20"
+                          className="flex flex-col gap-3 border border-border/60 rounded-xl p-4 bg-white/50 dark:bg-muted/20 transition-all hover:-translate-y-0.5 hover:bg-muted/30 hover:border-primary/20"
                         >
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                           <div className="space-y-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="text-sm font-semibold">{item.title}</span>
-                              <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                              <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
                                 {item.kind} / {item.template}
                               </span>
                               {item.date && <span className="text-xs text-muted-foreground">{item.date}</span>}
@@ -567,9 +640,8 @@ const AdminNotices = () => {
                               </label>
                             </div>
                             <Button
-                              variant="destructive"
                               onClick={() => setDeleteTargetId(item.id)}
-                              className="flex w-full items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all sm:w-auto"
+                              className={`flex w-full items-center justify-center gap-2 sm:w-auto ${vibrantDangerButtonClass}`}
                             >
                               <Trash2 className="h-4 w-4" />
                               Delete
@@ -631,7 +703,7 @@ const AdminNotices = () => {
               <Button variant="outline" onClick={() => setDeleteTargetId(null)}>
                 Cancel
               </Button>
-              <Button variant="destructive" onClick={handleDeleteConfirmed} className="flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
+              <Button onClick={handleDeleteConfirmed} className={`flex items-center gap-2 ${vibrantDangerButtonClass}`}>
                 <Trash2 className="h-4 w-4" />
                 Delete
               </Button>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Search, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+import { getAdminImageUrl } from "@/lib/adminImages/getAdminImageUrl";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,12 +32,29 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [headerSpacerPx, setHeaderSpacerPx] = useState(120);
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    const el = shellRef.current;
+    if (!el) return;
+    const update = () => setHeaderSpacerPx(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -106,6 +124,7 @@ const Header = () => {
 
   const campusMenuItems = [
     { title: "Campus Overview", href: "/campus" },
+    { title: "Student Corner", href: "/student-corner" },
     { title: "Library", href: "/library" },
     { title: "Canteen & Cafeteria", href: "/campus/canteen-cafeteria" },
     { title: "Sport", href: "/campus#sport" },
@@ -124,6 +143,12 @@ const Header = () => {
     { title: "Alumni", href: "/alumni", category: "Main Pages", keywords: ["alumni", "graduates", "network"] },
     { title: "Placements", href: "/placements", category: "Main Pages", keywords: ["placements", "jobs", "careers", "recruitment"] },
     { title: "Library", href: "/library", category: "Main Pages", keywords: ["library", "books", "resources", "reading"] },
+    {
+      title: "Student Corner",
+      href: "/student-corner",
+      category: "Main Pages",
+      keywords: ["student", "corner", "notices", "circular", "exam", "timetable"],
+    },
 
     ...engineeringMenuItems.map((item) => ({
       title: item.title,
@@ -214,7 +239,11 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50">
+   <>
+    <div
+      ref={shellRef}
+      className="fixed top-0 left-0 right-0 z-40 w-full bg-background"
+    >
       {/* Top Info Bar */}
       <div className="bg-primary text-primary-foreground py-2 px-3 sm:px-4">
         <div className="container mx-auto flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-sm">
@@ -235,17 +264,15 @@ const Header = () => {
               7768004581/82
             </a>
           </div>
-          <div className="text-xs hidden pl-1.5 pr-1.5 font-bold  text-red-400 animate-pulse sm:block">
+          <div className="w-full sm:w-auto text-[11px] sm:text-xs font-bold text-green-100 animate-pulse text-center sm:text-left truncate">
             Mechanical Engineering Program is Accredited by NBA
           </div>
-          <div className="hidden md:block">
-            <Link to="/admin/notices" className="hover:bg-blue-900 font-medium bg-sky-500  rounded-lg p-1 pr-3 pl-3 transition-colors">
+          <div className="w-full sm:w-auto sm:ml-auto">
+            <Link
+              to="/admin/notices"
+              className="inline-flex w-full sm:w-auto items-center justify-center rounded-lg bg-sky-500 px-3 py-1 font-medium text-primary-foreground hover:bg-blue-900 transition-colors"
+            >
               Admin Login
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <Link to="/contact" className="hover:bg-yellow-900 font-medium bg-yellow-600  rounded-full p-1 pr-3 pl-3 transition-colors">
-              Apply Now
             </Link>
           </div>
         </div>
@@ -265,7 +292,7 @@ const Header = () => {
             <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <div className="flex-shrink-0">
                 <img
-                  src="/naac-logo.png"
+                  src={getAdminImageUrl("/naac-logo.png")}
                   alt="NAAC"
                   className="h-14 w-auto sm:h-16 md:h-20 object-contain"
                   loading="lazy"
@@ -278,7 +305,7 @@ const Header = () => {
               </div>
               <div className="flex-shrink-0">
                 <img
-                  src="/ggsf-logo.jpg"
+                  src={getAdminImageUrl("/ggsf-logo.jpg")}
                   alt=" Guru Gobind Singh College of Engineering and Research Centre"
                   className="h-14 w-auto sm:h-16 md:h-20 object-contain"
                   loading="lazy"
@@ -562,9 +589,9 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-border bg-background">
-            <div className="container mx-auto px-4 py-4 space-y-4 max-h-[calc(100vh-5rem)] overflow-y-auto">
-              <Link to="/" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+          <div className="lg:hidden border-t border-border bg-background text-foreground">
+            <div className="container mx-auto px-4 py-4 space-y-4 max-h-[calc(100vh-5rem)] overflow-y-auto text-foreground">
+              <Link to="/" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
               
@@ -578,7 +605,7 @@ const Header = () => {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm text-foreground hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
@@ -591,7 +618,7 @@ const Header = () => {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm text-foreground hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
@@ -604,7 +631,7 @@ const Header = () => {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-1.5 pl-6 text-sm hover:text-primary transition-colors"
+                    className="block py-1.5 pl-6 text-sm text-foreground hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
@@ -619,7 +646,7 @@ const Header = () => {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-1.5 pl-4 text-sm hover:text-primary transition-colors"
+                    className="block py-1.5 pl-4 text-sm text-foreground hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
@@ -627,16 +654,16 @@ const Header = () => {
                 ))}
               </div>
 
-              <Link to="/events" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/events" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Events
               </Link>
-              <Link to="/alumni" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/alumni" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Alumni
               </Link>
-              <Link to="/placements" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/placements" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Placements
               </Link>
-              <Link to="/gallery" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/gallery" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Gallery
               </Link>
               <div>
@@ -645,28 +672,21 @@ const Header = () => {
                   <Link
                     key={item.title}
                     to={item.href}
-                    className="block py-1.5 pl-4 text-sm hover:text-primary transition-colors"
+                    className="block py-1.5 pl-4 text-sm text-foreground hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.title}
                   </Link>
                 ))}
               </div>
-              <Link to="/library" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/library" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Library
               </Link>
-              <Link to="/contact" className="block py-2 hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/contact" className="block py-2 text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Contact
               </Link>
 
               <div className="flex flex-col gap-2 pt-2 border-t border-border">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-yellow-600 px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-yellow-700 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Apply Now
-                </Link>
                 <Link
                   to="/admin/notices"
                   className="inline-flex items-center justify-center rounded-lg bg-sky-500 px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-sky-600 transition-colors"
@@ -680,6 +700,12 @@ const Header = () => {
         )}
       </header>
     </div>
+    <div
+      aria-hidden
+      className="shrink-0"
+      style={{ height: headerSpacerPx }}
+    />
+    </>
   );
 };
 
